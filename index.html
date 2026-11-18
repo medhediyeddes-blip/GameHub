@@ -1,167 +1,195 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="google-site-verification" content="6h_q5K9erGv7DLk9HGJbxC47lEejNvjKg7cNEnWjm4A">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming Hub</title>
-    <link rel="stylesheet" href="style.css">
 
     <style>
-        .extra-section {
-            padding: 40px 20px;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #111827;
+            color: white;
+        }
+
+        header {
+            background: #1f2937;
+            padding: 20px;
             text-align: center;
         }
 
-        .extra-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            max-width: 1100px;
-            margin: 25px auto;
+        header h1 {
+            color: #38bdf8;
+            margin-bottom: 15px;
         }
 
-        .extra-card {
-            padding: 22px;
-            border-radius: 12px;
-            background: #222;
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
             color: white;
-            text-align: left;
+            text-decoration: none;
+            font-weight: bold;
         }
 
-        .extra-card h3 {
-            color: #ff4747;
+        nav a:hover {
+            color: #38bdf8;
         }
 
-        .extra-card a {
-            color: #ff4747;
+        section {
+            padding: 40px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h2 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #1e3a8a, #111827);
+        }
+
+        .hero h2 {
+            font-size: 40px;
+        }
+
+        .hero p {
+            margin: 15px 0;
+        }
+
+        .button {
+            display: inline-block;
+            background: #0284c7;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background: #0369a1;
+        }
+
+        .featured {
+            background: #1f2937;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .featured h3 {
+            font-size: 28px;
+            margin: 15px;
+        }
+
+        .games {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .game {
+            background: #1f2937;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .game:hover {
+            transform: translateY(-5px);
+            background: #374151;
+        }
+
+        .game h3 {
+            margin: 10px 0;
+        }
+
+        .game p {
+            color: #d1d5db;
+        }
+
+        .game a {
+            color: #38bdf8;
             text-decoration: none;
         }
 
-        .extra-card button {
-            padding: 10px 16px;
-            background: #ff4747;
+        .search {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 25px;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        .info {
+            background: #1f2937;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: none;
+        }
+
+        button {
+            background: #0284c7;
             color: white;
+            padding: 12px 20px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
         }
 
-        .extra-card input,
-        .extra-card textarea,
-        .extra-card select {
-            width: 100%;
-            padding: 10px;
-            margin: 7px 0;
-            box-sizing: border-box;
+        button:hover {
+            background: #0369a1;
         }
 
-        .review {
-            border-bottom: 1px solid #555;
-            padding: 12px 0;
-        }
-
-        .video-frame {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            border: 0;
-            border-radius: 10px;
-        }
-
-        .extra-section h2 {
-            margin-bottom: 15px;
-        }
-
-        .section-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        .section-links a {
-            color: white;
-            background: #d93636;
-            padding: 10px 15px;
-            border-radius: 6px;
-            text-decoration: none;
-        }
-
-        /* HELP SECTION */
-
-        .help-answer {
-            color: #ccc;
-            line-height: 1.6;
-        }
-
-        .help-card textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .help-message {
-            color: #4caf50;
-            margin-top: 10px;
-        }
-
-        /* FEATURED GAME */
-
-        .featured-section {
-            padding: 40px 20px;
+        footer {
+            background: #1f2937;
             text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+            color: #d1d5db;
         }
 
-        .featured-card {
-            max-width: 650px;
-            margin: 25px auto;
-            padding: 30px;
-            border-radius: 15px;
-            background: #222;
-            color: white;
-            border: 2px solid #ff4747;
-            box-shadow: 0 0 18px rgba(255, 71, 71, 0.2);
-        }
-
-        .featured-icon {
-            font-size: 65px;
-            margin-bottom: 10px;
-        }
-
-        .featured-card h3 {
-            color: #ff4747;
-            font-size: 26px;
-        }
-
-        .featured-card p {
-            color: #ccc;
-            line-height: 1.6;
-        }
-
-        .featured-button {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 12px 22px;
-            background: #ff4747;
-            color: white;
-            border-radius: 7px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .featured-button:hover {
-            background: #d93636;
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 
 <body>
 
-<nav class="navbar">
-    <h2>🎮 Gaming Hub</h2>
-    <div>
-        <a href="index.html">Home</a>
+<header>
+    <h1>🎮 Gaming Hub</h1>
+
+    <nav>
+        <a href="#home">Home</a>
         <a href="#featured">Featured</a>
         <a href="#games">Games</a>
         <a href="#news">News</a>
@@ -170,878 +198,476 @@
         <a href="#reviews">Reviews</a>
         <a href="#account">Account</a>
         <a href="#help">Help</a>
-    </div>
-</nav>
-
-<header class="hero">
-    <h1>Welcome to Gaming Hub</h1>
-    <p>Discover your favourite games!</p>
-    <a href="#games" class="main-button">Explore Games</a>
+    </nav>
 </header>
 
-<!-- FEATURED GAME OF THE DAY -->
+<section class="hero" id="home">
+    <h2>Welcome to Gaming Hub!</h2>
+    <p>Discover games, gaming news, tips and more.</p>
+    <a href="#games" class="button">Explore Games</a>
+</section>
 
-<section class="featured-section" id="featured">
+<section id="featured">
     <h2>⭐ Featured Game of the Day</h2>
-    <p>Discover a different featured game every day!</p>
 
-    <div class="featured-card">
-        <div class="featured-icon" id="featuredIcon">🎮</div>
-        <h3 id="featuredName">Loading...</h3>
-        <p id="featuredDescription">Discover today's featured game!</p>
-        <a id="featuredLink" class="featured-button"
-           href="#games" target="_blank" rel="noopener noreferrer">
-            Explore Game →
+    <div class="featured">
+        <div id="featuredIcon" style="font-size:60px;">🎮</div>
+        <h3 id="featuredName">Free Fire</h3>
+        <p id="featuredDescription">Battle, survive and become the champion!</p>
+        <a id="featuredLink" class="button" href="https://ff.garena.com/" target="_blank">
+            Discover Game
         </a>
     </div>
 </section>
 
-<section class="account-section" id="account">
-    <h2>👤 Your Account</h2>
+<section id="games">
+    <h2>🎮 All Games</h2>
 
-    <div id="accountForm">
-        <input type="email" id="emailInput" placeholder="Enter your email">
-        <input type="password" id="passwordInput" placeholder="Enter your password">
+    <input
+        class="search"
+        type="text"
+        id="gameSearch"
+        placeholder="Search for a game..."
+        onkeyup="searchGames()"
+    >
 
-        <div class="account-buttons">
-            <button onclick="signUp()">Sign Up</button>
-            <button onclick="logIn()">Log In</button>
+    <div class="games" id="gameList">
+
+        <div class="game">
+            <h3>🔥 Free Fire</h3>
+            <p>Battle Royale survival game.</p>
+            <a href="https://ff.garena.com/" target="_blank">Visit Website</a>
         </div>
+
+        <div class="game">
+            <h3>⛏️ Minecraft</h3>
+            <p>Build, explore and survive.</p>
+            <a href="https://www.minecraft.net/" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="game">
+            <h3>🎯 Fortnite</h3>
+            <p>Battle Royale and creative modes.</p>
+            <a href="https://www.fortnite.com/" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="game">
+            <h3>🪖 PUBG</h3>
+            <p>Fight to become the last survivor.</p>
+            <a href="https://www.pubg.com/" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="game">
+            <h3>🧱 Roblox</h3>
+            <p>Play and create experiences.</p>
+            <a href="https://www.roblox.com/" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="game">
+            <h3>🚗 Rocket League</h3>
+            <p>Football with rocket-powered cars.</p>
+            <a href="https://www.rocketleague.com/" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="game">
+            <h3>⚔️ Genshin Impact</h3>
+            <p>Explore a huge fantasy world.</p>
+            <a href="https://genshin.hoyoverse.com/" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="game">
+            <h3>🏎️ Forza Horizon</h3>
+            <p>Explore and race amazing cars.</p>
+            <a href="https://forza.net/" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="game">
+            <h3>⚽ EA SPORTS FC</h3>
+            <p>Enjoy football matches.</p>
+            <a href="https://www.ea.com/games/ea-sports-fc" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="game">
+            <h3>👻 Among Us</h3>
+            <p>Find the impostor among your friends.</p>
+            <a href="https://www.innersloth.com/games/among-us/" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="game">
+            <h3>🧟 Call of Duty</h3>
+            <p>Discover action and multiplayer games.</p>
+            <a href="https://www.callofduty.com/" target="_blank">Visit Website</a>
+        </div>
+
+        <div class="game">
+            <h3>🚀 Apex Legends</h3>
+            <p>Team-based battle royale action.</p>
+            <a href="https://www.ea.com/games/apex-legends" target="_blank">Visit Website</a>
+        </div>
+
+    </div>
+</section>
+
+<section id="news">
+    <h2>📰 Gaming News</h2>
+
+    <div class="info">
+        <h3>New Games</h3>
+        <p>Discover new games and upcoming releases.</p>
+    </div>
+
+    <div class="info">
+        <h3>Gaming Updates</h3>
+        <p>Stay informed about your favorite games.</p>
+    </div>
+
+    <div class="info">
+        <h3>Gaming Events</h3>
+        <p>Follow tournaments and gaming events.</p>
+    </div>
+</section>
+
+<section id="freefire">
+    <h2>🔥 Free Fire Zone</h2>
+
+    <div class="info">
+        <h3>Free Fire Tips</h3>
+        <p>Practice your aim and learn how to use the Gloo Wall.</p>
+    </div>
+
+    <div class="info">
+        <h3>Game Modes</h3>
+        <p>Explore Battle Royale, Clash Squad and other modes.</p>
+    </div>
+
+    <a href="https://ff.garena.com/" class="button" target="_blank">
+        Official Free Fire Website
+    </a>
+</section>
+
+<section id="minecraft">
+    <h2>⛏️ Minecraft Zone</h2>
+
+    <div class="info">
+        <h3>Survival Mode</h3>
+        <p>Collect resources, build a house and explore.</p>
+    </div>
+
+    <div class="info">
+        <h3>Creative Mode</h3>
+        <p>Build anything you can imagine.</p>
+    </div>
+
+    <a href="https://www.minecraft.net/" class="button" target="_blank">
+        Official Minecraft Website
+    </a>
+</section>
+
+<section id="tips">
+    <h2>💡 Gaming Tips</h2>
+
+    <div class="info">
+        <h3>1. Practice</h3>
+        <p>Practice regularly to improve your skills.</p>
+    </div>
+
+    <div class="info">
+        <h3>2. Learn</h3>
+        <p>Watch tutorials and learn new strategies.</p>
+    </div>
+
+    <div class="info">
+        <h3>3. Have Fun</h3>
+        <p>Remember to enjoy your games and take breaks.</p>
+    </div>
+</section>
+
+<section id="videos">
+    <h2>▶️ Gaming Videos</h2>
+
+    <div class="info">
+        <h3>Free Fire Videos</h3>
+        <a href="https://www.youtube.com/results?search_query=free+fire+gameplay" target="_blank">
+            Watch Free Fire videos
+        </a>
+    </div>
+
+    <div class="info">
+        <h3>Minecraft Videos</h3>
+        <a href="https://www.youtube.com/results?search_query=minecraft+gameplay" target="_blank">
+            Watch Minecraft videos
+        </a>
+    </div>
+
+    <div class="info">
+        <h3>Gaming Videos</h3>
+        <a href="https://www.youtube.com/results?search_query=gaming" target="_blank">
+            Discover gaming videos
+        </a>
+    </div>
+</section>
+
+<section id="reviews">
+    <h2>⭐ Game Reviews</h2>
+
+    <div class="info">
+        <h3>Write a Review</h3>
+
+        <input type="text" id="reviewName" placeholder="Your name">
+
+        <select id="reviewGame">
+            <option>Free Fire</option>
+            <option>Minecraft</option>
+            <option>Fortnite</option>
+            <option>PUBG</option>
+            <option>Roblox</option>
+            <option>Other</option>
+        </select>
+
+        <select id="reviewRating">
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+        </select>
+
+        <textarea id="reviewText" placeholder="Write your review..."></textarea>
+
+        <button onclick="addReview()">Submit Review</button>
+    </div>
+
+    <div id="reviewList"></div>
+</section>
+
+<section id="account">
+    <h2>👤 Account</h2>
+
+    <div class="info">
+        <p>Create a simple local profile for this browser.</p>
+
+        <input type="text" id="username" placeholder="Enter your username">
+
+        <button onclick="saveAccount()">Save Username</button>
 
         <p id="accountMessage"></p>
     </div>
-
-    <div id="profile" class="hidden">
-        <h3>Welcome!</h3>
-        <p id="profileEmail"></p>
-        <button onclick="logOut()">Log Out</button>
-    </div>
 </section>
 
-<!-- GAMING NEWS -->
+<section id="help">
+    <h2>❓ Help & Support</h2>
 
-<section class="extra-section" id="news">
-    <h2>📰 Gaming News</h2>
-    <p>Discover gaming news and official updates.</p>
+    <div class="info">
+        <h3>Contact</h3>
+        <p>Send us your question or suggestion.</p>
 
-    <div class="extra-container">
+        <input type="text" id="helpName" placeholder="Your name">
+        <textarea id="helpMessage" placeholder="Your message..."></textarea>
 
-        <div class="extra-card">
-            <h3>🔥 Free Fire News</h3>
-            <p>Discover the latest Free Fire updates and announcements.</p>
-            <a href="https://ff.garena.com/" target="_blank" rel="noopener noreferrer">Official News →</a>
-        </div>
+        <button onclick="sendMessage()">Submit</button>
 
-        <div class="extra-card">
-            <h3>⛏️ Minecraft News</h3>
-            <p>Discover Minecraft updates and new features.</p>
-            <a href="https://www.minecraft.net/en-us" target="_blank" rel="noopener noreferrer">Official Website →</a>
-        </div>
-
-        <div class="extra-card">
-            <h3>🎮 Gaming News</h3>
-            <p>Discover news about games around the world.</p>
-            <a href="https://www.ign.com/" target="_blank" rel="noopener noreferrer">Read Gaming News →</a>
-        </div>
-
-    </div>
-</section>
-
-<!-- FREE FIRE -->
-
-<section class="extra-section" id="freefire">
-    <h2>🔥 Free Fire Zone</h2>
-    <p>Everything about Free Fire!</p>
-
-    <div class="extra-container">
-
-        <div class="extra-card">
-            <h3>🎯 Gameplay</h3>
-            <p>Discover gameplay and learn new techniques.</p>
-            <a href="https://www.youtube.com/results?search_query=free+fire+gameplay" target="_blank" rel="noopener noreferrer">Watch Gameplay →</a>
-        </div>
-
-        <div class="extra-card">
-            <h3>🏆 Tips and Tricks</h3>
-            <p>Learn movement, aiming and Gloo Wall techniques.</p>
-            <a href="https://www.youtube.com/results?search_query=free+fire+tips+and+tricks" target="_blank" rel="noopener noreferrer">Learn More →</a>
-        </div>
-
-        <div class="extra-card">
-            <h3>🌐 Official Website</h3>
-            <p>Visit the official Free Fire website.</p>
-            <a href="https://ff.garena.com/" target="_blank" rel="noopener noreferrer">Visit Free Fire →</a>
-        </div>
-
-    </div>
-</section>
-
-<!-- MINECRAFT -->
-
-<section class="extra-section" id="minecraft">
-    <h2>⛏️ Minecraft Zone</h2>
-    <p>Explore the Minecraft world!</p>
-
-    <div class="extra-container">
-
-        <div class="extra-card">
-            <h3>🏡 Building Ideas</h3>
-            <p>Find creative houses and building ideas.</p>
-            <a href="https://www.youtube.com/results?search_query=minecraft+building+ideas" target="_blank" rel="noopener noreferrer">Explore Builds →</a>
-        </div>
-
-        <div class="extra-card">
-            <h3>⚔️ Survival Tips</h3>
-            <p>Learn how to survive and explore.</p>
-            <a href="https://www.youtube.com/results?search_query=minecraft+survival+tips" target="_blank" rel="noopener noreferrer">Learn More →</a>
-        </div>
-
-        <div class="extra-card">
-            <h3>🌍 Minecraft Website</h3>
-            <p>Visit the official Minecraft website.</p>
-            <a href="https://www.minecraft.net/" target="_blank" rel="noopener noreferrer">Visit Minecraft →</a>
-        </div>
-
-    </div>
-</section>
-
-<!-- TIPS -->
-
-<section class="extra-section" id="tips">
-    <h2>🏆 Gaming Tips and Tricks</h2>
-
-    <div class="extra-container">
-
-        <div class="extra-card">
-            <h3>🎯 Improve Your Aim</h3>
-            <p>Practice regularly and learn how to control your aim.</p>
-        </div>
-
-        <div class="extra-card">
-            <h3>⚡ Improve Your Movement</h3>
-            <p>Learn movement techniques and improve your reactions.</p>
-        </div>
-
-        <div class="extra-card">
-            <h3>🧠 Learn Game Strategies</h3>
-            <p>Understand the game and make better decisions.</p>
-        </div>
-
-    </div>
-</section>
-
-<!-- VIDEOS -->
-
-<section class="extra-section" id="videos">
-    <h2>🎥 Gaming Videos</h2>
-    <p>Watch gaming videos and discover new gameplay.</p>
-
-    <div class="extra-container">
-
-        <div class="extra-card">
-            <h3>🔥 Free Fire Videos</h3>
-            <iframe class="video-frame"
-                src="https://www.youtube-nocookie.com/embed?listType=search&list=Free%20Fire%20Gameplay"
-                allowfullscreen title="Free Fire gameplay">
-            </iframe>
-        </div>
-
-        <div class="extra-card">
-            <h3>⛏️ Minecraft Videos</h3>
-            <iframe class="video-frame"
-                src="https://www.youtube-nocookie.com/embed?listType=search&list=Minecraft%20Gameplay"
-                allowfullscreen title="Minecraft gameplay">
-            </iframe>
-        </div>
-
-    </div>
-</section>
-
-<!-- ORIGINAL GAMES -->
-
-<section class="games-section" id="games">
-
-    <h2>🔥 All Games</h2>
-
-    <input type="text" id="searchInput" placeholder="Search for a game...">
-
-    <div class="categories">
-        <button class="category-button active" data-category="all">All</button>
-        <button class="category-button" data-category="battle">Battle Royale</button>
-        <button class="category-button" data-category="adventure">Adventure</button>
-        <button class="category-button" data-category="action">Action</button>
-        <button class="category-button" data-category="sports">Sports</button>
-        <button class="category-button" data-category="racing">Racing</button>
-    </div>
-
-    <p id="gameCount">Loading games...</p>
-
-    <div class="game-container">
-
-        <div class="game-card" data-category="battle"><h3>🔥 Free Fire</h3><p>Battle Royale</p><a href="freefire.html" class="game-button">Explore</a></div>
-        <div class="game-card" data-category="adventure"><h3>⛏️ Minecraft</h3><p>Adventure</p><a href="minecraft.html" class="game-button">Explore</a></div>
-        <div class="game-card" data-category="battle"><h3>🎯 Fortnite</h3><p>Battle Royale</p><a href="fortnite.html" class="game-button">Explore</a></div>
-        <div class="game-card" data-category="battle"><h3>🎖️ PUBG Mobile</h3><p>Battle Royale</p><a href="https://www.pubgmobile.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🧱 Roblox</h3><p>Adventure</p><a href="https://www.roblox.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🎮 Call of Duty Mobile</h3><p>Action</p><a href="https://www.callofduty.com/mobile" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>⚔️ Valorant</h3><p>Action</p><a href="https://playvalorant.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🚗 GTA V</h3><p>Action</p><a href="https://www.rockstargames.com/gta-v" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="battle"><h3>🛡️ Apex Legends</h3><p>Battle Royale</p><a href="https://www.ea.com/games/apex-legends" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🔫 Counter-Strike 2</h3><p>Action</p><a href="https://www.counter-strike.net/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="sports"><h3>🚀 Rocket League</h3><p>Sports</p><a href="https://www.rocketleague.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🧟 Resident Evil</h3><p>Action</p><a href="https://www.residentevil.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🏹 Genshin Impact</h3><p>Adventure</p><a href="https://genshin.hoyoverse.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="sports"><h3>⚽ EA SPORTS FC</h3><p>Sports</p><a href="https://www.ea.com/games/ea-sports-fc" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🥷 Brawlhalla</h3><p>Action</p><a href="https://www.brawlhalla.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🚀 Among Us</h3><p>Action</p><a href="https://www.innersloth.com/games/among-us/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🏁 Forza Horizon 5</h3><p>Racing</p><a href="https://forza.net/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🦖 ARK: Survival Evolved</h3><p>Adventure</p><a href="https://www.playark.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🎯 Overwatch 2</h3><p>Action</p><a href="https://overwatch.blizzard.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🏰 Terraria</h3><p>Adventure</p><a href="https://terraria.org/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>👑 Clash Royale</h3><p>Action</p><a href="https://supercell.com/en/games/clashroyale/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🐉 League of Legends</h3><p>Action</p><a href="https://www.leagueoflegends.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="battle"><h3>🎉 Fall Guys</h3><p>Battle Royale</p><a href="https://www.fallguys.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🌌 No Man's Sky</h3><p>Adventure</p><a href="https://www.nomanssky.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🏎️ Need for Speed</h3><p>Racing</p><a href="https://www.ea.com/games/need-for-speed" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🌳 Stardew Valley</h3><p>Adventure</p><a href="https://www.stardewvalley.net/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🕷️ Marvel's Spider-Man</h3><p>Action</p><a href="https://www.playstation.com/games/marvels-spider-man-2/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🧙 Hogwarts Legacy</h3><p>Adventure</p><a href="https://www.hogwartslegacy.com/" class="game-button">Official Website</a></div>
-
-        <!-- MORE GAMES -->
-
-        <div class="game-card" data-category="battle"><h3>💥 Call of Duty: Warzone</h3><p>Battle Royale</p><a href="https://www.callofduty.com/warzone" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🚀 Destiny 2</h3><p>Action</p><a href="https://www.destinythegame.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🪖 Halo Infinite</h3><p>Action</p><a href="https://www.halowaypoint.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>💣 Battlefield 2042</h3><p>Action</p><a href="https://www.ea.com/games/battlefield/battlefield-2042" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🛡️ Rainbow Six Siege</h3><p>Action</p><a href="https://www.ubisoft.com/game/rainbow-six/siege" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🏆 The Finals</h3><p>Action</p><a href="https://www.reachthefinals.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>✈️ War Thunder</h3><p>Action</p><a href="https://warthunder.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🚜 World of Tanks</h3><p>Action</p><a href="https://worldoftanks.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🚢 World of Warships</h3><p>Action</p><a href="https://worldofwarships.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🐉 Diablo IV</h3><p>Adventure</p><a href="https://diablo4.blizzard.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>⚔️ Path of Exile</h3><p>Adventure</p><a href="https://www.pathofexile.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🐲 The Elder Scrolls Online</h3><p>Adventure</p><a href="https://www.elderscrollsonline.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🌍 Guild Wars 2</h3><p>Adventure</p><a href="https://www.guildwars2.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>✨ Final Fantasy XIV</h3><p>Adventure</p><a href="https://www.finalfantasyxiv.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🐎 Black Desert</h3><p>Adventure</p><a href="https://www.naeu.playblackdesert.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>⚓ Lost Ark</h3><p>Adventure</p><a href="https://www.playlostark.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🧙 RuneScape</h3><p>Adventure</p><a href="https://www.runescape.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🏰 Old School RuneScape</h3><p>Adventure</p><a href="https://oldschool.runescape.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🚀 Starfield</h3><p>Adventure</p><a href="https://bethesda.net/en/game/starfield" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🐉 The Elder Scrolls V: Skyrim</h3><p>Adventure</p><a href="https://elderscrolls.bethesda.net/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>☢️ Fallout 4</h3><p>Action</p><a href="https://fallout.bethesda.net/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>☢️ Fallout 76</h3><p>Action</p><a href="https://fallout.bethesda.net/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🌃 Cyberpunk 2077</h3><p>Action</p><a href="https://www.cyberpunk.net/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🐺 The Witcher 3</h3><p>Adventure</p><a href="https://www.thewitcher.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🤠 Red Dead Redemption 2</h3><p>Action</p><a href="https://www.rockstargames.com/reddeadredemption2" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🐲 Elden Ring</h3><p>Action</p><a href="https://www.bandainamcoent.com/games/elden-ring" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>⚔️ Dark Souls III</h3><p>Action</p><a href="https://www.bandainamcoent.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🥷 Sekiro: Shadows Die Twice</h3><p>Action</p><a href="https://www.sekirothegame.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🩸 Bloodborne</h3><p>Action</p><a href="https://www.playstation.com/games/bloodborne/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>👹 Lies of P</h3><p>Action</p><a href="https://www.liesofp.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🦖 Monster Hunter: World</h3><p>Adventure</p><a href="https://www.monsterhunter.com/world/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🐉 Monster Hunter Rise</h3><p>Adventure</p><a href="https://www.monsterhunter.com/rise/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🐉 Dragon's Dogma 2</h3><p>Adventure</p><a href="https://www.dragonsdogma.com/2/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🐉 Baldur's Gate 3</h3><p>Adventure</p><a href="https://baldursgate3.game/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🧙 Divinity: Original Sin 2</h3><p>Adventure</p><a href="https://larian.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🔥 Hades</h3><p>Action</p><a href="https://www.supergiantgames.com/games/hades/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🔥 Hades II</h3><p>Action</p><a href="https://www.supergiantgames.com/games/hades-ii/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🐞 Hollow Knight</h3><p>Adventure</p><a href="https://www.hollowknight.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>☕ Cuphead</h3><p>Action</p><a href="https://www.cupheadgame.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🌳 Ori and the Blind Forest</h3><p>Adventure</p><a href="https://www.orithegame.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🌌 Ori and the Will of the Wisps</h3><p>Adventure</p><a href="https://www.orithegame.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🏃 Celeste</h3><p>Adventure</p><a href="https://www.celestegame.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>⚔️ Dead Cells</h3><p>Action</p><a href="https://dead-cells.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>❤️ Undertale</h3><p>Adventure</p><a href="https://undertale.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>⭐ Deltarune</h3><p>Adventure</p><a href="https://deltarune.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🃏 Slay the Spire</h3><p>Action</p><a href="https://www.megacrit.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🃏 Balatro</h3><p>Action</p><a href="https://www.playbalatro.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>⚙️ Factorio</h3><p>Adventure</p><a href="https://www.factorio.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🏭 Satisfactory</h3><p>Adventure</p><a href="https://www.satisfactorygame.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🏙️ Cities: Skylines II</h3><p>Adventure</p><a href="https://www.paradoxinteractive.com/games/cities-skylines-ii" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🏡 The Sims 4</h3><p>Adventure</p><a href="https://www.ea.com/games/the-sims/the-sims-4" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🦁 Planet Zoo</h3><p>Adventure</p><a href="https://www.planetzoogame.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🎢 Planet Coaster 2</h3><p>Adventure</p><a href="https://www.planetcoaster.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🚛 Euro Truck Simulator 2</h3><p>Racing</p><a href="https://eurotrucksimulator2.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🚚 American Truck Simulator</h3><p>Racing</p><a href="https://americantrucksimulator.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="sports"><h3>✈️ Microsoft Flight Simulator</h3><p>Sports</p><a href="https://www.flightsimulator.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="sports"><h3>🛩️ DCS World</h3><p>Sports</p><a href="https://www.digitalcombatsimulator.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🚜 Farming Simulator 25</h3><p>Adventure</p><a href="https://www.farming-simulator.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🚆 Train Sim World</h3><p>Racing</p><a href="https://trainsimworld.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🏎️ Assetto Corsa Competizione</h3><p>Racing</p><a href="https://assettocorsa.gg/assetto-corsa-competizione/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🏁 Gran Turismo 7</h3><p>Racing</p><a href="https://www.gran-turismo.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🏎️ F1 25</h3><p>Racing</p><a href="https://www.ea.com/games/f1" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🏍️ MotoGP 25</h3><p>Racing</p><a href="https://motogpvideogame.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🚗 The Crew Motorfest</h3><p>Racing</p><a href="https://www.ubisoft.com/game/the-crew/motorfest" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🏁 Trackmania</h3><p>Racing</p><a href="https://www.trackmania.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🚘 Wreckfest</h3><p>Racing</p><a href="https://wreckfest.thqnordic.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🚙 BeamNG.drive</h3><p>Racing</p><a href="https://www.beamng.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🏎️ DiRT Rally 2.0</h3><p>Racing</p><a href="https://www.ea.com/games/dirt" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🍄 Super Mario Odyssey</h3><p>Adventure</p><a href="https://www.nintendo.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🗡️ Zelda: Tears of the Kingdom</h3><p>Adventure</p><a href="https://www.zelda.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🗡️ Zelda: Breath of the Wild</h3><p>Adventure</p><a href="https://www.zelda.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🏝️ Animal Crossing: New Horizons</h3><p>Adventure</p><a href="https://www.animal-crossing.com/new-horizons/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🦑 Splatoon 3</h3><p>Action</p><a href="https://splatoon.nintendo.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🏎️ Mario Kart 8 Deluxe</h3><p>Racing</p><a href="https://mariokart8.nintendo.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>⚡ Pokémon Scarlet and Violet</h3><p>Adventure</p><a href="https://scarletviolet.pokemon.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🐾 Pokémon Legends: Arceus</h3><p>Adventure</p><a href="https://legends.pokemon.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>⭐ Kirby and the Forgotten Land</h3><p>Adventure</p><a href="https://kirbyandtheforgottenland.nintendo.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🤖 Metroid Dread</h3><p>Action</p><a href="https://metroid.nintendo.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🦍 Donkey Kong Country: Tropical Freeze</h3><p>Adventure</p><a href="https://www.nintendo.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🌱 Pikmin 4</h3><p>Adventure</p><a href="https://pikmin.nintendo.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🔥 Fire Emblem: Three Houses</h3><p>Adventure</p><a href="https://fireemblem.nintendo.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>⚔️ Xenoblade Chronicles 3</h3><p>Adventure</p><a href="https://www.nintendo.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>⚙️ Gears 5</h3><p>Action</p><a href="https://www.gearsofwar.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="racing"><h3>🏎️ Forza Motorsport</h3><p>Racing</p><a href="https://forza.net/motorsport" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🏴‍☠️ Sea of Thieves</h3><p>Adventure</p><a href="https://www.seaofthieves.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🌱 Grounded</h3><p>Adventure</p><a href="https://grounded.obsidian.net/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🧟 State of Decay 2</h3><p>Action</p><a href="https://www.stateofdecay.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🏰 Age of Empires IV</h3><p>Adventure</p><a href="https://www.ageofempires.com/games/aoeiv/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>⚔️ Minecraft Dungeons</h3><p>Adventure</p><a href="https://www.minecraft.net/about-dungeons" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🧠 Psychonauts 2</h3><p>Adventure</p><a href="https://www.psychonauts2.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🎵 Hi-Fi RUSH</h3><p>Action</p><a href="https://www.hifirush.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🌊 Sea of Stars</h3><p>Adventure</p><a href="https://seaofstarsgame.co/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🐟 Dave the Diver</h3><p>Adventure</p><a href="https://www.davethediver.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🌊 DREDGE</h3><p>Adventure</p><a href="https://www.dredge.game/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🌊 Subnautica</h3><p>Adventure</p><a href="https://subnautica.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>❄️ Subnautica: Below Zero</h3><p>Adventure</p><a href="https://subnautica.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🌲 Don't Starve Together</h3><p>Adventure</p><a href="https://www.klei.com/games/dont-starve-together" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🧟 Project Zomboid</h3><p>Adventure</p><a href="https://projectzomboid.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🛶 Valheim</h3><p>Adventure</p><a href="https://www.valheimgame.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🏕️ Rust</h3><p>Action</p><a href="https://rust.facepunch.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🧟 DayZ</h3><p>Action</p><a href="https://dayz.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🌲 The Forest</h3><p>Adventure</p><a href="https://endnightgames.com/games/the-forest" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🌲 Sons of the Forest</h3><p>Adventure</p><a href="https://endnightgames.com/games/sons-of-the-forest" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>👻 Phasmophobia</h3><p>Action</p><a href="https://www.kineticgames.co.uk/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🏢 Lethal Company</h3><p>Action</p><a href="https://store.steampowered.com/app/1966720/Lethal_Company/" class="game-button">Game Page</a></div>
-        <div class="game-card" data-category="action"><h3>📹 Content Warning</h3><p>Action</p><a href="https://store.steampowered.com/app/2881650/Content_Warning/" class="game-button">Game Page</a></div>
-        <div class="game-card" data-category="action"><h3>⛏️ Deep Rock Galactic</h3><p>Action</p><a href="https://www.deeprockgalactic.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🪖 Helldivers 2</h3><p>Action</p><a href="https://www.playstation.com/games/helldivers-2/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🧟 Left 4 Dead 2</h3><p>Action</p><a href="https://store.steampowered.com/app/550/Left_4_Dead_2/" class="game-button">Game Page</a></div>
-        <div class="game-card" data-category="action"><h3>🧟 Back 4 Blood</h3><p>Action</p><a href="https://www.back4blood.com/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>💰 Payday 3</h3><p>Action</p><a href="https://www.paydaythegame.com/payday3/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🎯 Hitman: World of Assassination</h3><p>Action</p><a href="https://www.ioi.dk/hitman/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🐍 Metal Gear Solid V</h3><p>Action</p><a href="https://www.konami.com/mg/mgsv/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🚚 Death Stranding</h3><p>Adventure</p><a href="https://www.kojimaproductions.jp/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>👻 Ghost of Tsushima</h3><p>Action</p><a href="https://www.playstation.com/games/ghost-of-tsushima/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>⚔️ God of War Ragnarök</h3><p>Action</p><a href="https://www.playstation.com/games/god-of-war-ragnarok/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🏹 Horizon Forbidden West</h3><p>Adventure</p><a href="https://www.playstation.com/games/horizon-forbidden-west/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="adventure"><h3>🧭 Uncharted: Legacy of Thieves</h3><p>Adventure</p><a href="https://www.playstation.com/games/uncharted/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🧟 The Last of Us Part I</h3><p>Action</p><a href="https://www.playstation.com/games/the-last-of-us-part-i/" class="game-button">Official Website</a></div>
-        <div class="game-card" data-category="action"><h3>🤖 Ratchet & Clank: Rift Apart</h3><p>Action</p><a href="https://www.playstation.com/games/ratchet-and-clank-rift-apart/" class="game-button">Official Website</a></div>
-
-    </div>
-
-    <p id="noResults" class="hidden">No games found.</p>
-</section>
-
-<!-- REVIEWS -->
-
-<section class="extra-section" id="reviews">
-    <h2>⭐ Game Reviews</h2>
-    <p>Share your opinion about your favourite games!</p>
-
-    <div class="extra-container">
-
-        <div class="extra-card">
-            <h3>Write a Review</h3>
-
-            <input type="text" id="reviewName" placeholder="Your name">
-
-            <select id="reviewGame">
-                <option value="Free Fire">Free Fire</option>
-                <option value="Minecraft">Minecraft</option>
-                <option value="Fortnite">Fortnite</option>
-                <option value="PUBG Mobile">PUBG Mobile</option>
-                <option value="Roblox">Roblox</option>
-                <option value="Other">Other</option>
-            </select>
-
-            <select id="reviewRating">
-                <option value="5">⭐⭐⭐⭐⭐</option>
-                <option value="4">⭐⭐⭐⭐</option>
-                <option value="3">⭐⭐⭐</option>
-                <option value="2">⭐⭐</option>
-                <option value="1">⭐</option>
-            </select>
-
-            <textarea id="reviewText" placeholder="Write your review..."></textarea>
-
-            <button onclick="addReview()">Submit Review</button>
-            <p id="reviewMessage"></p>
-        </div>
-
-        <div class="extra-card">
-            <h3>Community Reviews</h3>
-            <div id="reviewList"></div>
-        </div>
-
-    </div>
-</section>
-
-<!-- HELP & SUPPORT -->
-
-<section class="extra-section" id="help">
-    <h2>🛟 Help & Support</h2>
-    <p>Need help using Gaming Hub? Find answers or send us a suggestion.</p>
-
-    <div class="extra-container">
-
-        <div class="extra-card">
-            <h3>❓ How to Use Gaming Hub</h3>
-            <p class="help-answer">
-                1. Use the navigation menu to explore sections.<br><br>
-                2. Visit the Games section to discover games.<br><br>
-                3. Use the search box to find a game.<br><br>
-                4. Write reviews to share your opinions.
-            </p>
-        </div>
-
-        <div class="extra-card">
-            <h3>💡 Frequently Asked Questions</h3>
-
-            <p><strong>Is Gaming Hub free?</strong></p>
-            <p class="help-answer">Yes! You can explore the website for free.</p>
-
-            <p><strong>Can I search for games?</strong></p>
-            <p class="help-answer">Yes! Use the search box in the Games section.</p>
-
-            <p><strong>Can I write reviews?</strong></p>
-            <p class="help-answer">Yes! Visit the Reviews section.</p>
-
-            <p><strong>Are the games downloaded here?</strong></p>
-            <p class="help-answer">No. Game links take you to their official websites or game pages.</p>
-        </div>
-
-        <div class="extra-card help-card">
-            <h3>💬 Suggest a Game</h3>
-            <p>Tell us which game you want to see on Gaming Hub.</p>
-
-            <input type="text" id="suggestionName" placeholder="Game name">
-
-            <textarea id="suggestionText" placeholder="Why should we add this game?"></textarea>
-
-            <button onclick="sendSuggestion()">Send Suggestion</button>
-
-            <p id="suggestionMessage" class="help-message"></p>
-        </div>
-
-        <div class="extra-card help-card">
-            <h3>🐛 Report a Problem</h3>
-            <p>Found a problem on the website? Tell us about it.</p>
-
-            <select id="problemType">
-                <option value="Broken link">Broken link</option>
-                <option value="Search problem">Search problem</option>
-                <option value="Video problem">Video problem</option>
-                <option value="Other">Other problem</option>
-            </select>
-
-            <textarea id="problemText" placeholder="Describe the problem..."></textarea>
-
-            <button onclick="sendProblem()">Send Report</button>
-
-            <p id="problemMessage" class="help-message"></p>
-        </div>
-
+        <p id="helpResult"></p>
     </div>
 </section>
 
 <footer>
-    <p>© 2026 Gaming Hub | Made for Gamers 🎮</p>
+    <p>© 2026 Gaming Hub. All rights reserved.</p>
+    <p>Made for gamers 🎮</p>
 </footer>
 
-<script src="script.js"></script>
-
 <script>
-
-// FEATURED GAME OF THE DAY
-
-(function () {
-
+    // Featured Game of the Day
     const featuredGames = [
         {
-            name: "Free Fire",
             icon: "🔥",
-            description: "Jump into exciting Battle Royale matches and discover new ways to play!",
+            name: "Free Fire",
+            description: "Battle, survive and become the champion!",
             link: "https://ff.garena.com/"
         },
         {
-            name: "Minecraft",
             icon: "⛏️",
-            description: "Build amazing creations, explore new worlds and enjoy your adventure!",
+            name: "Minecraft",
+            description: "Build, explore and survive in your own world.",
             link: "https://www.minecraft.net/"
         },
         {
-            name: "Fortnite",
             icon: "🎯",
-            description: "Explore the island, discover new updates and enjoy the action!",
+            name: "Fortnite",
+            description: "Discover Battle Royale and creative adventures.",
             link: "https://www.fortnite.com/"
         },
         {
-            name: "PUBG Mobile",
-            icon: "🎖️",
-            description: "Discover PUBG Mobile and enjoy exciting Battle Royale matches!",
-            link: "https://www.pubgmobile.com/"
+            icon: "🪖",
+            name: "PUBG",
+            description: "Fight to become the last survivor.",
+            link: "https://www.pubg.com/"
         },
         {
-            name: "Roblox",
             icon: "🧱",
-            description: "Explore thousands of experiences and discover something new!",
+            name: "Roblox",
+            description: "Play millions of experiences created by players.",
             link: "https://www.roblox.com/"
         },
         {
+            icon: "🚗",
             name: "Rocket League",
-            icon: "🚀",
-            description: "Play football with rocket-powered cars!",
+            description: "Football meets rocket-powered cars.",
             link: "https://www.rocketleague.com/"
         },
         {
+            icon: "⚔️",
             name: "Genshin Impact",
-            icon: "✨",
-            description: "Explore a huge fantasy world full of adventures!",
+            description: "Explore a beautiful fantasy world.",
             link: "https://genshin.hoyoverse.com/"
         }
     ];
 
-    const dayNumber = Math.floor(
-        new Date().getTime() / (1000 * 60 * 60 * 24)
-    );
+    function showFeaturedGame() {
+        const today = new Date();
+        const dayIndex = Math.floor(
+            today.getTime() / (1000 * 60 * 60 * 24)
+        ) % featuredGames.length;
 
-    const featured = featuredGames[dayNumber % featuredGames.length];
+        const game = featuredGames[dayIndex];
 
-    document.getElementById("featuredIcon").textContent = featured.icon;
-    document.getElementById("featuredName").textContent = featured.name;
-    document.getElementById("featuredDescription").textContent =
-        featured.description;
-    document.getElementById("featuredLink").href = featured.link;
-
-})();
-
-
-// SEARCH AND CATEGORY FILTER
-
-(function () {
-
-    const container = document.querySelector(".game-container");
-    const search = document.getElementById("searchInput");
-    const buttons = document.querySelectorAll(".category-button");
-    const count = document.getElementById("gameCount");
-    const noResults = document.getElementById("noResults");
-
-    const MAX_GAMES = 1000;
-
-    function filterGames() {
-
-        const term = search.value.toLowerCase();
-
-        const active = document.querySelector(".category-button.active");
-
-        const category = active ? active.dataset.category : "all";
-
-        let visible = 0;
-
-        container.querySelectorAll(".game-card").forEach(card => {
-
-            const name = card.querySelector("h3").textContent.toLowerCase();
-
-            const matchesName = name.includes(term);
-
-            const matchesCategory =
-                category === "all" || card.dataset.category === category;
-
-            card.style.display =
-                matchesName && matchesCategory ? "" : "none";
-
-            if (matchesName && matchesCategory) visible++;
-
-        });
-
-        noResults.classList.toggle("hidden", visible !== 0);
-
+        document.getElementById("featuredIcon").textContent = game.icon;
+        document.getElementById("featuredName").textContent = game.name;
+        document.getElementById("featuredDescription").textContent = game.description;
+        document.getElementById("featuredLink").href = game.link;
     }
 
-    search.addEventListener("input", filterGames);
+    showFeaturedGame();
 
-    buttons.forEach(button => {
+    // Search Games
+    function searchGames() {
+        const search = document.getElementById("gameSearch").value.toLowerCase();
+        const games = document.querySelectorAll("#gameList .game");
 
-        button.addEventListener("click", () => {
+        games.forEach(function(game) {
+            const name = game.textContent.toLowerCase();
 
-            buttons.forEach(b => b.classList.remove("active"));
-
-            button.classList.add("active");
-
-            filterGames();
-
+            if (name.includes(search)) {
+                game.classList.remove("hidden");
+            } else {
+                game.classList.add("hidden");
+            }
         });
+    }
 
-    });
+    // Reviews
+    function getReviews() {
+        return JSON.parse(localStorage.getItem("gamingReviews")) || [];
+    }
 
-    function getCategory(genre) {
+    function addReview() {
+        const name = document.getElementById("reviewName").value.trim();
+        const game = document.getElementById("reviewGame").value;
+        const rating = document.getElementById("reviewRating").value;
+        const review = document.getElementById("reviewText").value.trim();
 
-        const value = String(genre || "").toLowerCase();
-
-        if (value.includes("racing")) return "racing";
-
-        if (value.includes("sports")) return "sports";
-
-        if (value.includes("action")) return "action";
-
-        if (value.includes("adventure") || value.includes("rpg")) {
-            return "adventure";
+        if (!name || !review) {
+            alert("Please enter your name and review.");
+            return;
         }
 
-        return "adventure";
+        const reviews = getReviews();
 
+        reviews.push({
+            name: name,
+            game: game,
+            rating: rating,
+            review: review
+        });
+
+        localStorage.setItem("gamingReviews", JSON.stringify(reviews));
+
+        document.getElementById("reviewName").value = "";
+        document.getElementById("reviewText").value = "";
+
+        showReviews();
     }
 
-    async function loadGames() {
+    function showReviews() {
+        const reviews = getReviews();
+        const list = document.getElementById("reviewList");
 
-        try {
+        list.innerHTML = "";
 
-            count.textContent = "Loading games from online database...";
+        reviews.forEach(function(review) {
+            const card = document.createElement("div");
+            card.className = "info";
 
-            const response = await fetch(
-                "https://proxy.cors.dev/https://steamspy.com/api.php?request=all&page=0"
-            );
+            const title = document.createElement("h3");
+            title.textContent = review.game;
 
-            if (!response.ok) {
-                throw new Error("Game database unavailable.");
-            }
+            const author = document.createElement("p");
+            author.textContent = "By: " + review.name;
 
-            const data = await response.json();
+            const rating = document.createElement("p");
+            rating.textContent = "Rating: " + "⭐".repeat(Number(review.rating));
 
-            const existing = new Set(
-                [...container.querySelectorAll(".game-card h3")]
-                    .map(title => title.textContent.trim().toLowerCase())
-            );
+            const message = document.createElement("p");
+            message.textContent = review.review;
 
-            for (const game of Object.values(data)) {
+            card.appendChild(title);
+            card.appendChild(author);
+            card.appendChild(rating);
+            card.appendChild(message);
 
-                if (container.querySelectorAll(".game-card").length >= MAX_GAMES) {
-                    break;
-                }
-
-                if (!game.name || !game.appid) continue;
-
-                const name = game.name.trim();
-
-                if (!name || existing.has(name.toLowerCase())) continue;
-
-                const card = document.createElement("div");
-
-                card.className = "game-card";
-
-                card.dataset.category = getCategory(game.genre);
-
-                const title = document.createElement("h3");
-
-                title.textContent = name;
-
-                const description = document.createElement("p");
-
-                description.textContent = game.genre || "Video Game";
-
-                const link = document.createElement("a");
-
-                link.className = "game-button";
-
-                link.textContent = "Game Page";
-
-                link.href = "https://store.steampowered.com/app/" +
-                    encodeURIComponent(game.appid) + "/";
-
-                link.target = "_blank";
-
-                link.rel = "noopener noreferrer";
-
-                card.append(title, description, link);
-
-                container.appendChild(card);
-
-                existing.add(name.toLowerCase());
-
-            }
-
-            const total = container.querySelectorAll(".game-card").length;
-
-            count.textContent = "🎮 " + total + " games loaded";
-
-            filterGames();
-
-        } catch (error) {
-
-            count.textContent =
-                "Could not load extra games. Check your internet connection and refresh.";
-
-            console.error(error);
-
-        }
-
+            list.appendChild(card);
+        });
     }
-
-    loadGames();
-
-})();
-
-
-// REVIEWS
-
-function addReview() {
-
-    const name = document.getElementById("reviewName").value.trim();
-
-    const game = document.getElementById("reviewGame").value;
-
-    const rating = document.getElementById("reviewRating").value;
-
-    const review = document.getElementById("reviewText").value.trim();
-
-    const message = document.getElementById("reviewMessage");
-
-    if (!name || !review) {
-
-        message.textContent = "Please complete all fields.";
-
-        return;
-
-    }
-
-    if (name.length > 40 || review.length > 500) {
-
-        message.textContent = "Name or review is too long.";
-
-        return;
-
-    }
-
-    const reviews = JSON.parse(localStorage.getItem("gamingReviews") || "[]");
-
-    reviews.unshift({
-
-        name: name,
-
-        game: game,
-
-        rating: rating,
-
-        review: review,
-
-        date: new Date().toLocaleDateString()
-
-    });
-
-    localStorage.setItem("gamingReviews", JSON.stringify(reviews.slice(0, 50)));
-
-    document.getElementById("reviewName").value = "";
-
-    document.getElementById("reviewText").value = "";
-
-    message.textContent = "Your review has been added!";
 
     showReviews();
 
-}
+    // Account
+    function saveAccount() {
+        const username = document.getElementById("username").value.trim();
 
+        if (!username) {
+            alert("Please enter a username.");
+            return;
+        }
 
-function showReviews() {
+        localStorage.setItem("gamingUsername", username);
 
-    const list = document.getElementById("reviewList");
-
-    const reviews = JSON.parse(localStorage.getItem("gamingReviews") || "[]");
-
-    list.innerHTML = "";
-
-    if (reviews.length === 0) {
-
-        list.textContent = "No reviews yet. Be the first!";
-
-        return;
-
+        document.getElementById("accountMessage").textContent =
+            "Welcome, " + username + "!";
     }
 
-    reviews.forEach(item => {
+    const savedUsername = localStorage.getItem("gamingUsername");
 
-        const div = document.createElement("div");
-
-        div.className = "review";
-
-        const title = document.createElement("h4");
-
-        title.textContent = item.game + " - " + "⭐".repeat(Number(item.rating));
-
-        const author = document.createElement("p");
-
-        author.textContent = "By " + item.name + " | " + item.date;
-
-        const content = document.createElement("p");
-
-        content.textContent = item.review;
-
-        div.append(title, author, content);
-
-        list.appendChild(div);
-
-    });
-
-}
-
-
-// HELP & SUPPORT FUNCTIONS
-
-function sendSuggestion() {
-
-    const name = document.getElementById("suggestionName").value.trim();
-
-    const description = document.getElementById("suggestionText").value.trim();
-
-    const message = document.getElementById("suggestionMessage");
-
-    if (!name) {
-        message.textContent = "Please enter a game name.";
-        return;
+    if (savedUsername) {
+        document.getElementById("username").value = savedUsername;
+        document.getElementById("accountMessage").textContent =
+            "Welcome back, " + savedUsername + "!";
     }
 
-    if (name.length > 80 || description.length > 300) {
-        message.textContent = "Your suggestion is too long.";
-        return;
+    // Help
+    function sendMessage() {
+        const name = document.getElementById("helpName").value.trim();
+        const message = document.getElementById("helpMessage").value.trim();
+
+        if (!name || !message) {
+            alert("Please complete both fields.");
+            return;
+        }
+
+        const messages = JSON.parse(localStorage.getItem("gamingMessages")) || [];
+
+        messages.push({
+            name: name,
+            message: message,
+            date: new Date().toLocaleString()
+        });
+
+        localStorage.setItem("gamingMessages", JSON.stringify(messages));
+
+        document.getElementById("helpName").value = "";
+        document.getElementById("helpMessage").value = "";
+        document.getElementById("helpResult").textContent =
+            "Your message has been saved on this browser!";
     }
-
-    message.textContent = "Thanks for your suggestion!";
-
-    document.getElementById("suggestionName").value = "";
-    document.getElementById("suggestionText").value = "";
-
-}
-
-
-function sendProblem() {
-
-    const type = document.getElementById("problemType").value;
-
-    const description = document.getElementById("problemText").value.trim();
-
-    const message = document.getElementById("problemMessage");
-
-    if (!description) {
-        message.textContent = "Please describe the problem.";
-        return;
-    }
-
-    if (description.length > 500) {
-        message.textContent = "Your report is too long.";
-        return;
-    }
-
-    message.textContent = "Thanks! Your report has been prepared.";
-
-    document.getElementById("problemText").value = "";
-
-}
-
-
-showReviews();
-
 </script>
 
 </body>
