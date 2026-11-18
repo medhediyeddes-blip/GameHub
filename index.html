@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,6 +88,23 @@
             border-radius: 6px;
             text-decoration: none;
         }
+
+        /* HELP SECTION */
+
+        .help-answer {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .help-card textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .help-message {
+            color: #4caf50;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -102,6 +120,7 @@
         <a href="#minecraft">Minecraft</a>
         <a href="#reviews">Reviews</a>
         <a href="#account">Account</a>
+        <a href="#help">Help</a>
     </div>
 </nav>
 
@@ -494,6 +513,74 @@
     </div>
 </section>
 
+<!-- HELP & SUPPORT -->
+
+<section class="extra-section" id="help">
+    <h2>🛟 Help & Support</h2>
+    <p>Need help using Gaming Hub? Find answers or send us a suggestion.</p>
+
+    <div class="extra-container">
+
+        <div class="extra-card">
+            <h3>❓ How to Use Gaming Hub</h3>
+            <p class="help-answer">
+                1. Use the navigation menu to explore sections.<br><br>
+                2. Visit the Games section to discover games.<br><br>
+                3. Use the search box to find a game.<br><br>
+                4. Write reviews to share your opinions.
+            </p>
+        </div>
+
+        <div class="extra-card">
+            <h3>💡 Frequently Asked Questions</h3>
+
+            <p><strong>Is Gaming Hub free?</strong></p>
+            <p class="help-answer">Yes! You can explore the website for free.</p>
+
+            <p><strong>Can I search for games?</strong></p>
+            <p class="help-answer">Yes! Use the search box in the Games section.</p>
+
+            <p><strong>Can I write reviews?</strong></p>
+            <p class="help-answer">Yes! Visit the Reviews section.</p>
+
+            <p><strong>Are the games downloaded here?</strong></p>
+            <p class="help-answer">No. Game links take you to their official websites or game pages.</p>
+        </div>
+
+        <div class="extra-card help-card">
+            <h3>💬 Suggest a Game</h3>
+            <p>Tell us which game you want to see on Gaming Hub.</p>
+
+            <input type="text" id="suggestionName" placeholder="Game name">
+
+            <textarea id="suggestionText" placeholder="Why should we add this game?"></textarea>
+
+            <button onclick="sendSuggestion()">Send Suggestion</button>
+
+            <p id="suggestionMessage" class="help-message"></p>
+        </div>
+
+        <div class="extra-card help-card">
+            <h3>🐛 Report a Problem</h3>
+            <p>Found a problem on the website? Tell us about it.</p>
+
+            <select id="problemType">
+                <option value="Broken link">Broken link</option>
+                <option value="Search problem">Search problem</option>
+                <option value="Video problem">Video problem</option>
+                <option value="Other">Other problem</option>
+            </select>
+
+            <textarea id="problemText" placeholder="Describe the problem..."></textarea>
+
+            <button onclick="sendProblem()">Send Report</button>
+
+            <p id="problemMessage" class="help-message"></p>
+        </div>
+
+    </div>
+</section>
+
 <footer>
     <p>© 2026 Gaming Hub | Made for Gamers 🎮</p>
 </footer>
@@ -768,6 +855,60 @@ function showReviews() {
     });
 
 }
+
+
+// HELP & SUPPORT FUNCTIONS
+
+function sendSuggestion() {
+
+    const name = document.getElementById("suggestionName").value.trim();
+
+    const description = document.getElementById("suggestionText").value.trim();
+
+    const message = document.getElementById("suggestionMessage");
+
+    if (!name) {
+        message.textContent = "Please enter a game name.";
+        return;
+    }
+
+    if (name.length > 80 || description.length > 300) {
+        message.textContent = "Your suggestion is too long.";
+        return;
+    }
+
+    message.textContent = "Thanks for your suggestion!";
+
+    document.getElementById("suggestionName").value = "";
+    document.getElementById("suggestionText").value = "";
+
+}
+
+
+function sendProblem() {
+
+    const type = document.getElementById("problemType").value;
+
+    const description = document.getElementById("problemText").value.trim();
+
+    const message = document.getElementById("problemMessage");
+
+    if (!description) {
+        message.textContent = "Please describe the problem.";
+        return;
+    }
+
+    if (description.length > 500) {
+        message.textContent = "Your report is too long.";
+        return;
+    }
+
+    message.textContent = "Thanks! Your report has been prepared.";
+
+    document.getElementById("problemText").value = "";
+
+}
+
 
 showReviews();
 
