@@ -1,10 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gaming Hub</title>
+
+<!-- Supabase JavaScript library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root{
@@ -99,7 +101,6 @@ footer{text-align:center;padding:35px;color:var(--muted);border-top:1px solid va
 #modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
 #modalContent{max-width:550px;width:100%;max-height:85vh;overflow:auto;background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:25px}
 .gallery-box{height:150px;border-radius:12px;display:grid;place-items:center;font-size:48px;background:linear-gradient(140deg,#29265e,#086b84)}
-/* Music */
 .music-card{background:linear-gradient(135deg,#171c40,#123c58);border:1px solid #344d78;border-radius:18px;padding:25px;color:white}
 .music-art{width:165px;height:165px;margin:10px auto 20px;border-radius:22px;background:linear-gradient(135deg,#6c63ff,#00d4ff);display:grid;place-items:center;font-size:75px;box-shadow:0 10px 35px #0005}
 .music-title{text-align:center;font-size:23px;font-weight:bold}
@@ -111,6 +112,7 @@ footer{text-align:center;padding:35px;color:var(--muted);border-top:1px solid va
 .track{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px;border-bottom:1px solid #ffffff22;cursor:pointer;border-radius:8px}
 .track:hover,.track.active{background:#ffffff18}
 .track-name{font-weight:bold}.track-type{color:#b9c8e5;font-size:13px}
+.auth-status{padding:12px;border-radius:9px;background:var(--panel2);margin:12px 0;color:var(--muted)}
 @media(max-width:950px){nav{display:none}.menu-btn{display:block;background:var(--panel2);color:var(--text);border:1px solid var(--border);padding:10px 13px;border-radius:8px}}
 @media(max-width:600px){
  .container{width:93%}.hero{padding:55px 17px}.hero h1{font-size:31px}
@@ -129,7 +131,7 @@ footer{text-align:center;padding:35px;color:var(--muted);border-top:1px solid va
   <a href="#home">Home</a><a href="#dashboard">Dashboard</a>
   <a href="#games">Games</a><a href="#music">Music</a>
   <a href="#news">News</a><a href="#community">Community</a>
-  <a href="#profile">Profile</a>
+  <a href="#profile">Profile</a><a href="#account">Account</a>
  </nav>
  <button class="menu-btn" onclick="toggleMenu()">☰ Menu</button>
 </header>
@@ -156,6 +158,7 @@ footer{text-align:center;padding:35px;color:var(--muted);border-top:1px solid va
  <a href="#community" onclick="toggleMenu()">💬 Community</a>
  <a href="#reviews" onclick="toggleMenu()">⭐ Reviews</a>
  <a href="#profile" onclick="toggleMenu()">👤 Profile</a>
+ <a href="#account" onclick="toggleMenu()">🔐 Account</a>
  <a href="#achievements" onclick="toggleMenu()">🏅 Achievements</a>
  <a href="#tournaments" onclick="toggleMenu()">🏆 Tournaments</a>
  <a href="#settings" onclick="toggleMenu()">⚙️ Settings</a>
@@ -173,7 +176,48 @@ footer{text-align:center;padding:35px;color:var(--muted);border-top:1px solid va
    <a href="#games" class="btn">🎮 Explore Games</a>
    <a href="#music" class="btn secondary">🎵 Music Zone</a>
    <a href="#dashboard" class="btn secondary">📊 My Dashboard</a>
+   <a href="#account" class="btn secondary">🔐 Create Account</a>
   </div>
+ </div>
+</section>
+
+<section id="account">
+ <p class="group-label">ONLINE ACCOUNT</p>
+ <h2>🔐 Player Account</h2>
+ <p class="muted">Create an account or log in to save your player profile online.</p>
+
+ <div class="card">
+  <div id="accountLoggedOut">
+   <div class="grid">
+    <div>
+     <h3>📝 Create Account</h3>
+     <label>Email address</label>
+     <input id="signupEmail" type="email" placeholder="Your email address" autocomplete="email">
+     <label>Password</label>
+     <input id="signupPassword" type="password" placeholder="At least 6 characters" autocomplete="new-password">
+     <label>Player nickname</label>
+     <input id="signupNickname" maxlength="24" placeholder="Choose a gaming nickname">
+     <button class="btn green" onclick="signUp()">Create Account</button>
+    </div>
+    <div>
+     <h3>🎮 Log In</h3>
+     <label>Email address</label>
+     <input id="loginEmail" type="email" placeholder="Your email address" autocomplete="email">
+     <label>Password</label>
+     <input id="loginPassword" type="password" placeholder="Your password" autocomplete="current-password">
+     <button class="btn" onclick="logIn()">Log In</button>
+    </div>
+   </div>
+   <div id="authMessage" class="auth-status">You are currently using Gaming Hub as a guest.</div>
+  </div>
+
+  <div id="accountLoggedIn" class="hidden">
+   <h3>✅ You are logged in!</h3>
+   <p id="loggedInNickname"></p>
+   <p class="muted">Your player profile can now be saved online.</p>
+   <button class="btn red" onclick="logOut()">Log Out</button>
+  </div>
+  <p class="muted">Use an email account with permission. Do not share your password or personal information with other players.</p>
  </div>
 </section>
 
@@ -331,7 +375,7 @@ footer{text-align:center;padding:35px;color:var(--muted);border-top:1px solid va
 <section id="faq">
  <h2>❓ Frequently Asked Questions</h2><div class="card">
   <h3>Is Gaming Hub free?</h3><p>Yes. This demo website is free to use.</p>
-  <h3>Are my account details online?</h3><p>No. This version saves profile information in your browser only.</p>
+  <h3>Are my account details online?</h3><p>Your login is handled by Supabase. Your player profile is saved online when you are logged in.</p>
   <h3>Can I add more games?</h3><p>Yes. You can add games in the JavaScript games list.</p>
   <h3>Does the leaderboard work online?</h3><p>No. The current leaderboard is local to this browser.</p>
  </div>
@@ -340,10 +384,11 @@ footer{text-align:center;padding:35px;color:var(--muted);border-top:1px solid va
 <section id="profile">
  <h2>👤 My Player Profile</h2><div class="card">
   <div class="game-image" id="profileBackground">🎮</div><h3 id="profileDisplayName">Player</h3><p class="muted" id="profileLevel">Level 1</p>
-  <input id="profileName" placeholder="Choose a nickname">
+  <input id="profileName" maxlength="24" placeholder="Choose a nickname">
   <select id="profileAvatar"><option value="🎮">🎮 Gamer</option><option value="👑">👑 King</option><option value="🔥">🔥 Fire</option><option value="🐉">🐉 Dragon</option><option value="🚀">🚀 Explorer</option></select>
   <select id="profileColor"><option value="#24245a">Purple background</option><option value="#07556c">Blue background</option><option value="#145a38">Green background</option><option value="#783c22">Orange background</option></select>
   <button class="btn" onclick="saveProfile()">Save Profile</button>
+  <p class="muted" id="profileSaveStatus">Guest profile is saved in this browser. Log in to save it online.</p>
  </div>
 </section>
 
@@ -383,12 +428,293 @@ footer{text-align:center;padding:35px;color:var(--muted);border-top:1px solid va
 <div id="modal" onclick="closeModal(event)"><div id="modalContent"></div></div>
 
 <script>
-function getData(key,fallback){try{const v=localStorage.getItem(key);return v?JSON.parse(v):fallback}catch{return fallback}}
-function saveData(key,value){localStorage.setItem(key,JSON.stringify(value))}
-function toast(message){const el=document.getElementById("toast");el.textContent=message;el.style.display="block";setTimeout(()=>el.style.display="none",2500)}
-function addXP(amount){saveData("gh_xp",getData("gh_xp",0)+amount);updateDashboard();toast("+"+amount+" XP earned!")}
-function activity(message){let items=getData("gh_activity",[]);items.unshift(message);saveData("gh_activity",items.slice(0,6));renderActivity()}
-function toggleMenu(){document.getElementById("sidebar").classList.toggle("show")}
+// ==========================================
+// SUPABASE CONNECTION
+// ==========================================
+
+const SUPABASE_URL = "https://fcyrcyzqkggfxrmdxjqj.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_qs6GyDgOfAv3q-J4X1UR3A_9V9Wj5ZB";
+
+const supabaseClient = window.supabase.createClient(
+ SUPABASE_URL,
+ SUPABASE_PUBLISHABLE_KEY
+);
+
+let currentUser = null;
+let authBusy = false;
+
+// ==========================================
+// GENERAL FUNCTIONS
+// ==========================================
+
+function getData(key,fallback){
+ try{
+  const v=localStorage.getItem(key);
+  return v?JSON.parse(v):fallback;
+ }catch{
+  return fallback;
+ }
+}
+
+function saveData(key,value){
+ localStorage.setItem(key,JSON.stringify(value));
+}
+
+function toast(message){
+ const el=document.getElementById("toast");
+ el.textContent=message;
+ el.style.display="block";
+ setTimeout(()=>el.style.display="none",2500);
+}
+
+function addXP(amount){
+ saveData("gh_xp",getData("gh_xp",0)+amount);
+ updateDashboard();
+ toast("+"+amount+" XP earned!");
+}
+
+function activity(message){
+ let items=getData("gh_activity",[]);
+ items.unshift(message);
+ saveData("gh_activity",items.slice(0,6));
+ renderActivity();
+}
+
+function toggleMenu(){
+ document.getElementById("sidebar").classList.toggle("show");
+}
+
+// ==========================================
+// AUTHENTICATION
+// ==========================================
+
+function setAuthMessage(message){
+ document.getElementById("authMessage").textContent=message;
+}
+
+function updateAccountUI(){
+ const loggedOut=document.getElementById("accountLoggedOut");
+ const loggedIn=document.getElementById("accountLoggedIn");
+
+ if(currentUser){
+  loggedOut.classList.add("hidden");
+  loggedIn.classList.remove("hidden");
+
+  const nickname=getData("gh_profile",{name:"Player"}).name;
+  document.getElementById("loggedInNickname").textContent=
+   "Welcome, "+nickname+"!";
+ }else{
+  loggedOut.classList.remove("hidden");
+  loggedIn.classList.add("hidden");
+ }
+}
+
+async function signUp(){
+ if(authBusy)return;
+
+ const email=document.getElementById("signupEmail").value.trim();
+ const password=document.getElementById("signupPassword").value;
+ const nickname=document.getElementById("signupNickname").value.trim()||"Player";
+
+ if(!email||!password){
+  setAuthMessage("Please enter your email and password.");
+  return;
+ }
+
+ if(password.length<6){
+  setAuthMessage("Your password must contain at least 6 characters.");
+  return;
+ }
+
+ if(nickname.length>24){
+  setAuthMessage("Your nickname must be 24 characters or fewer.");
+  return;
+ }
+
+ authBusy=true;
+ setAuthMessage("Creating your account...");
+
+ try{
+  const {data,error}=await supabaseClient.auth.signUp({
+   email:email,
+   password:password,
+   options:{
+    data:{nickname:nickname}
+   }
+  });
+
+  if(error)throw error;
+
+  if(data.session){
+   currentUser=data.user;
+   const profile={
+    name:nickname,
+    avatar:"🎮",
+    color:"#24245a"
+   };
+   saveData("gh_profile",profile);
+   await saveOnlineProfile(profile);
+   renderProfile();
+   updateAccountUI();
+   setAuthMessage("Your account was created successfully!");
+  }else{
+   setAuthMessage("Account created! Check your email for a confirmation link, then log in.");
+  }
+
+ }catch(error){
+  setAuthMessage("Sign-up error: "+error.message);
+ }finally{
+  authBusy=false;
+ }
+}
+
+async function logIn(){
+ if(authBusy)return;
+
+ const email=document.getElementById("loginEmail").value.trim();
+ const password=document.getElementById("loginPassword").value;
+
+ if(!email||!password){
+  setAuthMessage("Please enter your email and password.");
+  return;
+ }
+
+ authBusy=true;
+ setAuthMessage("Logging in...");
+
+ try{
+  const {data,error}=await supabaseClient.auth.signInWithPassword({
+   email:email,
+   password:password
+  });
+
+  if(error)throw error;
+
+  currentUser=data.user;
+  await loadOnlineProfile();
+  updateAccountUI();
+  setAuthMessage("You are logged in!");
+  toast("Welcome back to Gaming Hub!");
+
+ }catch(error){
+  setAuthMessage("Login error: "+error.message);
+ }finally{
+  authBusy=false;
+ }
+}
+
+async function logOut(){
+ const {error}=await supabaseClient.auth.signOut();
+
+ if(error){
+  toast("Logout error: "+error.message);
+  return;
+ }
+
+ currentUser=null;
+ updateAccountUI();
+ toast("You have logged out.");
+}
+
+async function saveOnlineProfile(profile){
+ if(!currentUser)return;
+
+ const row={
+  id:currentUser.id,
+  nickname:profile.name,
+  avatar:profile.avatar,
+  color:profile.color,
+  updated_at:new Date().toISOString()
+ };
+
+ const {error}=await supabaseClient
+  .from("profiles")
+  .upsert(row,{onConflict:"id"});
+
+ if(error){
+  console.error("Profile save error:",error);
+  document.getElementById("profileSaveStatus").textContent=
+   "Online save failed: "+error.message;
+  return false;
+ }
+
+ document.getElementById("profileSaveStatus").textContent=
+  "✅ Your profile is saved online!";
+ return true;
+}
+
+async function loadOnlineProfile(){
+ if(!currentUser)return;
+
+ document.getElementById("profileSaveStatus").textContent=
+  "Loading your online profile...";
+
+ const {data,error}=await supabaseClient
+  .from("profiles")
+  .select("nickname,avatar,color")
+  .eq("id",currentUser.id)
+  .maybeSingle();
+
+ if(error){
+  console.error("Profile load error:",error);
+  document.getElementById("profileSaveStatus").textContent=
+   "Could not load online profile: "+error.message;
+  return;
+ }
+
+ if(data){
+  const profile={
+   name:data.nickname||"Player",
+   avatar:data.avatar||"🎮",
+   color:data.color||"#24245a"
+  };
+  saveData("gh_profile",profile);
+  renderProfile();
+ }else{
+  const profile=getData("gh_profile",{
+   name:"Player",avatar:"🎮",color:"#24245a"
+  });
+  await saveOnlineProfile(profile);
+  renderProfile();
+ }
+
+ updateAccountUI();
+}
+
+async function initializeAuth(){
+ const {data,error}=await supabaseClient.auth.getSession();
+
+ if(error){
+  console.error("Session error:",error);
+  setAuthMessage("Could not check login session.");
+  return;
+ }
+
+ currentUser=data.session?.user||null;
+
+ if(currentUser){
+  await loadOnlineProfile();
+ }
+
+ updateAccountUI();
+
+ supabaseClient.auth.onAuthStateChange((event,session)=>{
+  currentUser=session?.user||null;
+  updateAccountUI();
+
+  if(event==="SIGNED_IN"){
+   setTimeout(()=>loadOnlineProfile(),0);
+  }
+
+  if(event==="SIGNED_OUT"){
+   setAuthMessage("You are logged out. You can still use Gaming Hub as a guest.");
+  }
+ });
+}
+
+// ==========================================
+// GAMES
+// ==========================================
 
 const games=[
 {name:"Free Fire",category:"Battle Royale",platform:"Mobile",icon:"🔥",description:"A fast-paced battle royale game."},
@@ -410,107 +736,585 @@ function renderGames(list=games){
  const category=document.getElementById("categoryFilter").value;
  const platform=document.getElementById("platformFilter").value;
  const favorites=getData("gh_favorites",[]);
- const filtered=list.filter(g=>g.name.toLowerCase().includes(search)&&(category==="all"||g.category===category)&&(platform==="all"||g.platform===platform));
+
+ const filtered=list.filter(g=>
+  g.name.toLowerCase().includes(search)&&
+  (category==="all"||g.category===category)&&
+  (platform==="all"||g.platform===platform)
+ );
+
  document.getElementById("gamesGrid").innerHTML=filtered.map(g=>`
- <div class="card"><div class="game-image">${g.icon}</div><h3>${g.name}</h3><span class="tag">${g.category}</span><span class="tag">${g.platform}</span><p class="muted">${g.description}</p><button class="btn" onclick="openGame('${g.name}')">Details</button><button class="btn secondary" onclick="toggleFavorite('${g.name}')">${favorites.includes(g.name)?"❤️ Saved":"🤍 Favorite"}</button></div>`).join("")||"<p>No games found.</p>";
+ <div class="card">
+  <div class="game-image">${g.icon}</div>
+  <h3>${g.name}</h3>
+  <span class="tag">${g.category}</span>
+  <span class="tag">${g.platform}</span>
+  <p class="muted">${g.description}</p>
+  <button class="btn" onclick="openGame('${g.name}')">Details</button>
+  <button class="btn secondary" onclick="toggleFavorite('${g.name}')">${favorites.includes(g.name)?"❤️ Saved":"🤍 Favorite"}</button>
+ </div>`).join("")||"<p>No games found.</p>";
+
  updateDashboard();
 }
+
 function openGame(name){
- const game=games.find(g=>g.name===name);if(!game)return;
- let recent=getData("gh_recent",[]);recent=[name,...recent.filter(n=>n!==name)].slice(0,5);saveData("gh_recent",recent);
- activity("Opened "+name);renderRecent();
- document.getElementById("modalContent").innerHTML=`<div class="game-image">${game.icon}</div><h2>${game.name}</h2><p>${game.description}</p><span class="tag">${game.category}</span><span class="tag">${game.platform}</span><button class="btn" onclick="toggleFavorite('${game.name}');closeModal()">Favorite</button><button class="btn secondary" onclick="closeModal()">Close</button>`;
+ const game=games.find(g=>g.name===name);
+ if(!game)return;
+
+ let recent=getData("gh_recent",[]);
+ recent=[name,...recent.filter(n=>n!==name)].slice(0,5);
+ saveData("gh_recent",recent);
+
+ activity("Opened "+name);
+ renderRecent();
+
+ document.getElementById("modalContent").innerHTML=`
+ <div class="game-image">${game.icon}</div>
+ <h2>${game.name}</h2>
+ <p>${game.description}</p>
+ <span class="tag">${game.category}</span>
+ <span class="tag">${game.platform}</span>
+ <button class="btn" onclick="toggleFavorite('${game.name}');closeModal()">Favorite</button>
+ <button class="btn secondary" onclick="closeModal()">Close</button>`;
+
  document.getElementById("modal").style.display="flex";
 }
-function closeModal(event){if(!event||event.target.id==="modal")document.getElementById("modal").style.display="none"}
-function toggleFavorite(name){let f=getData("gh_favorites",[]);f=f.includes(name)?f.filter(n=>n!==name):[...f,name];saveData("gh_favorites",f);renderGames();toast("Favorites updated!")}
-function showFavorites(){renderGames(games.filter(g=>getData("gh_favorites",[]).includes(g.name)))}
-function showSuggestions(){const v=document.getElementById("gameSearch").value.toLowerCase();const m=games.filter(g=>g.name.toLowerCase().includes(v)).slice(0,5);document.getElementById("suggestions").textContent=v?"Suggestions: "+m.map(g=>g.name).join(", "):"";renderGames()}
-function renderRecent(){const r=getData("gh_recent",[]);document.getElementById("recentGames").innerHTML=r.length?r.map(n=>`<div class="card"><h3>${n}</h3><button class="btn" onclick="openGame('${n}')">Open Again</button></div>`).join(""):'<p class="muted">No games visited yet.</p>'}
+
+function closeModal(event){
+ if(!event||event.target.id==="modal"){
+  document.getElementById("modal").style.display="none";
+ }
+}
+
+function toggleFavorite(name){
+ let f=getData("gh_favorites",[]);
+ f=f.includes(name)?f.filter(n=>n!==name):[...f,name];
+ saveData("gh_favorites",f);
+ renderGames();
+ toast("Favorites updated!");
+}
+
+function showFavorites(){
+ renderGames(games.filter(g=>getData("gh_favorites",[]).includes(g.name)));
+}
+
+function showSuggestions(){
+ const v=document.getElementById("gameSearch").value.toLowerCase();
+ const m=games.filter(g=>g.name.toLowerCase().includes(v)).slice(0,5);
+ document.getElementById("suggestions").textContent=
+  v?"Suggestions: "+m.map(g=>g.name).join(", "):"";
+ renderGames();
+}
+
+function renderRecent(){
+ const r=getData("gh_recent",[]);
+ document.getElementById("recentGames").innerHTML=r.length?
+  r.map(n=>`<div class="card"><h3>${n}</h3><button class="btn" onclick="openGame('${n}')">Open Again</button></div>`).join("") :
+  '<p class="muted">No games visited yet.</p>';
+}
+
+// ==========================================
+// DASHBOARD AND NOTIFICATIONS
+// ==========================================
 
 function updateDashboard(){
- const xp=getData("gh_xp",0),level=Math.floor(xp/100)+1,progress=xp%100;
- document.getElementById("xpStat").textContent=xp;document.getElementById("levelStat").textContent=level;
+ const xp=getData("gh_xp",0);
+ const level=Math.floor(xp/100)+1;
+ const progress=xp%100;
+
+ document.getElementById("xpStat").textContent=xp;
+ document.getElementById("levelStat").textContent=level;
  document.getElementById("favStat").textContent=getData("gh_favorites",[]).length;
  document.getElementById("playedStat").textContent=getData("gh_recent",[]).length;
  document.getElementById("levelProgress").style.width=progress+"%";
  document.getElementById("levelProgressText").textContent=progress+" / 100 XP";
  document.getElementById("profileLevel").textContent="Level "+level+" • "+xp+" XP";
 }
-function renderActivity(){const a=getData("gh_activity",[]);document.getElementById("recentActivity").innerHTML=a.length?a.map(x=>`<div class="list-item">${escapeHTML(x)}</div>`).join(""):"No activity yet."}
-function addNotification(m){let n=getData("gh_notifications",[]);n.unshift(m);saveData("gh_notifications",n.slice(0,10));renderNotifications()}
-function renderNotifications(){document.getElementById("notificationList").innerHTML=getData("gh_notifications",["Welcome to Gaming Hub!"]).map(x=>`<div class="list-item">🔔 ${escapeHTML(x)}</div>`).join("")}
-function clearNotifications(){saveData("gh_notifications",[]);renderNotifications();toast("Notifications cleared.")}
 
-function setupComparison(){const o=games.map(g=>`<option>${g.name}</option>`).join("");document.getElementById("compareA").innerHTML=o;document.getElementById("compareB").innerHTML=o}
-function compareGames(){const a=games.find(g=>g.name===document.getElementById("compareA").value),b=games.find(g=>g.name===document.getElementById("compareB").value);document.getElementById("comparisonResult").innerHTML=`<div class="grid"><div class="card"><h3>${a.icon} ${a.name}</h3><p>${a.category}</p><p>${a.platform}</p></div><div class="card"><h3>${b.icon} ${b.name}</h3><p>${b.category}</p><p>${b.platform}</p></div></div>`}
+function renderActivity(){
+ const a=getData("gh_activity",[]);
+ document.getElementById("recentActivity").innerHTML=a.length?
+  a.map(x=>`<div class="list-item">${escapeHTML(x)}</div>`).join("") :
+  "No activity yet.";
+}
 
-// Original browser-generated music
+function addNotification(m){
+ let n=getData("gh_notifications",[]);
+ n.unshift(m);
+ saveData("gh_notifications",n.slice(0,10));
+ renderNotifications();
+}
+
+function renderNotifications(){
+ document.getElementById("notificationList").innerHTML=
+  getData("gh_notifications",["Welcome to Gaming Hub!"])
+  .map(x=>`<div class="list-item">🔔 ${escapeHTML(x)}</div>`).join("");
+}
+
+function clearNotifications(){
+ saveData("gh_notifications",[]);
+ renderNotifications();
+ toast("Notifications cleared.");
+}
+
+// ==========================================
+// GAME COMPARISON
+// ==========================================
+
+function setupComparison(){
+ const o=games.map(g=>`<option>${g.name}</option>`).join("");
+ document.getElementById("compareA").innerHTML=o;
+ document.getElementById("compareB").innerHTML=o;
+}
+
+function compareGames(){
+ const a=games.find(g=>g.name===document.getElementById("compareA").value);
+ const b=games.find(g=>g.name===document.getElementById("compareB").value);
+
+ document.getElementById("comparisonResult").innerHTML=`
+ <div class="grid">
+  <div class="card"><h3>${a.icon} ${a.name}</h3><p>${a.category}</p><p>${a.platform}</p></div>
+  <div class="card"><h3>${b.icon} ${b.name}</h3><p>${b.category}</p><p>${b.platform}</p></div>
+ </div>`;
+}
+
+// ==========================================
+// ORIGINAL BROWSER-GENERATED MUSIC
+// ==========================================
+
 const tracks=[
 {name:"Neon Battle",type:"Gaming Beat",icon:"⚡",bpm:110,notes:[110,164.81,220,164.81,130.81,196,261.63,196]},
 {name:"Phantom Drive",type:"Dark Electronic",icon:"🌑",bpm:125,notes:[98,146.83,196,146.83,116.54,174.61,233.08,174.61]},
 {name:"Victory Rush",type:"Epic Gaming",icon:"🏆",bpm:135,notes:[130.81,196,261.63,196,146.83,220,293.66,220]},
 {name:"Dream World",type:"Relaxing Synth",icon:"🌙",bpm:85,notes:[174.61,220,261.63,220,164.81,207.65,246.94,207.65]}
 ];
+
 let currentTrack=0,audioContext=null,musicTimer=null,musicPlaying=false,musicStep=0,masterGain=null,musicStartTime=0,musicElapsed=0;
 const trackLength=30;
-function setupAudio(){if(audioContext)return;const AC=window.AudioContext||window.webkitAudioContext;if(!AC){toast("Your browser does not support audio.");return}audioContext=new AC();masterGain=audioContext.createGain();masterGain.gain.value=Number(document.getElementById("volumeControl").value)/100;masterGain.connect(audioContext.destination)}
-function playNote(frequency,start,duration,volume,waveform){const o=audioContext.createOscillator(),g=audioContext.createGain();o.type=waveform;o.frequency.setValueAtTime(frequency,start);g.gain.setValueAtTime(.001,start);g.gain.exponentialRampToValueAtTime(volume,start+.02);g.gain.exponentialRampToValueAtTime(.001,start+duration);o.connect(g);g.connect(masterGain);o.start(start);o.stop(start+duration+.03)}
-function playMusicStep(){if(!musicPlaying||!audioContext)return;const t=tracks[currentTrack],now=audioContext.currentTime,note=t.notes[musicStep%t.notes.length];playNote(note,now,.25,.18,"sawtooth");if(musicStep%2===0)playNote(note/2,now,.35,.23,"triangle");if(musicStep%4===0)playNote(700,now,.045,.035,"square");musicStep++}
-function startMusic(){setupAudio();if(!audioContext)return;if(audioContext.state==="suspended")audioContext.resume();if(musicPlaying)return;musicPlaying=true;musicStartTime=Date.now()-musicElapsed*1000;document.getElementById("playButton").textContent="⏸";playMusicStep();musicTimer=setInterval(playMusicStep,60000/tracks[currentTrack].bpm);updateMusicProgress();renderPlaylist()}
-function pauseMusic(){if(!musicPlaying)return;musicPlaying=false;musicElapsed=Math.min(trackLength,(Date.now()-musicStartTime)/1000);clearInterval(musicTimer);musicTimer=null;document.getElementById("playButton").textContent="▶";renderPlaylist()}
-function stopMusic(){pauseMusic();musicElapsed=0;musicStep=0;updateMusicProgress()}
+
+function setupAudio(){
+ if(audioContext)return;
+ const AC=window.AudioContext||window.webkitAudioContext;
+ if(!AC){toast("Your browser does not support audio.");return}
+ audioContext=new AC();
+ masterGain=audioContext.createGain();
+ masterGain.gain.value=Number(document.getElementById("volumeControl").value)/100;
+ masterGain.connect(audioContext.destination);
+}
+
+function playNote(frequency,start,duration,volume,waveform){
+ const o=audioContext.createOscillator(),g=audioContext.createGain();
+ o.type=waveform;
+ o.frequency.setValueAtTime(frequency,start);
+ g.gain.setValueAtTime(.001,start);
+ g.gain.exponentialRampToValueAtTime(volume,start+.02);
+ g.gain.exponentialRampToValueAtTime(.001,start+duration);
+ o.connect(g);g.connect(masterGain);
+ o.start(start);o.stop(start+duration+.03);
+}
+
+function playMusicStep(){
+ if(!musicPlaying||!audioContext)return;
+ const t=tracks[currentTrack],now=audioContext.currentTime,note=t.notes[musicStep%t.notes.length];
+ playNote(note,now,.25,.18,"sawtooth");
+ if(musicStep%2===0)playNote(note/2,now,.35,.23,"triangle");
+ if(musicStep%4===0)playNote(700,now,.045,.035,"square");
+ musicStep++;
+}
+
+function startMusic(){
+ setupAudio();
+ if(!audioContext)return;
+ if(audioContext.state==="suspended")audioContext.resume();
+ if(musicPlaying)return;
+ musicPlaying=true;
+ musicStartTime=Date.now()-musicElapsed*1000;
+ document.getElementById("playButton").textContent="⏸";
+ playMusicStep();
+ musicTimer=setInterval(playMusicStep,60000/tracks[currentTrack].bpm);
+ updateMusicProgress();
+ renderPlaylist();
+}
+
+function pauseMusic(){
+ if(!musicPlaying)return;
+ musicPlaying=false;
+ musicElapsed=Math.min(trackLength,(Date.now()-musicStartTime)/1000);
+ clearInterval(musicTimer);
+ musicTimer=null;
+ document.getElementById("playButton").textContent="▶";
+ renderPlaylist();
+}
+
+function stopMusic(){
+ pauseMusic();
+ musicElapsed=0;
+ musicStep=0;
+ updateMusicProgress();
+}
+
 function toggleMusic(){musicPlaying?pauseMusic():startMusic()}
-function chooseTrack(i){stopMusic();currentTrack=(i+tracks.length)%tracks.length;updateMusicDisplay();startMusic()}
+
+function chooseTrack(i){
+ stopMusic();
+ currentTrack=(i+tracks.length)%tracks.length;
+ updateMusicDisplay();
+ startMusic();
+}
+
 function nextTrack(){chooseTrack(currentTrack+1)}
 function previousTrack(){chooseTrack(currentTrack-1)}
-function updateMusicDisplay(){const t=tracks[currentTrack];document.getElementById("musicTitle").textContent=t.name;document.getElementById("musicCategory").textContent=t.type+" • Original";document.getElementById("musicArt").textContent=t.icon;renderPlaylist()}
-function renderPlaylist(){document.getElementById("playlist").innerHTML=tracks.map((t,i)=>`<div class="track ${i===currentTrack?"active":""}" onclick="chooseTrack(${i})"><div><div class="track-name">${t.icon} ${t.name}</div><div class="track-type">${t.type}</div></div><span>${i===currentTrack&&musicPlaying?"🔊 Playing":"▶ Play"}</span></div>`).join("")}
-function updateMusicProgress(){const p=document.getElementById("musicProgress");let e=musicElapsed;if(musicPlaying)e=Math.min(trackLength,(Date.now()-musicStartTime)/1000);p.value=e;document.getElementById("musicCurrentTime").textContent=formatTime(e);document.getElementById("musicDuration").textContent=formatTime(trackLength);if(e>=trackLength&&musicPlaying){nextTrack();return}if(musicPlaying)requestAnimationFrame(updateMusicProgress)}
-function formatTime(s){return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0")}
-document.getElementById("volumeControl").addEventListener("input",function(){const v=Number(this.value);document.getElementById("volumeValue").textContent=v+"%";if(masterGain)masterGain.gain.setTargetAtTime(v/100,audioContext.currentTime,.03)});
-document.getElementById("musicProgress").addEventListener("change",function(){const v=Number(this.value);musicElapsed=v;if(musicPlaying)musicStartTime=Date.now()-v*1000;musicStep=Math.floor(v/(60/tracks[currentTrack].bpm));updateMusicProgress()});
 
-function addNews(){const title=document.getElementById("newsTitle").value.trim(),description=document.getElementById("newsDescription").value.trim();if(!title||!description)return toast("Fill in both news fields.");let n=getData("gh_news",[]);n.unshift({title,description});saveData("gh_news",n);renderNews();document.getElementById("newsTitle").value="";document.getElementById("newsDescription").value="";toast("News added!")}
-function renderNews(){const n=getData("gh_news",[]),d=`<div class="card"><h3>🎮 Gaming Hub Update</h3><p>Explore the new features and discover your favorite games.</p></div><div class="card"><h3>🏆 New Challenges</h3><p>Try the daily missions and collect XP.</p></div><div class="card"><h3>🌟 Player Spotlight</h3><p>Build your profile and show your gaming interests.</p></div>`;document.getElementById("newsGrid").innerHTML=d+n.map(x=>`<div class="card"><h3>${escapeHTML(x.title)}</h3><p>${escapeHTML(x.description)}</p><span class="tag">Community News</span></div>`).join("")}
+function updateMusicDisplay(){
+ const t=tracks[currentTrack];
+ document.getElementById("musicTitle").textContent=t.name;
+ document.getElementById("musicCategory").textContent=t.type+" • Original";
+ document.getElementById("musicArt").textContent=t.icon;
+ renderPlaylist();
+}
 
-function vote(option){let v=getData("gh_votes",{});v[option]=(v[option]||0)+1;saveData("gh_votes",v);renderPoll();toast("Your vote was saved!")}
-function renderPoll(){const v=getData("gh_votes",{}),total=Object.values(v).reduce((a,b)=>a+b,0);document.getElementById("pollResults").innerHTML=["Mobile","PC","Console"].map(n=>{const c=v[n]||0,p=total?Math.round(c/total*100):0;return `<p>${n}: ${c} votes (${p}%)</p><div class="progress"><div style="width:${p}%"></div></div>`}).join("")}
+function renderPlaylist(){
+ document.getElementById("playlist").innerHTML=tracks.map((t,i)=>`
+ <div class="track ${i===currentTrack?"active":""}" onclick="chooseTrack(${i})">
+  <div><div class="track-name">${t.icon} ${t.name}</div><div class="track-type">${t.type}</div></div>
+  <span>${i===currentTrack&&musicPlaying?"🔊 Playing":"▶ Play"}</span>
+ </div>`).join("");
+}
 
-function addRelease(){const name=document.getElementById("releaseName").value.trim(),date=document.getElementById("releaseDate").value;if(!name||!date)return toast("Enter a game and date.");let l=getData("gh_releases",[]);l.push({name,date});l.sort((a,b)=>a.date.localeCompare(b.date));saveData("gh_releases",l);renderReleases();toast("Release date added!")}
-function renderReleases(){const l=getData("gh_releases",[]);document.getElementById("releaseList").innerHTML=l.length?l.map(r=>`<div class="list-item">📅 ${escapeHTML(r.name)} — ${r.date}</div>`).join(""):'<p class="muted">No release dates added yet.</p>'}
+function updateMusicProgress(){
+ const p=document.getElementById("musicProgress");
+ let e=musicElapsed;
+ if(musicPlaying)e=Math.min(trackLength,(Date.now()-musicStartTime)/1000);
+ p.value=e;
+ document.getElementById("musicCurrentTime").textContent=formatTime(e);
+ document.getElementById("musicDuration").textContent=formatTime(trackLength);
+ if(e>=trackLength&&musicPlaying){nextTrack();return}
+ if(musicPlaying)requestAnimationFrame(updateMusicProgress);
+}
 
-function completeMission(id,points){let d=getData("gh_missions",[]);if(d.includes(id))return toast("Mission already completed!");d.push(id);saveData("gh_missions",d);addXP(points);activity("Completed a daily mission");addNotification("You completed a mission!");renderMissions()}
-function renderMissions(){const d=getData("gh_missions",[]);["mission1","mission2","mission3"].forEach(id=>document.getElementById(id+"Status").textContent=d.includes(id)?"✅ Completed":"Not completed")}
+function formatTime(s){
+ return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");
+}
 
-function renderLeaderboard(){const l=getData("gh_leaderboard",[]);document.getElementById("leaderboardList").innerHTML=l.length?[...l].sort((a,b)=>b.score-a.score).map((p,i)=>`<div class="list-item">#${i+1} 🏆 ${escapeHTML(p.name)} — ${p.score} XP</div>`).join(""):"No scores yet."}
-function addLeaderboardScore(){const name=document.getElementById("leaderboardName").value.trim();if(!name)return toast("Enter a player name.");let l=getData("gh_leaderboard",[]);l.push({name,score:getData("gh_xp",0)});saveData("gh_leaderboard",l);renderLeaderboard();toast("Your demo score was added!")}
+document.getElementById("volumeControl").addEventListener("input",function(){
+ const v=Number(this.value);
+ document.getElementById("volumeValue").textContent=v+"%";
+ if(masterGain)masterGain.gain.setTargetAtTime(v/100,audioContext.currentTime,.03);
+});
 
-function answerQuiz(correct){const r=document.getElementById("quizResult");if(correct){r.textContent="✅ Correct! Minecraft is famous for building with blocks.";if(!getData("gh_quiz_done",false)){saveData("gh_quiz_done",true);addXP(15)}}else r.textContent="❌ Try again!"}
+document.getElementById("musicProgress").addEventListener("change",function(){
+ const v=Number(this.value);
+ musicElapsed=v;
+ if(musicPlaying)musicStartTime=Date.now()-v*1000;
+ musicStep=Math.floor(v/(60/tracks[currentTrack].bpm));
+ updateMusicProgress();
+});
 
-function sendMessage(){const name=document.getElementById("chatName").value.trim(),message=document.getElementById("chatMessage").value.trim();if(!name||!message)return toast("Enter a nickname and message.");let l=getData("gh_chat",[]);l.push({name,message});saveData("gh_chat",l.slice(-30));document.getElementById("chatMessage").value="";renderChat()}
-function renderChat(){document.getElementById("chatMessages").innerHTML=getData("gh_chat",[]).map(m=>`<div class="list-item"><b>${escapeHTML(m.name)}:</b> ${escapeHTML(m.message)}</div>`).join("")}
+// ==========================================
+// NEWS
+// ==========================================
 
-function addReview(){const game=document.getElementById("reviewGame").value.trim(),rating=document.getElementById("reviewRating").value,text=document.getElementById("reviewText").value.trim();if(!game||!text)return toast("Enter a game and review.");let l=getData("gh_reviews",[]);l.unshift({game,rating,text});saveData("gh_reviews",l);renderReviews();document.getElementById("reviewText").value="";toast("Review added!")}
-function renderReviews(){document.getElementById("reviewList").innerHTML=getData("gh_reviews",[]).map(r=>`<div class="list-item"><b>${escapeHTML(r.game)}</b> — ${"⭐".repeat(Number(r.rating))}<p>${escapeHTML(r.text)}</p></div>`).join("")}
+function addNews(){
+ const title=document.getElementById("newsTitle").value.trim();
+ const description=document.getElementById("newsDescription").value.trim();
+ if(!title||!description)return toast("Fill in both news fields.");
+ let n=getData("gh_news",[]);
+ n.unshift({title,description});
+ saveData("gh_news",n);
+ renderNews();
+ document.getElementById("newsTitle").value="";
+ document.getElementById("newsDescription").value="";
+ toast("News added!");
+}
 
-function saveProfile(){const p={name:document.getElementById("profileName").value.trim()||"Player",avatar:document.getElementById("profileAvatar").value,color:document.getElementById("profileColor").value};saveData("gh_profile",p);renderProfile();toast("Profile saved!")}
-function renderProfile(){const p=getData("gh_profile",{name:"Player",avatar:"🎮",color:"#24245a"});document.getElementById("profileDisplayName").textContent=p.avatar+" "+p.name;document.getElementById("profileName").value=p.name;document.getElementById("profileAvatar").value=p.avatar;document.getElementById("profileColor").value=p.color;document.getElementById("profileBackground").style.background=p.color;document.getElementById("profileBackground").textContent=p.avatar}
+function renderNews(){
+ const n=getData("gh_news",[]);
+ const d=`
+ <div class="card"><h3>🎮 Gaming Hub Update</h3><p>Explore the new features and discover your favorite games.</p></div>
+ <div class="card"><h3>🏆 New Challenges</h3><p>Try the daily missions and collect XP.</p></div>
+ <div class="card"><h3>🌟 Player Spotlight</h3><p>Build your profile and show your gaming interests.</p></div>`;
+ document.getElementById("newsGrid").innerHTML=d+n.map(x=>`
+ <div class="card"><h3>${escapeHTML(x.title)}</h3><p>${escapeHTML(x.description)}</p><span class="tag">Community News</span></div>
+ `).join("");
+}
 
-function joinTournament(name){let j=getData("gh_tournaments",[]);if(j.includes(name))return toast("You already joined this demo event.");j.push(name);saveData("gh_tournaments",j);activity("Joined "+name);toast("You joined the demo event!")}
-function sendSupport(){const message=document.getElementById("supportMessage").value.trim(),email=document.getElementById("supportEmail").value.trim();if(!message)return toast("Write a message first.");let l=getData("gh_support",[]);l.unshift({email,message});saveData("gh_support",l);document.getElementById("supportMessage").value="";toast("Feedback saved in this browser!")}
+// ==========================================
+// POLLS
+// ==========================================
 
-function toggleTheme(){document.body.classList.toggle("light");saveData("gh_theme",document.body.classList.contains("light")?"light":"dark")}
-function loadTheme(){if(getData("gh_theme","dark")==="light")document.body.classList.add("light")}
-function resetData(){if(!confirm("Reset all Gaming Hub data saved in this browser?"))return;Object.keys(localStorage).filter(k=>k.startsWith("gh_")).forEach(k=>localStorage.removeItem(k));location.reload()}
-function escapeHTML(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function vote(option){
+ let v=getData("gh_votes",{});
+ v[option]=(v[option]||0)+1;
+ saveData("gh_votes",v);
+ renderPoll();
+ toast("Your vote was saved!");
+}
+
+function renderPoll(){
+ const v=getData("gh_votes",{});
+ const total=Object.values(v).reduce((a,b)=>a+b,0);
+
+ document.getElementById("pollResults").innerHTML=
+ ["Mobile","PC","Console"].map(n=>{
+  const c=v[n]||0,p=total?Math.round(c/total*100):0;
+  return `<p>${n}: ${c} votes (${p}%)</p><div class="progress"><div style="width:${p}%"></div></div>`;
+ }).join("");
+}
+
+// ==========================================
+// RELEASE CALENDAR
+// ==========================================
+
+function addRelease(){
+ const name=document.getElementById("releaseName").value.trim();
+ const date=document.getElementById("releaseDate").value;
+ if(!name||!date)return toast("Enter a game and date.");
+ let l=getData("gh_releases",[]);
+ l.push({name,date});
+ l.sort((a,b)=>a.date.localeCompare(b.date));
+ saveData("gh_releases",l);
+ renderReleases();
+ toast("Release date added!");
+}
+
+function renderReleases(){
+ const l=getData("gh_releases",[]);
+ document.getElementById("releaseList").innerHTML=l.length?
+  l.map(r=>`<div class="list-item">📅 ${escapeHTML(r.name)} — ${r.date}</div>`).join("") :
+  '<p class="muted">No release dates added yet.</p>';
+}
+
+// ==========================================
+// MISSIONS
+// ==========================================
+
+function completeMission(id,points){
+ let d=getData("gh_missions",[]);
+ if(d.includes(id))return toast("Mission already completed!");
+ d.push(id);
+ saveData("gh_missions",d);
+ addXP(points);
+ activity("Completed a daily mission");
+ addNotification("You completed a mission!");
+ renderMissions();
+}
+
+function renderMissions(){
+ const d=getData("gh_missions",[]);
+ ["mission1","mission2","mission3"].forEach(id=>{
+  document.getElementById(id+"Status").textContent=
+   d.includes(id)?"✅ Completed":"Not completed";
+ });
+}
+
+// ==========================================
+// LEADERBOARD
+// ==========================================
+
+function renderLeaderboard(){
+ const l=getData("gh_leaderboard",[]);
+ document.getElementById("leaderboardList").innerHTML=l.length?
+  [...l].sort((a,b)=>b.score-a.score).map((p,i)=>
+   `<div class="list-item">#${i+1} 🏆 ${escapeHTML(p.name)} — ${p.score} XP</div>`
+  ).join(""):"No scores yet.";
+}
+
+function addLeaderboardScore(){
+ const name=document.getElementById("leaderboardName").value.trim();
+ if(!name)return toast("Enter a player name.");
+ let l=getData("gh_leaderboard",[]);
+ l.push({name,score:getData("gh_xp",0)});
+ saveData("gh_leaderboard",l);
+ renderLeaderboard();
+ toast("Your demo score was added!");
+}
+
+// ==========================================
+// QUIZ
+// ==========================================
+
+function answerQuiz(correct){
+ const r=document.getElementById("quizResult");
+ if(correct){
+  r.textContent="✅ Correct! Minecraft is famous for building with blocks.";
+  if(!getData("gh_quiz_done",false)){
+   saveData("gh_quiz_done",true);
+   addXP(15);
+  }
+ }else{
+  r.textContent="❌ Try again!";
+ }
+}
+
+// ==========================================
+// CHAT
+// ==========================================
+
+function sendMessage(){
+ const name=document.getElementById("chatName").value.trim();
+ const message=document.getElementById("chatMessage").value.trim();
+
+ if(!name||!message)return toast("Enter a nickname and message.");
+
+ let l=getData("gh_chat",[]);
+ l.push({name,message});
+ saveData("gh_chat",l.slice(-30));
+ document.getElementById("chatMessage").value="";
+ renderChat();
+}
+
+function renderChat(){
+ document.getElementById("chatMessages").innerHTML=
+  getData("gh_chat",[]).map(m=>
+   `<div class="list-item"><b>${escapeHTML(m.name)}:</b> ${escapeHTML(m.message)}</div>`
+  ).join("");
+}
+
+// ==========================================
+// REVIEWS
+// ==========================================
+
+function addReview(){
+ const game=document.getElementById("reviewGame").value.trim();
+ const rating=document.getElementById("reviewRating").value;
+ const text=document.getElementById("reviewText").value.trim();
+
+ if(!game||!text)return toast("Enter a game and review.");
+
+ let l=getData("gh_reviews",[]);
+ l.unshift({game,rating,text});
+ saveData("gh_reviews",l);
+ renderReviews();
+ document.getElementById("reviewText").value="";
+ toast("Review added!");
+}
+
+function renderReviews(){
+ document.getElementById("reviewList").innerHTML=
+  getData("gh_reviews",[]).map(r=>
+   `<div class="list-item"><b>${escapeHTML(r.game)}</b> — ${"⭐".repeat(Number(r.rating))}<p>${escapeHTML(r.text)}</p></div>`
+  ).join("");
+}
+
+// ==========================================
+// PLAYER PROFILE
+// ==========================================
+
+async function saveProfile(){
+ const p={
+  name:document.getElementById("profileName").value.trim()||"Player",
+  avatar:document.getElementById("profileAvatar").value,
+  color:document.getElementById("profileColor").value
+ };
+
+ saveData("gh_profile",p);
+ renderProfile();
+
+ if(currentUser){
+  const saved=await saveOnlineProfile(p);
+  if(saved)toast("Profile saved online!");
+ }else{
+  document.getElementById("profileSaveStatus").textContent=
+   "Saved in this browser. Log in to save your profile online.";
+  toast("Guest profile saved!");
+ }
+
+ updateAccountUI();
+}
+
+function renderProfile(){
+ const p=getData("gh_profile",{
+  name:"Player",avatar:"🎮",color:"#24245a"
+ });
+
+ document.getElementById("profileDisplayName").textContent=p.avatar+" "+p.name;
+ document.getElementById("profileName").value=p.name;
+ document.getElementById("profileAvatar").value=p.avatar;
+ document.getElementById("profileColor").value=p.color;
+ document.getElementById("profileBackground").style.background=p.color;
+ document.getElementById("profileBackground").textContent=p.avatar;
+}
+
+// ==========================================
+// TOURNAMENTS, SUPPORT AND SETTINGS
+// ==========================================
+
+function joinTournament(name){
+ let j=getData("gh_tournaments",[]);
+ if(j.includes(name))return toast("You already joined this demo event.");
+ j.push(name);
+ saveData("gh_tournaments",j);
+ activity("Joined "+name);
+ toast("You joined the demo event!");
+}
+
+function sendSupport(){
+ const message=document.getElementById("supportMessage").value.trim();
+ const email=document.getElementById("supportEmail").value.trim();
+
+ if(!message)return toast("Write a message first.");
+
+ let l=getData("gh_support",[]);
+ l.unshift({email,message});
+ saveData("gh_support",l);
+ document.getElementById("supportMessage").value="";
+ toast("Feedback saved in this browser!");
+}
+
+function toggleTheme(){
+ document.body.classList.toggle("light");
+ saveData("gh_theme",document.body.classList.contains("light")?"light":"dark");
+}
+
+function loadTheme(){
+ if(getData("gh_theme","dark")==="light"){
+  document.body.classList.add("light");
+ }
+}
+
+function resetData(){
+ if(!confirm("Reset all Gaming Hub data saved in this browser?"))return;
+ Object.keys(localStorage)
+  .filter(k=>k.startsWith("gh_"))
+  .forEach(k=>localStorage.removeItem(k));
+ location.reload();
+}
+
+function escapeHTML(v){
+ return String(v).replace(/[&<>"']/g,c=>({
+  "&":"&amp;",
+  "<":"&lt;",
+  ">":"&gt;",
+  '"':"&quot;",
+  "'":"&#39;"
+ }[c]));
+}
+
+// ==========================================
+// START GAMING HUB
+// ==========================================
 
 function startHub(){
- loadTheme();renderGames();renderRecent();renderActivity();renderNotifications();
- renderNews();renderPoll();renderReleases();renderMissions();renderLeaderboard();
- renderChat();renderReviews();renderProfile();setupComparison();updateDashboard();
- renderPlaylist();updateMusicDisplay();
+ loadTheme();
+ renderGames();
+ renderRecent();
+ renderActivity();
+ renderNotifications();
+ renderNews();
+ renderPoll();
+ renderReleases();
+ renderMissions();
+ renderLeaderboard();
+ renderChat();
+ renderReviews();
+ renderProfile();
+ setupComparison();
+ updateDashboard();
+ renderPlaylist();
+ updateMusicDisplay();
+ initializeAuth();
 }
+
 startHub();
 </script>
 </body>
