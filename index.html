@@ -4,62 +4,273 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gaming Hub 2.0</title>
+<title>Gaming Hub</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth}
-body{font-family:Arial,sans-serif;background:#111827;color:white;transition:.3s}
-body.light{background:#f1f5f9;color:#111827}
-body.light header,body.light footer,body.light .card,body.light .game,body.light .info{background:#fff;color:#111827}
-body.light input,body.light textarea,body.light select{background:#e2e8f0;color:#111827}
-header{background:#1f2937;padding:20px;text-align:center;position:sticky;top:0;z-index:10}
-header h1{color:#38bdf8;margin-bottom:15px}
-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:13px}
-nav a{color:inherit;text-decoration:none;font-weight:bold;font-size:13px}
-nav a:hover{color:#38bdf8}
-section{padding:40px 20px;max-width:1150px;margin:auto;scroll-margin-top:130px}
-h2{color:#38bdf8;text-align:center;margin-bottom:20px}
-h3{margin-bottom:10px}
-p{line-height:1.5}
-.hero{text-align:center;padding:85px 20px;background:linear-gradient(135deg,#1e3a8a,#111827)}
-.hero h2{font-size:42px}
-.hero p{margin:15px}
-button,.button{display:inline-block;background:#0284c7;color:white;padding:11px 17px;border:0;border-radius:8px;margin:5px 3px;cursor:pointer;text-decoration:none;font-size:14px}
-button:hover,.button:hover{background:#0369a1}
-button:disabled{opacity:.5;cursor:not-allowed}
-input,textarea,select{width:100%;padding:12px;margin:7px 0;border:0;border-radius:7px;background:#e5e7eb;color:#111827;font-family:Arial}
-textarea{min-height:85px}
-.card,.info,.game,.featured,.news-card,.tournament-card{background:#1f2937;padding:20px;border-radius:12px;margin-bottom:15px}
-.games,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
-.game{text-align:center;transition:.2s}
-.game:hover{transform:translateY(-4px);background:#374151}
-.game-icon{font-size:45px;margin:10px}
-.game p{color:#cbd5e1;margin:8px}
-.tag{display:inline-block;background:#374151;padding:5px 9px;border-radius:15px;font-size:12px;margin:4px}
-.small{font-size:12px;color:#9ca3af}
-.score{font-size:22px;color:#38bdf8;font-weight:bold}
-.progress{height:12px;background:#111827;border-radius:20px;overflow:hidden;margin:10px 0}
-.fill{height:100%;background:#22c55e}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.center{text-align:center}
-.hidden{display:none!important}
-hr{border:0;border-top:1px solid #4b5563;margin:18px 0}
-.avatar{font-size:55px}
-.leaderboard-row,.message{padding:12px;background:#374151;border-radius:8px;margin:8px 0;overflow-wrap:anywhere}
-.rank{color:#facc15;font-weight:bold}
-footer{text-align:center;background:#1f2937;padding:25px;margin-top:30px;color:#cbd5e1}
-.gallery img{width:100%;height:170px;object-fit:cover;border-radius:10px}
-.poll-option{display:block;width:100%;text-align:left;background:#374151}
-.stat{background:#374151;padding:15px;border-radius:10px;text-align:center}
-.stat strong{display:block;font-size:25px;color:#38bdf8}
-#toast{position:fixed;bottom:20px;right:20px;background:#0284c7;padding:14px 20px;border-radius:9px;display:none;z-index:30}
-.ad-box{border:2px dashed #64748b;padding:25px;text-align:center;border-radius:10px;margin:15px 0;color:#9ca3af}
-@media(max-width:600px){
- header{position:relative}
- nav{gap:10px}
- nav a{font-size:12px}
- section{padding:30px 14px}
- .hero h2{font-size:30px}
+:root {
+    --bg:#0b1020;
+    --panel:#151d32;
+    --panel2:#1c2740;
+    --text:#f4f7ff;
+    --muted:#aab5cc;
+    --accent:#6c63ff;
+    --accent2:#00d4ff;
+    --border:#2a3652;
+    --danger:#ff5263;
+}
+body.light {
+    --bg:#eef2fa;
+    --panel:#ffffff;
+    --panel2:#e5eafa;
+    --text:#18213a;
+    --muted:#58647d;
+    --border:#d2dced;
+}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial,sans-serif;
+    transition:.2s;
+}
+button,input,select,textarea {font:inherit}
+button {cursor:pointer}
+a {color:inherit;text-decoration:none}
+header {
+    background:var(--panel);
+    border-bottom:1px solid var(--border);
+    padding:16px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+.logo {font-size:25px;font-weight:bold;color:var(--accent2)}
+.logo span {color:var(--accent)}
+nav {display:flex;gap:15px;align-items:center;flex-wrap:wrap}
+nav a {color:var(--muted);font-size:14px}
+nav a:hover {color:var(--accent2)}
+.menu-btn {
+    display:none;
+    background:var(--panel2);
+    color:var(--text);
+    border:1px solid var(--border);
+    padding:9px 12px;
+    border-radius:8px;
+}
+.container {width:90%;max-width:1300px;margin:auto}
+section {padding:35px 0;scroll-margin-top:80px}
+h1,h2,h3 {margin-top:0}
+h2 {font-size:27px}
+p {line-height:1.6}
+.muted {color:var(--muted)}
+.hero {
+    margin-top:25px;
+    padding:65px 35px;
+    border-radius:20px;
+    background:linear-gradient(120deg,#22205a,#174d72,#11182d);
+    text-align:center;
+}
+.hero h1 {font-size:42px;margin-bottom:10px}
+.hero p {color:#d9eaff}
+.btn {
+    display:inline-block;
+    background:var(--accent);
+    color:white;
+    border:0;
+    padding:11px 17px;
+    border-radius:9px;
+    margin:5px 3px;
+    font-weight:bold;
+}
+.btn:hover {filter:brightness(1.15)}
+.btn.secondary {background:var(--panel2);border:1px solid var(--border);color:var(--text)}
+.btn.green {background:#159b72}
+.btn.red {background:var(--danger)}
+.grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
+.card {
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px;
+    min-width:0;
+}
+.card:hover {border-color:var(--accent)}
+.stat {font-size:28px;font-weight:bold;color:var(--accent2)}
+.game-image {
+    height:130px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:55px;
+    margin-bottom:13px;
+    background:linear-gradient(135deg,#24245a,#087b9a);
+}
+.tag {
+    display:inline-block;
+    background:var(--panel2);
+    color:var(--accent2);
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    margin:3px;
+}
+input,select,textarea {
+    width:100%;
+    background:var(--panel2);
+    border:1px solid var(--border);
+    color:var(--text);
+    border-radius:8px;
+    padding:11px;
+    margin:6px 0 12px;
+}
+textarea {min-height:90px;resize:vertical}
+label {font-size:14px;color:var(--muted)}
+.progress {
+    background:var(--panel2);
+    height:12px;
+    border-radius:20px;
+    overflow:hidden;
+    margin:10px 0;
+}
+.progress div {
+    height:100%;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    width:0;
+}
+.row {display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.list-item {
+    padding:12px 0;
+    border-bottom:1px solid var(--border);
+}
+.list-item:last-child {border-bottom:0}
+footer {
+    text-align:center;
+    padding:30px;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    margin-top:30px;
+}
+.hidden {display:none!important}
+#toast {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:var(--accent);
+    color:white;
+    padding:13px 18px;
+    border-radius:10px;
+    display:none;
+    z-index:100;
+}
+#modal {
+    position:fixed;
+    inset:0;
+    background:#000b;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:50;
+    padding:20px;
+}
+#modalContent {
+    max-width:550px;
+    width:100%;
+    max-height:85vh;
+    overflow:auto;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:25px;
+}
+.gallery-box {
+    height:150px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    font-size:48px;
+    background:linear-gradient(140deg,#29265e,#086b84);
+}
+.sidebar {
+    display:none;
+    background:var(--panel);
+    padding:15px;
+    border-bottom:1px solid var(--border);
+}
+.sidebar a {display:block;padding:9px;color:var(--muted)}
+
+/* MUSIC PLAYER */
+.music-card {
+    background:linear-gradient(135deg,#171c40,#123c58);
+    border:1px solid #344d78;
+    border-radius:18px;
+    padding:25px;
+    color:white;
+}
+.music-art {
+    width:170px;
+    height:170px;
+    margin:10px auto 20px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#6c63ff,#00d4ff);
+    display:grid;
+    place-items:center;
+    font-size:75px;
+    box-shadow:0 10px 35px #0005;
+}
+.music-title {text-align:center;font-size:23px;font-weight:bold}
+.music-subtitle {text-align:center;color:#b9c8e5}
+.music-controls {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    margin:20px 0;
+}
+.music-controls button {
+    border:0;
+    border-radius:50%;
+    width:48px;
+    height:48px;
+    background:#ffffff20;
+    color:white;
+    font-size:20px;
+}
+.music-controls button.main-play {
+    width:62px;
+    height:62px;
+    background:#6c63ff;
+    font-size:25px;
+}
+.music-range {accent-color:#00d4ff;width:100%}
+.track {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    padding:13px;
+    border-bottom:1px solid #ffffff22;
+    cursor:pointer;
+    border-radius:8px;
+}
+.track:hover,.track.active {background:#ffffff18}
+.track-name {font-weight:bold}
+.track-type {color:#b9c8e5;font-size:13px}
+@media(max-width:850px) {
+    nav {display:none}
+    .menu-btn {display:block}
+    .sidebar.show {display:block}
+    .hero h1 {font-size:30px}
 }
 </style>
 </head>
@@ -67,1174 +278,1028 @@ footer{text-align:center;background:#1f2937;padding:25px;margin-top:30px;color:#
 <body>
 
 <header>
-<h1>🎮 Gaming Hub 2.0</h1>
-<nav>
-<a href="#home">Home</a>
-<a href="#dashboard">Dashboard</a>
-<a href="#games">Games</a>
-<a href="#store">Store</a>
-<a href="#gta">GTA VI</a>
-<a href="#freefire">Free Fire</a>
-<a href="#minecraft">Minecraft</a>
-<a href="#news">News</a>
-<a href="#videos">Videos</a>
-<a href="#tips">Tips</a>
-<a href="#minigames">Mini Games</a>
-<a href="#community">Community</a>
-<a href="#messages">Messages</a>
-<a href="#polls">Polls</a>
-<a href="#events">Events</a>
-<a href="#rankings">Rankings</a>
-<a href="#missions">Missions</a>
-<a href="#profile">Profile</a>
-<a href="#gallery">Gallery</a>
-<a href="#setups">Setups</a>
-<a href="#music">Music</a>
-<a href="#wishlist">Wishlist</a>
-<a href="#comparison">Compare</a>
-<a href="#shop">Shop</a>
-<a href="#reviews">Reviews</a>
-<a href="#tournaments">Tournaments</a>
-<a href="#achievements">Achievements</a>
-<a href="#notifications">Notifications</a>
-<a href="#help">Help</a>
-<a href="#admin">Admin</a>
-</nav>
+    <div class="logo">🎮 Gaming Hub</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#games">Games</a>
+        <a href="#music">Music</a>
+        <a href="#news">News</a>
+        <a href="#community">Community</a>
+        <a href="#profile">Profile</a>
+    </nav>
+    <button class="menu-btn" onclick="toggleMenu()">☰ Menu</button>
 </header>
 
-<div class="hero" id="home">
-<h2>WELCOME TO GAMING HUB!</h2>
-<p>Your ultimate destination for gaming, challenges, news and entertainment.</p>
-<a href="#games" class="button">Explore Games 🎮</a>
-<a href="#dashboard" class="button">My Dashboard</a>
+<div class="sidebar" id="sidebar">
+    <a href="#home" onclick="toggleMenu()">Home</a>
+    <a href="#dashboard" onclick="toggleMenu()">Dashboard</a>
+    <a href="#games" onclick="toggleMenu()">Games</a>
+    <a href="#music" onclick="toggleMenu()">Music Zone</a>
+    <a href="#news" onclick="toggleMenu()">News</a>
+    <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+    <a href="#missions" onclick="toggleMenu()">Missions</a>
+    <a href="#community" onclick="toggleMenu()">Community</a>
+    <a href="#profile" onclick="toggleMenu()">Profile</a>
+    <a href="#settings" onclick="toggleMenu()">Settings</a>
 </div>
 
-<!-- DASHBOARD -->
+<main class="container">
+
+<section id="home">
+    <div class="hero">
+        <h1>WELCOME TO GAMING HUB</h1>
+        <p>Your place for games, music, gaming news, challenges and fun.</p>
+        <a href="#games" class="btn">Explore Games</a>
+        <a href="#music" class="btn secondary">🎵 Music Zone</a>
+        <a href="#dashboard" class="btn secondary">My Dashboard</a>
+    </div>
+</section>
+
 <section id="dashboard">
-<h2>📊 Gaming Dashboard</h2>
-<div class="grid">
-<div class="stat"><strong id="dashLevel">1</strong>Player Level</div>
-<div class="stat"><strong id="dashXP">0</strong>Total XP</div>
-<div class="stat"><strong id="dashFavorites">0</strong>Favorites</div>
-<div class="stat"><strong id="dashReviews">0</strong>Reviews</div>
-</div>
-<div class="info">
-<h3>Welcome back, <span id="dashName">Guest</span>!</h3>
-<p>Your XP progress</p>
-<div class="progress"><div class="fill" id="xpFill" style="width:0%"></div></div>
-<p id="xpText">0 / 100 XP</p>
-<button onclick="location.href='#profile'">View Profile</button>
-</div>
+    <h2>📊 Player Dashboard</h2>
+    <p class="muted">Your personal gaming overview.</p>
+    <div class="grid">
+        <div class="card"><p class="muted">Your XP</p><div class="stat" id="xpStat">0</div></div>
+        <div class="card"><p class="muted">Your Level</p><div class="stat" id="levelStat">1</div></div>
+        <div class="card"><p class="muted">Favorites</p><div class="stat" id="favStat">0</div></div>
+        <div class="card"><p class="muted">Games Visited</p><div class="stat" id="playedStat">0</div></div>
+    </div>
+    <div class="card" style="margin-top:18px">
+        <div class="row"><h3>⭐ Your Level Progress</h3><span id="levelProgressText">0 / 100 XP</span></div>
+        <div class="progress"><div id="levelProgress"></div></div>
+        <p class="muted">Earn XP by completing missions and quizzes.</p>
+    </div>
+    <div class="grid" style="margin-top:18px">
+        <div class="card">
+            <h3>🕹️ Quick Shortcuts</h3>
+            <a class="btn" href="#games">Browse Games</a>
+            <a class="btn secondary" href="#missions">Daily Missions</a>
+            <a class="btn secondary" href="#profile">My Profile</a>
+        </div>
+        <div class="card">
+            <h3>🕒 Recent Activity</h3>
+            <div id="recentActivity" class="muted">No activity yet.</div>
+        </div>
+    </div>
 </section>
 
-<!-- FEATURED -->
-<section id="featured">
-<h2>⭐ Featured Game of the Day</h2>
-<div class="featured center">
-<div class="game-icon" id="featuredIcon">🔥</div>
-<h3 id="featuredName">Free Fire</h3>
-<p id="featuredDescription">Battle, survive and become the champion!</p>
-<a id="featuredLink" class="button" href="https://ff.garena.com/" target="_blank">Discover Game</a>
-</div>
-</section>
-
-<!-- ALL GAMES -->
-<section id="games">
-<h2>🎮 All Games</h2>
-<input id="gameSearch" placeholder="Search games..." oninput="showGames()">
-<select id="gameCategory" onchange="showGames()">
-<option value="all">All Categories</option>
-<option value="battle">Battle Royale</option>
-<option value="creative">Creative</option>
-<option value="sports">Sports & Racing</option>
-<option value="adventure">Adventure</option>
-</select>
-<select id="gamePlatform" onchange="showGames()">
-<option value="all">All Platforms</option>
-<option value="mobile">Mobile</option>
-<option value="pc">PC</option>
-<option value="console">Console</option>
-</select>
-<div class="games" id="gameList"></div>
-</section>
-
-<!-- GAME STORE -->
-<section id="store">
-<h2>🛍️ Game Store</h2>
-<p class="center small">Discover games and visit their official websites.</p>
-<div class="games" id="storeList"></div>
-</section>
-
-<!-- GTA -->
-<section id="gta">
-<h2>🌴 Grand Theft Auto VI</h2>
-<div class="card center" style="background:linear-gradient(135deg,#7c2d12,#451a03)">
-<div style="font-size:60px">🌴</div>
-<h3 style="font-size:32px;color:#fbbf24">GTA VI</h3>
-<p>Explore the world of Vice City.</p>
-<a class="button" href="https://www.rockstargames.com/VI" target="_blank">Official GTA VI Website</a>
-</div>
-<div class="info"><h3>🎮 About GTA VI</h3><p>Discover the open-world adventure from Rockstar Games.</p></div>
-<div class="info"><h3>🌴 Vice City</h3><p>Explore the fictional state of Leonida.</p></div>
-<div class="info"><h3>📰 GTA VI Updates</h3><a href="https://www.rockstargames.com/VI" target="_blank">Visit Rockstar Games</a></div>
-<div class="ad-box">ADVERTISEMENT<br>Your Advertisement Here</div>
-</section>
-
-<!-- FREE FIRE -->
-<section id="freefire">
-<h2>🔥 Free Fire Zone</h2>
-<div class="grid">
-<div class="info"><h3>🎯 Aim Training</h3><p>Practice regularly to improve your aim.</p></div>
-<div class="info"><h3>🛡️ Gloo Wall</h3><p>Learn how to use Gloo Walls effectively.</p></div>
-<div class="info"><h3>🏆 Game Modes</h3><p>Explore Battle Royale and Clash Squad.</p></div>
-</div>
-<a class="button" href="https://ff.garena.com/" target="_blank">Official Free Fire Website</a>
-</section>
-
-<!-- MINECRAFT -->
-<section id="minecraft">
-<h2>⛏️ Minecraft Zone</h2>
-<div class="grid">
-<div class="info"><h3>Survival Mode</h3><p>Collect resources and explore.</p></div>
-<div class="info"><h3>Creative Mode</h3><p>Build anything you imagine.</p></div>
-<div class="info"><h3>Building Ideas</h3><p>Create houses, castles and cities.</p></div>
-</div>
-<a class="button" href="https://www.minecraft.net/" target="_blank">Minecraft Website</a>
-</section>
-
-<!-- NEWS -->
-<section id="news">
-<h2>📰 Gaming News</h2>
-<div id="newsList"></div>
-</section>
-
-<!-- VIDEOS -->
-<section id="videos">
-<h2>▶️ Gaming Videos</h2>
-<div class="grid">
-<div class="info"><h3>🔥 Free Fire</h3><a href="https://www.youtube.com/results?search_query=free+fire+gameplay" target="_blank">Watch Videos</a></div>
-<div class="info"><h3>⛏️ Minecraft</h3><a href="https://www.youtube.com/results?search_query=minecraft+gameplay" target="_blank">Watch Videos</a></div>
-<div class="info"><h3>🎮 Gaming</h3><a href="https://www.youtube.com/results?search_query=gaming" target="_blank">Discover Videos</a></div>
-</div>
-</section>
-
-<!-- TIPS -->
-<section id="tips">
-<h2>💡 Gaming Tips</h2>
-<div class="info"><h3>1. Practice</h3><p>Practice regularly to improve your skills.</p></div>
-<div class="info"><h3>2. Learn</h3><p>Watch tutorials and discover new strategies.</p></div>
-<div class="info"><h3>3. Have Fun</h3><p>Enjoy gaming and take breaks.</p></div>
-</section>
-
-<!-- MINI GAMES -->
-<section id="minigames">
-<h2>🕹️ Mini Games Arcade</h2>
-<div class="grid">
-<div class="card center">
-<h3>🔢 Number Guessing</h3>
-<p>Guess a number between 1 and 10.</p>
-<input id="guessInput" type="number" min="1" max="10" placeholder="Your guess">
-<button onclick="guessNumber()">Guess</button>
-<p id="guessResult"></p>
-</div>
-<div class="card center">
-<h3>⚡ Reaction Game</h3>
-<p>Press the button as quickly as possible!</p>
-<button id="reactionButton" onclick="reactionGame()">START</button>
-<p id="reactionResult">Ready?</p>
-</div>
-<div class="card center">
-<h3>✊ Rock Paper Scissors</h3>
-<select id="rpsChoice">
-<option>Rock</option><option>Paper</option><option>Scissors</option>
-</select>
-<button onclick="playRPS()">Play</button>
-<p id="rpsResult"></p>
-</div>
-</div>
-</section>
-
-<!-- COMMUNITY -->
-<section id="community">
-<h2>💬 Gaming Community</h2>
-<div class="info">
-<p class="small">Local demo chat. Messages are saved in this browser only.</p>
-<div id="chatMessages"></div>
-<input id="chatName" placeholder="Display name" maxlength="20">
-<textarea id="chatInput" placeholder="Write a message..." maxlength="300"></textarea>
-<button onclick="sendChat()">Send Message</button>
-</div>
-</section>
-
-<!-- PLAYER MESSAGES -->
-<section id="messages">
-<h2>✉️ Player Messaging</h2>
-<div class="info">
-<p class="small">Local demo messaging. No messages are sent to other devices.</p>
-<input id="msgFrom" placeholder="Your name">
-<input id="msgTo" placeholder="Recipient name">
-<textarea id="msgText" placeholder="Write your message..."></textarea>
-<button onclick="sendPrivateMessage()">Send</button>
-<div id="privateMessages"></div>
-</div>
-</section>
-
-<!-- POLLS -->
-<section id="polls">
-<h2>📊 Gaming Polls</h2>
-<div class="info">
-<h3>Which game do you like most?</h3>
-<div id="pollOptions"></div>
-<p id="pollResult"></p>
-<button onclick="resetPoll()">Reset Demo Poll</button>
-</div>
-</section>
-
-<!-- EVENTS -->
-<section id="events">
-<h2>📅 Events Calendar</h2>
-<div id="eventList"></div>
-</section>
-
-<!-- RANKINGS -->
-<section id="rankings">
-<h2>🌍 Player Rankings</h2>
-<p class="small center">Demo rankings saved on this browser, not a global online leaderboard.</p>
-<div id="rankingList"></div>
-</section>
-
-<!-- LEADERBOARD -->
-<section id="leaderboard">
-<h2>🏆 Leaderboard</h2>
-<div class="info">
-<input id="playerName" placeholder="Username">
-<input id="playerScore" type="number" min="0" placeholder="Points">
-<button onclick="addPlayer()">Add Score</button>
-<div id="leaderboardList"></div>
-</div>
-</section>
-
-<!-- MISSIONS -->
-<section id="missions">
-<h2>🎯 Daily Missions</h2>
-<div id="missionList"></div>
-</section>
-
-<!-- PROFILE -->
-<section id="profile">
-<h2>🧑 Player Profile</h2>
-<div class="info center">
-<div class="avatar" id="profileAvatar">🎮</div>
-<h3 id="profileName">Guest Player</h3>
-<p id="profileLevel">Level 1</p>
-<p class="score" id="profileXP">0 XP</p>
-<div class="progress"><div class="fill" id="profileFill" style="width:0%"></div></div>
-<hr>
-<h3>Choose Avatar</h3>
-<div>
-<button onclick="chooseAvatar('🎮')">🎮</button>
-<button onclick="chooseAvatar('👾')">👾</button>
-<button onclick="chooseAvatar('🚀')">🚀</button>
-<button onclick="chooseAvatar('🐉')">🐉</button>
-<button onclick="chooseAvatar('⚡')">⚡</button>
-<button onclick="chooseAvatar('🏆')">🏆</button>
-</div>
-<h3 style="margin-top:20px">Change Profile Name</h3>
-<input id="username" placeholder="Enter your name">
-<button onclick="saveAccount()">Save Profile</button>
-<p id="accountMessage"></p>
-</div>
-</section>
-
-<!-- GALLERY -->
-<section id="gallery">
-<h2>📸 Screenshot Gallery</h2>
-<div class="info">
-<p>Choose images from your computer to preview them here.</p>
-<input type="file" id="galleryInput" accept="image/*" multiple onchange="addGallery(event)">
-<div class="games gallery" id="galleryList"></div>
-<p class="small">Gallery previews are temporary and reset when you reload the page.</p>
-</div>
-</section>
-
-<!-- SETUPS -->
-<section id="setups">
-<h2>🖥️ Gaming Setups</h2>
-<div class="info">
-<h3>Share Your Setup</h3>
-<input id="setupName" placeholder="Setup name">
-<input id="setupDescription" placeholder="Describe your gaming setup">
-<button onclick="addSetup()">Add Setup</button>
-<div id="setupList"></div>
-</div>
-</section>
-
-<!-- MUSIC -->
-<section id="music">
-<h2>🎵 Gaming Music Zone</h2>
-<div class="grid">
-<div class="info"><h3>🎧 Gaming Music</h3><a href="https://www.youtube.com/results?search_query=gaming+music" target="_blank">Discover Music</a></div>
-<div class="info"><h3>🔥 Gaming Phonk</h3><a href="https://www.youtube.com/results?search_query=gaming+phonk" target="_blank">Discover Phonk</a></div>
-<div class="info"><h3>⚡ Epic Soundtracks</h3><a href="https://www.youtube.com/results?search_query=epic+gaming+soundtracks" target="_blank">Discover Soundtracks</a></div>
-</div>
-</section>
-
-<!-- WISHLIST -->
-<section id="wishlist">
-<h2>❤️ Wishlist</h2>
-<p class="small center">Save games you want to play later.</p>
-<div id="wishlistList" class="games"></div>
-</section>
-
-<!-- COMPARISON -->
-<section id="comparison">
-<h2>⚖️ Game Comparison</h2>
-<div class="info">
-<select id="compareA"></select>
-<select id="compareB"></select>
-<button onclick="compareGames()">Compare Games</button>
-<div id="compareResult"></div>
-</div>
-</section>
-
-<!-- SHOP -->
-<section id="shop">
-<h2>🛍️ Virtual Gaming Shop</h2>
-<p class="small center">Demo items purchased with your earned XP.</p>
-<p class="score center" id="shopXP">0 XP</p>
-<div class="games" id="shopList"></div>
-</section>
-
-<!-- REVIEWS -->
-<section id="reviews">
-<h2>⭐ Game Reviews</h2>
-<div class="info">
-<input id="reviewName" placeholder="Display name">
-<select id="reviewGame"></select>
-<select id="reviewRating">
-<option value="5">⭐⭐⭐⭐⭐</option>
-<option value="4">⭐⭐⭐⭐</option>
-<option value="3">⭐⭐⭐</option>
-<option value="2">⭐⭐</option>
-<option value="1">⭐</option>
-</select>
-<textarea id="reviewText" placeholder="Write your review..."></textarea>
-<button onclick="addReview()">Submit Review</button>
-</div>
-<div id="reviewList"></div>
-</section>
-
-<!-- TOURNAMENTS -->
-<section id="tournaments">
-<h2>🏅 Tournaments</h2>
-<div id="tournamentList"></div>
-</section>
-
-<!-- ACHIEVEMENTS -->
-<section id="achievements">
-<h2>🎖️ Achievements</h2>
-<div class="games" id="achievementList"></div>
-</section>
-
-<!-- NOTIFICATIONS -->
 <section id="notifications">
-<h2>🔔 Notifications Center</h2>
-<div id="notificationList"></div>
-<button onclick="clearNotifications()">Clear Notifications</button>
+    <div class="row">
+        <h2>🔔 Notifications</h2>
+        <button class="btn secondary" onclick="clearNotifications()">Clear All</button>
+    </div>
+    <div class="card" id="notificationList">Welcome to Gaming Hub!</div>
 </section>
 
-<!-- DAILY REWARDS -->
-<section id="rewards">
-<h2>🎁 Daily Rewards</h2>
-<div class="info center">
-<div style="font-size:55px">💎</div>
-<h3>Claim your daily reward!</h3>
-<p>Collect 10 XP once per day.</p>
-<p id="rewardPoints" class="score">0 XP</p>
-<button id="claimRewardButton" onclick="claimReward()">Claim Reward</button>
-<p id="rewardMessage"></p>
-</div>
+<section id="games">
+    <h2>🎮 All Games</h2>
+    <p class="muted">Search, filter, favorite and explore games.</p>
+    <input id="gameSearch" placeholder="Search games..." oninput="showSuggestions()">
+    <div id="suggestions" class="muted"></div>
+    <div class="row">
+        <select id="categoryFilter" onchange="renderGames()">
+            <option value="all">All Categories</option>
+            <option value="Battle Royale">Battle Royale</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Action">Action</option>
+            <option value="Sports">Sports</option>
+            <option value="Sandbox">Sandbox</option>
+        </select>
+        <select id="platformFilter" onchange="renderGames()">
+            <option value="all">All Platforms</option>
+            <option value="Mobile">Mobile</option>
+            <option value="PC">PC</option>
+            <option value="Console">Console</option>
+        </select>
+        <button class="btn secondary" onclick="showFavorites()">❤️ Favorites</button>
+        <button class="btn secondary" onclick="renderGames()">Show All</button>
+    </div>
+    <div class="grid" id="gamesGrid"></div>
 </section>
 
-<!-- LANGUAGE -->
+<section id="recent">
+    <h2>🕒 Recently Played</h2>
+    <div class="grid" id="recentGames"><p class="muted">Open a game to see it here.</p></div>
+</section>
+
+<section id="compare">
+    <h2>⚖️ Compare Games</h2>
+    <div class="card">
+        <label>First Game</label>
+        <select id="compareA"></select>
+        <label>Second Game</label>
+        <select id="compareB"></select>
+        <button class="btn" onclick="compareGames()">Compare</button>
+        <div id="comparisonResult"></div>
+    </div>
+</section>
+
+<!-- NEW MUSIC ZONE -->
+<section id="music">
+    <h2>🎵 Gaming Music Zone</h2>
+    <p class="muted">Listen to original instrumental gaming beats made in your browser.</p>
+
+    <div class="music-card">
+        <div class="music-art" id="musicArt">🎧</div>
+        <div class="music-title" id="musicTitle">Neon Battle</div>
+        <div class="music-subtitle" id="musicCategory">Gaming Beat • Original</div>
+
+        <div style="margin-top:25px">
+            <div class="row">
+                <span id="musicCurrentTime">0:00</span>
+                <span id="musicDuration">0:30</span>
+            </div>
+            <input class="music-range" type="range" id="musicProgress" min="0" max="30" value="0">
+        </div>
+
+        <div class="music-controls">
+            <button onclick="previousTrack()" title="Previous">⏮</button>
+            <button class="main-play" id="playButton" onclick="toggleMusic()" title="Play">▶</button>
+            <button onclick="nextTrack()" title="Next">⏭</button>
+        </div>
+
+        <div class="row">
+            <span>🔊 Volume</span>
+            <span id="volumeValue">60%</span>
+        </div>
+        <input class="music-range" id="volumeControl" type="range" min="0" max="100" value="60">
+        <p style="text-align:center;color:#b9c8e5;font-size:12px">
+            Press Play to start. Your browser may require a click before audio can play.
+        </p>
+    </div>
+
+    <h3 style="margin-top:25px">🎶 Playlist</h3>
+    <div class="card" id="playlist"></div>
+</section>
+
+<section id="news">
+    <h2>📰 Gaming News</h2>
+    <div class="grid" id="newsGrid">
+        <div class="card"><h3>🎮 Gaming Hub Update</h3><p>Explore the new features and discover your favorite games.</p><span class="tag">Gaming Hub</span></div>
+        <div class="card"><h3>🏆 New Challenges</h3><p>Try the daily missions and collect XP.</p><span class="tag">Challenges</span></div>
+        <div class="card"><h3>🌟 Player Spotlight</h3><p>Build your profile and show your gaming interests.</p><span class="tag">Community</span></div>
+    </div>
+    <div class="card" style="margin-top:18px">
+        <h3>➕ Add Your Own News</h3>
+        <input id="newsTitle" placeholder="News title">
+        <textarea id="newsDescription" placeholder="Write your news..."></textarea>
+        <button class="btn" onclick="addNews()">Publish News</button>
+    </div>
+</section>
+
+<section id="freefire">
+    <h2>🔥 Free Fire Zone</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="game-image">🔥</div>
+            <h3>Free Fire</h3>
+            <p>Discover tips, guides and information about Free Fire.</p>
+            <span class="tag">Battle Royale</span>
+            <a class="btn" href="https://ff.garena.com/" target="_blank" rel="noopener">Official Website</a>
+        </div>
+        <div class="card"><h3>🎯 Gameplay Tips</h3><p>Practice your aim, learn the maps and work with your team.</p></div>
+        <div class="card"><h3>🧱 Gloo Wall Tips</h3><p>Practice placing cover and moving carefully during matches.</p></div>
+    </div>
+</section>
+
+<section id="minecraft">
+    <h2>⛏️ Minecraft Zone</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="game-image">⛏️</div>
+            <h3>Minecraft</h3>
+            <p>Explore, build and create your own world.</p>
+            <a class="btn" href="https://www.minecraft.net/" target="_blank" rel="noopener">Official Website</a>
+        </div>
+        <div class="card"><h3>🏠 Building Ideas</h3><p>Try building houses, castles, farms and amazing cities.</p></div>
+    </div>
+</section>
+
+<section id="gallery">
+    <h2>🖼️ Gaming Gallery</h2>
+    <p class="muted">A collection of gaming-inspired artwork and icons.</p>
+    <div class="grid">
+        <div class="card"><div class="gallery-box">🏝️</div><h3>Battle Island</h3></div>
+        <div class="card"><div class="gallery-box">🚗</div><h3>Racing World</h3></div>
+        <div class="card"><div class="gallery-box">🏰</div><h3>Fantasy World</h3></div>
+        <div class="card"><div class="gallery-box">🌌</div><h3>Space Adventure</h3></div>
+    </div>
+</section>
+
+<section id="polls">
+    <h2>🗳️ Gaming Polls</h2>
+    <div class="card">
+        <h3>What is your favorite gaming platform?</h3>
+        <button class="btn secondary" onclick="vote('Mobile')">📱 Mobile</button>
+        <button class="btn secondary" onclick="vote('PC')">💻 PC</button>
+        <button class="btn secondary" onclick="vote('Console')">🎮 Console</button>
+        <div id="pollResults"></div>
+    </div>
+</section>
+
+<section id="calendar">
+    <h2>📅 Game Release Calendar</h2>
+    <div class="card">
+        <p class="muted">Add release dates you want to remember.</p>
+        <input id="releaseName" placeholder="Game name">
+        <input id="releaseDate" type="date">
+        <button class="btn" onclick="addRelease()">Add Release</button>
+        <div id="releaseList"></div>
+    </div>
+</section>
+
+<section id="missions">
+    <h2>🎯 Daily Missions</h2>
+    <p class="muted">Complete these activities to earn XP.</p>
+    <div class="grid">
+        <div class="card"><h3>Mission 1</h3><p>Explore three games.</p><button class="btn" onclick="completeMission('mission1',30)">Complete +30 XP</button><p id="mission1Status" class="muted">Not completed</p></div>
+        <div class="card"><h3>Mission 2</h3><p>Visit the gaming guides.</p><button class="btn" onclick="completeMission('mission2',20)">Complete +20 XP</button><p id="mission2Status" class="muted">Not completed</p></div>
+        <div class="card"><h3>Mission 3</h3><p>Answer the gaming quiz.</p><button class="btn" onclick="completeMission('mission3',25)">Complete +25 XP</button><p id="mission3Status" class="muted">Not completed</p></div>
+    </div>
+</section>
+
+<section id="leaderboard">
+    <h2>🏆 Weekly Leaderboard</h2>
+    <div class="card">
+        <p class="muted">Local demo leaderboard. Scores are saved in this browser.</p>
+        <div id="leaderboardList"></div>
+        <input id="leaderboardName" placeholder="Your player name">
+        <button class="btn" onclick="addLeaderboardScore()">Add My Score</button>
+    </div>
+</section>
+
+<section id="quiz">
+    <h2>🧠 Gaming Quiz</h2>
+    <div class="card">
+        <h3>Which game is famous for building with blocks?</h3>
+        <button class="btn secondary" onclick="answerQuiz(false)">Free Fire</button>
+        <button class="btn secondary" onclick="answerQuiz(true)">Minecraft</button>
+        <button class="btn secondary" onclick="answerQuiz(false)">Rocket League</button>
+        <p id="quizResult"></p>
+    </div>
+</section>
+
+<section id="guides">
+    <h2>📚 Gaming Guides</h2>
+    <div class="grid">
+        <div class="card"><h3>🎯 Beginner Guide</h3><p>Start with easy controls, practice regularly and learn one game at a time.</p></div>
+        <div class="card"><h3>🖥️ PC Gaming Guide</h3><p>Adjust your settings, keep your games updated and check system requirements.</p></div>
+        <div class="card"><h3>📱 Mobile Gaming Guide</h3><p>Choose comfortable controls and take breaks during long gaming sessions.</p></div>
+    </div>
+</section>
+
+<section id="tips">
+    <h2>💡 Gaming Tips</h2>
+    <div class="grid">
+        <div class="card"><h3>🎯 Practice</h3><p>Practice a little every day.</p></div>
+        <div class="card"><h3>⚙️ Settings</h3><p>Choose settings that feel comfortable.</p></div>
+        <div class="card"><h3>🤝 Teamwork</h3><p>Communicate respectfully with teammates.</p></div>
+        <div class="card"><h3>⏰ Breaks</h3><p>Take regular breaks and balance gaming with other activities.</p></div>
+    </div>
+</section>
+
+<section id="videos">
+    <h2>▶️ Gaming Videos</h2>
+    <div class="grid">
+        <div class="card"><h3>Free Fire Videos</h3><a class="btn" href="https://www.youtube.com/results?search_query=free+fire+gameplay" target="_blank" rel="noopener">Watch on YouTube</a></div>
+        <div class="card"><h3>Minecraft Videos</h3><a class="btn" href="https://www.youtube.com/results?search_query=minecraft+gameplay" target="_blank" rel="noopener">Watch on YouTube</a></div>
+    </div>
+</section>
+
+<section id="community">
+    <h2>💬 Community Chat</h2>
+    <div class="card">
+        <p class="muted">Demo chat saved only in this browser. Do not share personal information.</p>
+        <div id="chatMessages"></div>
+        <input id="chatName" placeholder="Player nickname">
+        <input id="chatMessage" placeholder="Write a friendly message...">
+        <button class="btn" onclick="sendMessage()">Send Message</button>
+    </div>
+</section>
+
+<section id="reviews">
+    <h2>⭐ Game Reviews</h2>
+    <div class="card">
+        <input id="reviewGame" placeholder="Game name">
+        <select id="reviewRating">
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★</option>
+            <option value="3">★★★</option>
+            <option value="2">★★</option>
+            <option value="1">★</option>
+        </select>
+        <textarea id="reviewText" placeholder="Write your review..."></textarea>
+        <button class="btn" onclick="addReview()">Submit Review</button>
+        <div id="reviewList"></div>
+    </div>
+</section>
+
+<section id="faq">
+    <h2>❓ Frequently Asked Questions</h2>
+    <div class="card">
+        <h3>Is Gaming Hub free?</h3><p>Yes. This demo website is free to use.</p>
+        <h3>Are my account details online?</h3><p>No. This version saves profile information in your browser only.</p>
+        <h3>Can I add more games?</h3><p>Yes. You can add games in the JavaScript games list.</p>
+        <h3>Does the leaderboard work online?</h3><p>No. The current leaderboard is local to this browser.</p>
+    </div>
+</section>
+
+<section id="profile">
+    <h2>👤 My Player Profile</h2>
+    <div class="card">
+        <div class="game-image" id="profileBackground">🎮</div>
+        <h3 id="profileDisplayName">Player</h3>
+        <p class="muted" id="profileLevel">Level 1</p>
+        <input id="profileName" placeholder="Choose a nickname">
+        <select id="profileAvatar">
+            <option value="🎮">🎮 Gamer</option>
+            <option value="👑">👑 King</option>
+            <option value="🔥">🔥 Fire</option>
+            <option value="🐉">🐉 Dragon</option>
+            <option value="🚀">🚀 Explorer</option>
+        </select>
+        <select id="profileColor">
+            <option value="#24245a">Purple background</option>
+            <option value="#07556c">Blue background</option>
+            <option value="#145a38">Green background</option>
+            <option value="#783c22">Orange background</option>
+        </select>
+        <button class="btn" onclick="saveProfile()">Save Profile</button>
+    </div>
+</section>
+
+<section id="achievements">
+    <h2>🏅 Achievements</h2>
+    <div class="grid">
+        <div class="card"><h3>🌟 Explorer</h3><p>Visit the games section.</p></div>
+        <div class="card"><h3>🎯 Mission Master</h3><p>Complete your daily missions.</p></div>
+        <div class="card"><h3>🧠 Quiz Player</h3><p>Answer a quiz question correctly.</p></div>
+    </div>
+</section>
+
+<section id="tournaments">
+    <h2>🏆 Tournaments</h2>
+    <div class="grid">
+        <div class="card"><h3>🎮 Community Challenge</h3><p>Practice your favorite game and challenge yourself.</p><button class="btn" onclick="joinTournament('Community Challenge')">Join Demo</button></div>
+        <div class="card"><h3>⚡ Gaming Quiz Challenge</h3><p>Test your gaming knowledge.</p><button class="btn" onclick="joinTournament('Gaming Quiz Challenge')">Join Demo</button></div>
+    </div>
+</section>
+
 <section id="settings">
-<h2>🌐 Language & Appearance</h2>
-<div class="info">
-<h3>Language</h3>
-<select id="languageSelect" onchange="changeLanguage()">
-<option value="en">English</option>
-<option value="fr">Français</option>
-<option value="ar">العربية</option>
-</select>
-<h3>Appearance</h3>
-<button onclick="toggleTheme()">Switch Dark / Light Theme</button>
-</div>
+    <h2>⚙️ Website Settings</h2>
+    <div class="card">
+        <h3>Appearance</h3>
+        <button class="btn" onclick="toggleTheme()">🌗 Switch Dark / Light Mode</button>
+        <h3 style="margin-top:25px">Your Data</h3>
+        <p class="muted">Your demo data is stored in this browser.</p>
+        <button class="btn red" onclick="resetData()">Reset Website Data</button>
+    </div>
 </section>
 
-<!-- HELP -->
-<section id="help">
-<h2>❓ Help & Support</h2>
-<div class="info">
-<input id="helpName" placeholder="Your name">
-<textarea id="helpMessage" placeholder="Your question or suggestion"></textarea>
-<button onclick="sendHelp()">Submit</button>
-<p id="helpResult"></p>
-</div>
+<section id="support">
+    <h2>📩 Help & Support</h2>
+    <div class="card">
+        <input id="supportEmail" placeholder="Contact email (optional)">
+        <textarea id="supportMessage" placeholder="How can we improve Gaming Hub?"></textarea>
+        <button class="btn" onclick="sendSupport()">Send Feedback</button>
+        <p class="muted">This demo stores feedback locally; it does not send an email.</p>
+    </div>
 </section>
 
-<!-- ADMIN -->
-<section id="admin">
-<h2>⚙️ Admin Dashboard</h2>
-<div class="info">
-<p class="small">Local demo admin panel. This is not a secure online administration system.</p>
-<h3>Website Statistics</h3>
-<div id="adminStats"></div>
-<hr>
-<h3>Publish News</h3>
-<input id="adminNewsTitle" placeholder="News title">
-<textarea id="adminNewsText" placeholder="News content"></textarea>
-<button onclick="addNews()">Publish News</button>
-<hr>
-<h3>Manage News</h3>
-<div id="adminNewsList"></div>
-<hr>
-<h3>Help Messages</h3>
-<div id="adminMessages"></div>
-<hr>
-<h3>Manage Reviews</h3>
-<div id="adminReviews"></div>
-<hr>
-<button onclick="resetWebsite()">Reset All Demo Data</button>
-</div>
-</section>
+</main>
 
 <footer>
-<p>© 2026 Gaming Hub 2.0</p>
-<p>Made for gamers 🎮</p>
-<a href="#home">Back to Top ↑</a>
+    <h3>🎮 Gaming Hub</h3>
+    <p>Your gaming world starts here.</p>
+    <p>Made for gaming fans | 2026</p>
+    <a href="#home">Back to Top ↑</a>
 </footer>
 
 <div id="toast"></div>
+<div id="modal" onclick="closeModal(event)">
+    <div id="modalContent"></div>
+</div>
 
 <script>
-/* STORAGE */
-function get(key,fallback=[]){
- try{
-  const value=JSON.parse(localStorage.getItem("gh_"+key));
-  return value===null?fallback:value;
- }catch{return fallback;}
+// STORAGE
+function getData(key, fallback) {
+    try {
+        const value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : fallback;
+    } catch {
+        return fallback;
+    }
 }
-function put(key,value){
- localStorage.setItem("gh_"+key,JSON.stringify(value));
+function saveData(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
 }
-function el(tag,cls,txt){
- const e=document.createElement(tag);
- if(cls)e.className=cls;
- if(txt!==undefined)e.textContent=txt;
- return e;
+function toast(message) {
+    const el = document.getElementById("toast");
+    el.textContent = message;
+    el.style.display = "block";
+    setTimeout(() => el.style.display = "none", 2500);
 }
-function toast(message){
- const t=document.getElementById("toast");
- t.textContent=message;
- t.style.display="block";
- setTimeout(()=>t.style.display="none",2500);
+function addXP(amount) {
+    let xp = getData("gh_xp", 0);
+    xp += amount;
+    saveData("gh_xp", xp);
+    updateDashboard();
+    toast("+" + amount + " XP earned!");
 }
-function escapeHTML(value){
- return String(value).replace(/[&<>"']/g,c=>({
- "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[c]));
+function activity(message) {
+    let items = getData("gh_activity", []);
+    items.unshift(message);
+    saveData("gh_activity", items.slice(0, 6));
+    renderActivity();
 }
-
-/* XP SYSTEM */
-function xp(){
- return Number(localStorage.getItem("gh_xp")||0);
-}
-function addXP(amount,reason){
- localStorage.setItem("gh_xp",xp()+amount);
- addNotification("+"+amount+" XP: "+reason);
- updateAll();
-}
-function level(){
- return Math.floor(xp()/100)+1;
-}
-function updateXP(){
- const current=xp();
- const progress=current%100;
- document.getElementById("dashLevel").textContent=level();
- document.getElementById("dashXP").textContent=current;
- document.getElementById("xpFill").style.width=progress+"%";
- document.getElementById("xpText").textContent=progress+" / 100 XP";
- document.getElementById("profileLevel").textContent="Level "+level();
- document.getElementById("profileXP").textContent=current+" XP";
- document.getElementById("profileFill").style.width=progress+"%";
- document.getElementById("shopXP").textContent=current+" XP";
- document.getElementById("dashFavorites").textContent=get("favorites").length;
- document.getElementById("dashReviews").textContent=get("reviews").length;
- document.getElementById("dashName").textContent=localStorage.getItem("gh_username")||"Guest";
+function toggleMenu() {
+    document.getElementById("sidebar").classList.toggle("show");
 }
 
-/* GAMES DATABASE */
-const games=[
- {name:"Free Fire",icon:"🔥",description:"Battle Royale survival game.",category:"battle",platform:"mobile",url:"https://ff.garena.com/",year:"2017"},
- {name:"Minecraft",icon:"⛏️",description:"Build, explore and survive.",category:"creative",platform:"pc",url:"https://www.minecraft.net/",year:"2011"},
- {name:"Fortnite",icon:"🎯",description:"Battle Royale and creative modes.",category:"battle",platform:"console",url:"https://www.fortnite.com/",year:"2017"},
- {name:"PUBG",icon:"🪖",description:"Battle Royale action.",category:"battle",platform:"mobile",url:"https://www.pubg.com/",year:"2017"},
- {name:"Roblox",icon:"🧱",description:"Play and create experiences.",category:"creative",platform:"pc",url:"https://www.roblox.com/",year:"2006"},
- {name:"Rocket League",icon:"🚗",description:"Football with rocket-powered cars.",category:"sports",platform:"console",url:"https://www.rocketleague.com/",year:"2015"},
- {name:"Genshin Impact",icon:"⚔️",description:"Explore a fantasy world.",category:"adventure",platform:"pc",url:"https://genshin.hoyoverse.com/",year:"2020"},
- {name:"Forza Horizon",icon:"🏎️",description:"Explore and race amazing cars.",category:"sports",platform:"console",url:"https://forza.net/",year:"2021"},
- {name:"EA SPORTS FC",icon:"⚽",description:"Enjoy football matches.",category:"sports",platform:"console",url:"https://www.ea.com/games/ea-sports-fc",year:"2023"},
- {name:"Among Us",icon:"👻",description:"Find the impostor.",category:"adventure",platform:"mobile",url:"https://www.innersloth.com/games/among-us/",year:"2018"},
- {name:"Call of Duty",icon:"🎖️",description:"Multiplayer action games.",category:"battle",platform:"pc",url:"https://www.callofduty.com/",year:"2003"},
- {name:"Apex Legends",icon:"🚀",description:"Team-based battle royale.",category:"battle",platform:"console",url:"https://www.ea.com/games/apex-legends",year:"2019"}
+// GAMES
+const games = [
+    {name:"Free Fire",category:"Battle Royale",platform:"Mobile",icon:"🔥",description:"A fast-paced battle royale game."},
+    {name:"Minecraft",category:"Sandbox",platform:"PC",icon:"⛏️",description:"Build, explore and create your own world."},
+    {name:"GTA V",category:"Action",platform:"PC",icon:"🚗",description:"Explore a huge open-world city."},
+    {name:"Fortnite",category:"Battle Royale",platform:"Console",icon:"🎯",description:"Battle royale with building and creative modes."},
+    {name:"PUBG Mobile",category:"Battle Royale",platform:"Mobile",icon:"🪖",description:"A competitive mobile battle royale."},
+    {name:"Rocket League",category:"Sports",platform:"PC",icon:"🚀",description:"Football with rocket-powered cars."},
+    {name:"Roblox",category:"Adventure",platform:"Mobile",icon:"🧱",description:"Explore games and experiences made by creators."},
+    {name:"Among Us",category:"Adventure",platform:"Mobile",icon:"👨‍🚀",description:"A social deduction multiplayer game."},
+    {name:"EA Sports FC",category:"Sports",platform:"Console",icon:"⚽",description:"Play football and build your team."},
+    {name:"The Sims 4",category:"Adventure",platform:"PC",icon:"🏡",description:"Create characters and build homes."},
+    {name:"Fall Guys",category:"Adventure",platform:"Console",icon:"🏃",description:"Compete in colorful obstacle courses."},
+    {name:"Terraria",category:"Sandbox",platform:"PC",icon:"🌳",description:"Explore, build and discover."}
 ];
 
-function favorites(){return get("favorites");}
-function isFavorite(name){return favorites().includes(name);}
-function toggleFavorite(name){
- let list=favorites();
- if(list.includes(name))list=list.filter(x=>x!==name);
- else{
-  list.push(name);
-  addXP(5,"Added a favorite");
- }
- put("favorites",list);
- showGames();
- showWishlist();
- updateAll();
+function renderGames(list = games) {
+    const search = document.getElementById("gameSearch").value.toLowerCase();
+    const category = document.getElementById("categoryFilter").value;
+    const platform = document.getElementById("platformFilter").value;
+    const favorites = getData("gh_favorites", []);
+    const filtered = list.filter(game =>
+        game.name.toLowerCase().includes(search) &&
+        (category === "all" || game.category === category) &&
+        (platform === "all" || game.platform === platform)
+    );
+    document.getElementById("gamesGrid").innerHTML = filtered.map(game => `
+        <div class="card">
+            <div class="game-image">${game.icon}</div>
+            <h3>${game.name}</h3>
+            <span class="tag">${game.category}</span>
+            <span class="tag">${game.platform}</span>
+            <p class="muted">${game.description}</p>
+            <button class="btn" onclick="openGame('${game.name}')">Details</button>
+            <button class="btn secondary" onclick="toggleFavorite('${game.name}')">
+                ${favorites.includes(game.name) ? "❤️ Saved" : "🤍 Favorite"}
+            </button>
+        </div>
+    `).join("") || "<p>No games found.</p>";
+    updateDashboard();
 }
-function gameCard(game){
- const card=el("div","game");
- card.append(el("div","game-icon",game.icon));
- card.append(el("h3","",game.name));
- card.append(el("p","",game.description));
- card.append(el("span","tag",game.category));
- card.append(el("span","tag",game.platform));
- const a=el("a","button","Visit Website");
- a.href=game.url;a.target="_blank";a.rel="noopener";
- card.append(a);
- const fav=el("button","",isFavorite(game.name)?"❤️ Saved":"♡ Wishlist");
- fav.onclick=()=>toggleFavorite(game.name);
- card.append(fav);
- return card;
+function openGame(name) {
+    const game = games.find(g => g.name === name);
+    if (!game) return;
+    let recent = getData("gh_recent", []);
+    recent = [name, ...recent.filter(n => n !== name)].slice(0, 5);
+    saveData("gh_recent", recent);
+    activity("Opened " + name);
+    renderRecent();
+    document.getElementById("modalContent").innerHTML = `
+        <div class="game-image">${game.icon}</div>
+        <h2>${game.name}</h2>
+        <p>${game.description}</p>
+        <span class="tag">${game.category}</span>
+        <span class="tag">${game.platform}</span>
+        <button class="btn" onclick="toggleFavorite('${game.name}');closeModal()">Favorite</button>
+        <button class="btn secondary" onclick="closeModal()">Close</button>
+    `;
+    document.getElementById("modal").style.display = "flex";
 }
-function showGames(){
- const box=document.getElementById("gameList");
- box.innerHTML="";
- const s=document.getElementById("gameSearch").value.toLowerCase();
- const cat=document.getElementById("gameCategory").value;
- const plat=document.getElementById("gamePlatform").value;
- games.filter(g=>
-  (g.name.toLowerCase().includes(s)||g.description.toLowerCase().includes(s))&&
-  (cat==="all"||g.category===cat)&&
-  (plat==="all"||g.platform===plat)
- ).forEach(g=>box.append(gameCard(g)));
- if(!box.children.length)box.textContent="No games found.";
+function closeModal(event) {
+    if (!event || event.target.id === "modal") {
+        document.getElementById("modal").style.display = "none";
+    }
 }
-function showStore(){
- const box=document.getElementById("storeList");
- games.forEach(g=>box.append(gameCard(g)));
+function toggleFavorite(name) {
+    let favorites = getData("gh_favorites", []);
+    if (favorites.includes(name)) favorites = favorites.filter(n => n !== name);
+    else favorites.push(name);
+    saveData("gh_favorites", favorites);
+    renderGames();
+    toast("Favorites updated!");
 }
-function showWishlist(){
- const box=document.getElementById("wishlistList");
- box.innerHTML="";
- games.filter(g=>isFavorite(g.name)).forEach(g=>box.append(gameCard(g)));
- if(!box.children.length)box.textContent="Your wishlist is empty.";
+function showFavorites() {
+    const favorites = getData("gh_favorites", []);
+    renderGames(games.filter(g => favorites.includes(g.name)));
 }
-showGames();showStore();showWishlist();
+function showSuggestions() {
+    const value = document.getElementById("gameSearch").value.toLowerCase();
+    const matches = games.filter(g => g.name.toLowerCase().includes(value)).slice(0, 5);
+    document.getElementById("suggestions").textContent =
+        value ? "Suggestions: " + matches.map(g => g.name).join(", ") : "";
+    renderGames();
+}
+function renderRecent() {
+    const recent = getData("gh_recent", []);
+    document.getElementById("recentGames").innerHTML = recent.length
+        ? recent.map(name => `<div class="card"><h3>${name}</h3><button class="btn" onclick="openGame('${name}')">Open Again</button></div>`).join("")
+        : '<p class="muted">No games visited yet.</p>';
+}
 
-/* FEATURED GAME */
-const featured=[
- {icon:"🔥",name:"Free Fire",description:"Battle, survive and become champion!",link:"https://ff.garena.com/"},
- {icon:"⛏️",name:"Minecraft",description:"Build and explore your own world.",link:"https://www.minecraft.net/"},
- {icon:"🎯",name:"Fortnite",description:"Discover Battle Royale adventures.",link:"https://www.fortnite.com/"},
- {icon:"🧱",name:"Roblox",description:"Explore experiences created by players.",link:"https://www.roblox.com/"}
+// DASHBOARD
+function updateDashboard() {
+    const xp = getData("gh_xp", 0);
+    const level = Math.floor(xp / 100) + 1;
+    const progress = xp % 100;
+    document.getElementById("xpStat").textContent = xp;
+    document.getElementById("levelStat").textContent = level;
+    document.getElementById("favStat").textContent = getData("gh_favorites", []).length;
+    document.getElementById("playedStat").textContent = getData("gh_recent", []).length;
+    document.getElementById("levelProgress").style.width = progress + "%";
+    document.getElementById("levelProgressText").textContent = progress + " / 100 XP";
+    document.getElementById("profileLevel").textContent = "Level " + level + " • " + xp + " XP";
+}
+function renderActivity() {
+    const items = getData("gh_activity", []);
+    document.getElementById("recentActivity").innerHTML = items.length
+        ? items.map(item => `<div class="list-item">${item}</div>`).join("")
+        : "No activity yet.";
+}
+
+// NOTIFICATIONS
+function addNotification(message) {
+    let list = getData("gh_notifications", []);
+    list.unshift(message);
+    saveData("gh_notifications", list.slice(0, 10));
+    renderNotifications();
+}
+function renderNotifications() {
+    const list = getData("gh_notifications", ["Welcome to Gaming Hub!"]);
+    document.getElementById("notificationList").innerHTML = list.map(item =>
+        `<div class="list-item">🔔 ${item}</div>`
+    ).join("");
+}
+function clearNotifications() {
+    saveData("gh_notifications", []);
+    renderNotifications();
+    toast("Notifications cleared.");
+}
+
+// COMPARISON
+function setupComparison() {
+    const options = games.map(g => `<option>${g.name}</option>`).join("");
+    document.getElementById("compareA").innerHTML = options;
+    document.getElementById("compareB").innerHTML = options;
+}
+function compareGames() {
+    const a = games.find(g => g.name === document.getElementById("compareA").value);
+    const b = games.find(g => g.name === document.getElementById("compareB").value);
+    document.getElementById("comparisonResult").innerHTML = `
+        <div class="grid">
+            <div class="card"><h3>${a.icon} ${a.name}</h3><p>${a.category}</p><p>${a.platform}</p></div>
+            <div class="card"><h3>${b.icon} ${b.name}</h3><p>${b.category}</p><p>${b.platform}</p></div>
+        </div>`;
+}
+
+// ---------------- MUSIC PLAYER ----------------
+
+// These are original, browser-generated instrumental loops.
+// No external audio files or copyrighted recordings are used.
+
+const tracks = [
+    {name:"Neon Battle",type:"Gaming Beat",icon:"⚡",bpm:110,notes:[110,164.81,220,164.81,130.81,196,261.63,196]},
+    {name:"Phantom Drive",type:"Dark Electronic",icon:"🌑",bpm:125,notes:[98,146.83,196,146.83,116.54,174.61,233.08,174.61]},
+    {name:"Victory Rush",type:"Epic Gaming",icon:"🏆",bpm:135,notes:[130.81,196,261.63,196,146.83,220,293.66,220]},
+    {name:"Dream World",type:"Relaxing Synth",icon:"🌙",bpm:85,notes:[174.61,220,261.63,220,164.81,207.65,246.94,207.65]}
 ];
-const fg=featured[Math.floor(Date.now()/86400000)%featured.length];
-document.getElementById("featuredIcon").textContent=fg.icon;
-document.getElementById("featuredName").textContent=fg.name;
-document.getElementById("featuredDescription").textContent=fg.description;
-document.getElementById("featuredLink").href=fg.link;
 
-/* NEWS */
-const defaultNews=[
- {title:"Welcome to Gaming Hub!",text:"Explore games, challenges and community features."},
- {title:"Gaming Updates",text:"Visit official game websites for announcements."},
- {title:"Welcome to Gaming Hub 2.0",text:"Discover our new gaming features!"}
-];
-function news(){return get("news",defaultNews);}
-function showNews(){
- const box=document.getElementById("newsList");
- box.innerHTML="";
- news().forEach(n=>{
-  const c=el("div","news-card");
-  c.append(el("h3","",n.title),el("p","",n.text));
-  box.append(c);
- });
-}
-function addNews(){
- const title=document.getElementById("adminNewsTitle").value.trim();
- const text=document.getElementById("adminNewsText").value.trim();
- if(!title||!text)return toast("Complete both fields.");
- const list=news();
- list.unshift({title,text});
- put("news",list.slice(0,30));
- document.getElementById("adminNewsTitle").value="";
- document.getElementById("adminNewsText").value="";
- showNews();renderAdmin();
- addNotification("New news article published.");
- toast("News published!");
-}
-showNews();
+let currentTrack = 0;
+let audioContext = null;
+let musicTimer = null;
+let musicPlaying = false;
+let musicStep = 0;
+let masterGain = null;
+let musicStartTime = 0;
+let musicElapsed = 0;
+const trackLength = 30;
 
-/* NOTIFICATIONS */
-function addNotification(text){
- const list=get("notifications");
- list.unshift({text,date:new Date().toLocaleString()});
- put("notifications",list.slice(0,50));
- showNotifications();
-}
-function showNotifications(){
- const box=document.getElementById("notificationList");
- box.innerHTML="";
- const list=get("notifications");
- if(!list.length)box.textContent="No notifications.";
- list.forEach(n=>{
-  const c=el("div","message");
-  c.append(el("p","",n.text),el("p","small",n.date));
-  box.append(c);
- });
-}
-function clearNotifications(){
- put("notifications",[]);
- showNotifications();
- toast("Notifications cleared.");
+function setupAudio() {
+    if (audioContext) return;
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) {
+        toast("Your browser does not support audio playback.");
+        return;
+    }
+    audioContext = new AudioContextClass();
+    masterGain = audioContext.createGain();
+    masterGain.gain.value = Number(document.getElementById("volumeControl").value) / 100;
+    masterGain.connect(audioContext.destination);
 }
 
-/* LEADERBOARD */
-function addPlayer(){
- const name=document.getElementById("playerName").value.trim();
- const score=Number(document.getElementById("playerScore").value);
- if(!name||!Number.isInteger(score)||score<0||score>1000000)return toast("Enter a valid name and score.");
- const list=get("players");
- list.push({name,score});
- list.sort((a,b)=>b.score-a.score);
- put("players",list);
- document.getElementById("playerName").value="";
- document.getElementById("playerScore").value="";
- addXP(10,"Leaderboard entry");
- showLeaderboard();updateAll();
-}
-function showLeaderboard(){
- const box=document.getElementById("leaderboardList");
- box.innerHTML="";
- const list=get("players").sort((a,b)=>b.score-a.score).slice(0,10);
- if(!list.length)box.textContent="No players yet.";
- list.forEach((p,i)=>{
-  const row=el("div","leaderboard-row");
-  row.append(el("span","rank","#"+(i+1)),el("span","",p.name),el("span","",p.score+" pts"));
-  box.append(row);
- });
- document.getElementById("rankingList").innerHTML=box.innerHTML;
+function playNote(frequency, start, duration, volume, waveform) {
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = waveform;
+    oscillator.frequency.setValueAtTime(frequency, start);
+
+    gain.gain.setValueAtTime(0.001, start);
+    gain.gain.exponentialRampToValueAtTime(volume, start + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, start + duration);
+
+    oscillator.connect(gain);
+    gain.connect(masterGain);
+
+    oscillator.start(start);
+    oscillator.stop(start + duration + 0.03);
 }
 
-/* QUIZ-LIKE MINI GAMES */
-function guessNumber(){
- const n=Number(document.getElementById("guessInput").value);
- if(!Number.isInteger(n)||n<1||n>10)return toast("Choose a number from 1 to 10.");
- const answer=Math.floor(Math.random()*10)+1;
- if(n===answer){
-  document.getElementById("guessResult").textContent="🎉 Correct! The number was "+answer;
-  addXP(10,"Number game winner");
- }else document.getElementById("guessResult").textContent="Not this time! The number was "+answer+". Try again!";
-}
-let reactionStart=0,reactionTimer=null;
-function reactionGame(){
- const b=document.getElementById("reactionButton");
- const result=document.getElementById("reactionResult");
- if(b.dataset.waiting==="yes"){
-  clearTimeout(reactionTimer);
-  reactionStart=Date.now();
-  b.dataset.waiting="no";
-  b.textContent="CLICK!";
-  result.textContent="GO!";
- }else if(b.dataset.waiting==="no"){
-  const ms=Date.now()-reactionStart;
-  b.dataset.waiting="";
-  b.textContent="START";
-  result.textContent="Your reaction time: "+ms+" ms";
-  if(ms<500)addXP(5,"Reaction game");
- }else{
-  b.dataset.waiting="yes";
-  b.textContent="WAIT...";
-  result.textContent="Wait for GO...";
-  reactionTimer=setTimeout(()=>{
-   if(b.dataset.waiting==="yes"){
-    b.dataset.waiting="no";
-    b.textContent="CLICK!";
-    reactionStart=Date.now();
-    result.textContent="GO!";
-   }
-  },1000+Math.random()*3000);
- }
-}
-function playRPS(){
- const player=document.getElementById("rpsChoice").value;
- const choices=["Rock","Paper","Scissors"];
- const computer=choices[Math.floor(Math.random()*3)];
- let result;
- if(player===computer)result="It's a draw!";
- else if((player==="Rock"&&computer==="Scissors")||(player==="Paper"&&computer==="Rock")||(player==="Scissors"&&computer==="Paper")){
-  result="You win!";addXP(5,"Rock Paper Scissors");
- }else result="Computer wins!";
- document.getElementById("rpsResult").textContent="You: "+player+" | Computer: "+computer+" — "+result;
+function playMusicStep() {
+    if (!musicPlaying || !audioContext) return;
+
+    const track = tracks[currentTrack];
+    const now = audioContext.currentTime;
+    const index = musicStep % track.notes.length;
+    const note = track.notes[index];
+
+    // Main electronic melody
+    playNote(note, now, 0.25, 0.18, "sawtooth");
+
+    // Soft bass pulse
+    if (musicStep % 2 === 0) {
+        playNote(note / 2, now, 0.35, 0.23, "triangle");
+    }
+
+    // Light rhythmic click
+    if (musicStep % 4 === 0) {
+        playNote(700, now, 0.045, 0.035, "square");
+    }
+
+    musicStep++;
 }
 
-/* COMMUNITY CHAT */
-function sendChat(){
- const name=document.getElementById("chatName").value.trim();
- const message=document.getElementById("chatInput").value.trim();
- if(!name||!message)return toast("Enter your name and message.");
- const list=get("chat");
- list.push({name,message,date:new Date().toLocaleString()});
- put("chat",list.slice(-100));
- document.getElementById("chatInput").value="";
- showChat();
- addXP(5,"Community message");
-}
-function showChat(){
- const box=document.getElementById("chatMessages");
- box.innerHTML="";
- const list=get("chat").slice(-30);
- if(!list.length)box.textContent="No messages yet.";
- list.forEach(m=>{
-  const c=el("div","message");
-  c.append(el("strong","",m.name),el("p","",m.message),el("p","small",m.date));
-  box.append(c);
- });
-}
-showChat();
+function startMusic() {
+    setupAudio();
+    if (!audioContext) return;
 
-/* PRIVATE MESSAGES */
-function sendPrivateMessage(){
- const from=document.getElementById("msgFrom").value.trim();
- const to=document.getElementById("msgTo").value.trim();
- const message=document.getElementById("msgText").value.trim();
- if(!from||!to||!message)return toast("Complete all fields.");
- const list=get("privateMessages");
- list.unshift({from,to,message,date:new Date().toLocaleString()});
- put("privateMessages",list.slice(0,100));
- document.getElementById("msgText").value="";
- showPrivateMessages();
- toast("Saved locally.");
-}
-function showPrivateMessages(){
- const box=document.getElementById("privateMessages");
- box.innerHTML="";
- get("privateMessages").forEach(m=>{
-  const c=el("div","message");
-  c.append(el("strong","",m.from+" → "+m.to),el("p","",m.message),el("p","small",m.date));
-  box.append(c);
- });
+    if (audioContext.state === "suspended") {
+        audioContext.resume();
+    }
+
+    if (musicPlaying) return;
+
+    musicPlaying = true;
+    musicStartTime = Date.now() - musicElapsed * 1000;
+    document.getElementById("playButton").textContent = "⏸";
+
+    playMusicStep();
+    musicTimer = setInterval(playMusicStep, 60000 / tracks[currentTrack].bpm);
+    updateMusicProgress();
 }
 
-/* POLLS */
-const pollChoices=["Free Fire","Minecraft","Fortnite","Roblox"];
-function votePoll(choice){
- const votes=get("votes",{});
- votes[choice]=(votes[choice]||0)+1;
- put("votes",votes);
- localStorage.setItem("gh_voted","yes");
- showPoll();
- addXP(2,"Poll vote");
-}
-function showPoll(){
- const box=document.getElementById("pollOptions");
- box.innerHTML="";
- const votes=get("votes",{});
- pollChoices.forEach(choice=>{
-  const b=el("button","poll-option",choice+" — "+(votes[choice]||0)+" votes");
-  b.disabled=localStorage.getItem("gh_voted")==="yes";
-  b.onclick=()=>votePoll(choice);
-  box.append(b);
- });
- document.getElementById("pollResult").textContent=
-  localStorage.getItem("gh_voted")==="yes"?"Thanks for voting!":"Choose your favorite game.";
-}
-function resetPoll(){
- localStorage.removeItem("gh_voted");
- put("votes",{});
- showPoll();
-}
-showPoll();
-
-/* EVENTS */
-const events=[
- {name:"Gaming Community Day",date:"2026-12-01",description:"Share your favorite games."},
- {name:"Minecraft Building Challenge",date:"2026-12-05",description:"Create an amazing building idea."},
- {name:"Free Fire Fan Event",date:"2026-12-10",description:"A friendly community activity."}
-];
-function showEvents(){
- const box=document.getElementById("eventList");
- events.forEach(e=>{
-  const c=el("div","event-card info");
-  c.append(el("h3","","📅 "+e.name),el("p","",e.description),el("p","small",e.date));
-  box.append(c);
- });
-}
-showEvents();
-
-/* MISSIONS */
-const missions=[
- {id:"favorite",name:"Save a Favorite Game",points:10,check:()=>favorites().length>0},
- {id:"review",name:"Write a Game Review",points:15,check:()=>get("reviews").length>0},
- {id:"message",name:"Send a Community Message",points:10,check:()=>get("chat").length>0}
-];
-function showMissions(){
- const box=document.getElementById("missionList");
- box.innerHTML="";
- const done=get("missions");
- missions.forEach(m=>{
-  const c=el("div","info");
-  c.append(el("h3","",m.name),el("p","score","+"+m.points+" XP"));
-  const b=el("button","",done.includes(m.id)?"Completed ✓":"Claim Mission");
-  b.disabled=done.includes(m.id);
-  b.onclick=()=>{
-   if(!m.check())return toast("Complete the activity first!");
-   const d=get("missions");d.push(m.id);put("missions",d);
-   addXP(m.points,"Mission completed");
-   showMissions();showAchievements();
-  };
-  c.append(b);box.append(c);
- });
-}
-showMissions();
-
-/* PROFILE */
-function saveAccount(){
- const name=document.getElementById("username").value.trim();
- if(!name)return toast("Enter a name.");
- localStorage.setItem("gh_username",name);
- document.getElementById("accountMessage").textContent="Welcome, "+name+"!";
- updateAll();
- toast("Profile saved!");
-}
-function chooseAvatar(a){
- localStorage.setItem("gh_avatar",a);
- updateAll();
-}
-function updateProfile(){
- document.getElementById("profileName").textContent=localStorage.getItem("gh_username")||"Guest Player";
- document.getElementById("profileAvatar").textContent=localStorage.getItem("gh_avatar")||"🎮";
-}
-if(localStorage.getItem("gh_username")){
- document.getElementById("username").value=localStorage.getItem("gh_username");
+function pauseMusic() {
+    if (!musicPlaying) return;
+    musicPlaying = false;
+    musicElapsed = Math.min(trackLength, (Date.now() - musicStartTime) / 1000);
+    clearInterval(musicTimer);
+    musicTimer = null;
+    document.getElementById("playButton").textContent = "▶";
 }
 
-/* GALLERY */
-function addGallery(event){
- const box=document.getElementById("galleryList");
- [...event.target.files].forEach(file=>{
-  if(!file.type.startsWith("image/"))return;
-  const url=URL.createObjectURL(file);
-  const img=document.createElement("img");
-  img.src=url;img.alt="Gaming screenshot";
-  const card=el("div","game");
-  card.append(img,el("p","",file.name));
-  box.append(card);
- });
+function stopMusic() {
+    pauseMusic();
+    musicElapsed = 0;
+    musicStep = 0;
+    updateMusicProgress();
 }
 
-/* GAMING SETUPS */
-function addSetup(){
- const name=document.getElementById("setupName").value.trim();
- const description=document.getElementById("setupDescription").value.trim();
- if(!name||!description)return toast("Complete both fields.");
- const list=get("setups");
- list.unshift({name,description});
- put("setups",list);
- document.getElementById("setupName").value="";
- document.getElementById("setupDescription").value="";
- showSetups();
- addXP(5,"Shared a gaming setup");
-}
-function showSetups(){
- const box=document.getElementById("setupList");
- box.innerHTML="";
- get("setups").forEach(s=>{
-  const c=el("div","message");
-  c.append(el("h3","",s.name),el("p","",s.description));
-  box.append(c);
- });
-}
-showSetups();
-
-/* GAME COMPARISON */
-function setupCompare(){
- ["compareA","compareB","reviewGame"].forEach(id=>{
-  const select=document.getElementById(id);
-  games.forEach(g=>{
-   const option=el("option","",g.name);
-   option.value=g.name;
-   select.append(option);
-  });
- });
-}
-function compareGames(){
- const a=games.find(g=>g.name===document.getElementById("compareA").value);
- const b=games.find(g=>g.name===document.getElementById("compareB").value);
- const box=document.getElementById("compareResult");
- box.innerHTML="";
- if(!a||!b)return;
- [a,b].forEach(g=>{
-  const c=el("div","message");
-  c.append(el("h3","",g.icon+" "+g.name),
-   el("p","","Category: "+g.category),
-   el("p","","Platform: "+g.platform),
-   el("p","","Release year: "+g.year));
-  box.append(c);
- });
-}
-setupCompare();
-
-/* VIRTUAL SHOP */
-const shopItems=[
- {id:"blue",name:"Blue Player Badge",icon:"🔵",cost:30},
- {id:"crown",name:"Golden Crown",icon:"👑",cost:100},
- {id:"dragon",name:"Dragon Avatar",icon:"🐉",cost:150},
- {id:"legend",name:"Legend Title",icon:"🏆",cost:200}
-];
-function buyItem(item){
- const owned=get("owned");
- if(owned.includes(item.id))return toast("Already owned!");
- if(xp()<item.cost)return toast("Not enough XP!");
- localStorage.setItem("gh_xp",xp()-item.cost);
- owned.push(item.id);put("owned",owned);
- showShop();updateAll();
- toast("Item purchased!");
-}
-function showShop(){
- const box=document.getElementById("shopList");
- box.innerHTML="";
- shopItems.forEach(item=>{
-  const c=el("div","game");
-  c.append(el("div","game-icon",item.icon),el("h3","",item.name),el("p","","Cost: "+item.cost+" XP"));
-  const b=el("button","",get("owned").includes(item.id)?"Owned ✓":"Buy Item");
-  b.disabled=get("owned").includes(item.id);
-  b.onclick=()=>buyItem(item);
-  c.append(b);box.append(c);
- });
-}
-showShop();
-
-/* REVIEWS */
-function addReview(){
- const name=document.getElementById("reviewName").value.trim();
- const game=document.getElementById("reviewGame").value;
- const rating=Number(document.getElementById("reviewRating").value);
- const text=document.getElementById("reviewText").value.trim();
- if(!name||!text)return toast("Complete your review.");
- const list=get("reviews");
- list.push({name,game,rating,text,date:new Date().toLocaleString()});
- put("reviews",list.slice(-100));
- document.getElementById("reviewName").value="";
- document.getElementById("reviewText").value="";
- showReviews();
- addXP(10,"Game review");
- showAchievements();renderAdmin();
-}
-function showReviews(){
- const box=document.getElementById("reviewList");
- box.innerHTML="";
- get("reviews").slice().reverse().forEach(r=>{
-  const c=el("div","info");
-  c.append(el("h3","",r.game),el("p","", "By: "+r.name),
-   el("p","", "⭐".repeat(r.rating)),el("p","",r.text),
-   el("p","small",r.date));
-  box.append(c);
- });
- if(!box.children.length)box.textContent="No reviews yet.";
+function toggleMusic() {
+    if (musicPlaying) pauseMusic();
+    else startMusic();
 }
 
-/* TOURNAMENTS */
-const tournaments=[
- {id:"ff",name:"Free Fire Friendly Cup",game:"Free Fire",description:"Friendly community demo event."},
- {id:"mc",name:"Minecraft Building Challenge",game:"Minecraft",description:"Show your creativity."},
- {id:"fn",name:"Fortnite Challenge",game:"Fortnite",description:"A friendly demo challenge."}
-];
-function joinTournament(id){
- const joined=get("joined");
- if(joined.includes(id))return toast("Already joined!");
- joined.push(id);put("joined",joined);
- addXP(10,"Joined a tournament");
- showTournaments();showAchievements();
-}
-function showTournaments(){
- const box=document.getElementById("tournamentList");
- box.innerHTML="";
- tournaments.forEach(t=>{
-  const c=el("div","tournament-card");
-  c.append(el("h3","","🏅 "+t.name),el("p","",t.description),el("span","tag",t.game));
-  const b=el("button","",get("joined").includes(t.id)?"Joined ✓":"Join Tournament");
-  b.disabled=get("joined").includes(t.id);
-  b.onclick=()=>joinTournament(t.id);
-  c.append(b);box.append(c);
- });
-}
-showTournaments();
-
-/* ACHIEVEMENTS */
-const badges=[
- {id:"favorite",name:"Collector",icon:"❤️",check:()=>favorites().length>0},
- {id:"review",name:"Game Critic",icon:"⭐",check:()=>get("reviews").length>0},
- {id:"chat",name:"Communicator",icon:"💬",check:()=>get("chat").length>0},
- {id:"tournament",name:"Competitor",icon:"🏅",check:()=>get("joined").length>0},
- {id:"level",name:"Level Up",icon:"🚀",check:()=>level()>=2},
- {id:"xp",name:"XP Collector",icon:"💎",check:()=>xp()>=100}
-];
-function showAchievements(){
- const box=document.getElementById("achievementList");
- box.innerHTML="";
- badges.forEach(b=>{
-  const unlocked=b.check();
-  const c=el("div","game");
-  c.append(el("div","game-icon",b.icon),el("h3","",b.name),el("p","",unlocked?"✅ Unlocked":"🔒 Locked"));
-  box.append(c);
- });
-}
-showAchievements();
-
-/* DAILY REWARDS */
-function claimReward(){
- const today=new Date().toDateString();
- if(localStorage.getItem("gh_lastReward")===today)return toast("Already claimed today!");
- localStorage.setItem("gh_lastReward",today);
- addXP(10,"Daily login reward");
- showReward();
- document.getElementById("rewardMessage").textContent="🎉 You received 10 XP!";
-}
-function showReward(){
- document.getElementById("rewardPoints").textContent=xp()+" XP";
- const claimed=localStorage.getItem("gh_lastReward")===new Date().toDateString();
- document.getElementById("claimRewardButton").disabled=claimed;
- document.getElementById("claimRewardButton").textContent=claimed?"Claimed ✓":"Claim Reward";
-}
-showReward();
-
-/* THEME */
-function toggleTheme(){
- document.body.classList.toggle("light");
- localStorage.setItem("gh_theme",document.body.classList.contains("light")?"light":"dark");
-}
-if(localStorage.getItem("gh_theme")==="light")document.body.classList.add("light");
-
-/* LANGUAGE */
-const translations={
- en:{home:"Home",games:"Games",news:"Gaming News"},
- fr:{home:"Accueil",games:"Jeux",news:"Actualités"},
- ar:{home:"الرئيسية",games:"الألعاب",news:"أخبار الألعاب"}
-};
-function changeLanguage(){
- const lang=document.getElementById("languageSelect").value;
- localStorage.setItem("gh_language",lang);
- const t=translations[lang];
- const links=document.querySelectorAll("nav a");
- const mapping={"#home":"home","#games":"games","#news":"news"};
- links.forEach(a=>{
-  if(mapping[a.getAttribute("href")])a.textContent=t[mapping[a.getAttribute("href")]];
- });
- document.documentElement.lang=lang;
- document.body.dir=lang==="ar"?"rtl":"ltr";
-}
-const savedLanguage=localStorage.getItem("gh_language")||"en";
-document.getElementById("languageSelect").value=savedLanguage;
-changeLanguage();
-
-/* HELP */
-function sendHelp(){
- const name=document.getElementById("helpName").value.trim();
- const message=document.getElementById("helpMessage").value.trim();
- if(!name||!message)return toast("Complete both fields.");
- const list=get("help");
- list.unshift({name,message,date:new Date().toLocaleString()});
- put("help",list.slice(0,100));
- document.getElementById("helpName").value="";
- document.getElementById("helpMessage").value="";
- document.getElementById("helpResult").textContent="Message saved in this browser.";
- renderAdmin();
+function chooseTrack(index) {
+    stopMusic();
+    currentTrack = (index + tracks.length) % tracks.length;
+    updateMusicDisplay();
+    startMusic();
 }
 
-/* ADMIN */
-function renderAdmin(){
- const reviews=get("reviews");
- const messages=get("help");
- const newsItems=news();
- document.getElementById("adminStats").textContent=
- "Games: "+games.length+
- " | XP: "+xp()+
- " | Reviews: "+reviews.length+
- " | Messages: "+messages.length+
- " | News: "+newsItems.length;
-
- const newsBox=document.getElementById("adminNewsList");
- newsBox.innerHTML="";
- newsItems.forEach((n,i)=>{
-  const c=el("div","message");
-  c.append(el("strong","",n.title),el("p","",n.text));
-  const b=el("button","","Delete News");
-  b.onclick=()=>{
-   const list=news();
-   list.splice(i,1);put("news",list);
-   showNews();renderAdmin();
-  };
-  c.append(b);newsBox.append(c);
- });
-
- const helpBox=document.getElementById("adminMessages");
- helpBox.innerHTML="";
- messages.forEach((m,i)=>{
-  const c=el("div","message");
-  c.append(el("strong","",m.name),el("p","",m.message));
-  const b=el("button","","Delete Message");
-  b.onclick=()=>{
-   const list=get("help");list.splice(i,1);put("help",list);renderAdmin();
-  };
-  c.append(b);helpBox.append(c);
- });
-
- const reviewBox=document.getElementById("adminReviews");
- reviewBox.innerHTML="";
- reviews.forEach((r,i)=>{
-  const c=el("div","message");
-  c.append(el("strong","",r.game+" — "+r.name),el("p","",r.text));
-  const b=el("button","","Delete Review");
-  b.onclick=()=>{
-   const list=get("reviews");list.splice(i,1);put("reviews",list);
-   showReviews();renderAdmin();updateAll();
-  };
-  c.append(b);reviewBox.append(c);
- });
-}
-function resetWebsite(){
- if(!confirm("Delete all Gaming Hub demo data from this browser?"))return;
- Object.keys(localStorage).filter(k=>k.startsWith("gh_")).forEach(k=>localStorage.removeItem(k));
- location.reload();
+function nextTrack() {
+    chooseTrack(currentTrack + 1);
 }
 
-/* UPDATE EVERYTHING */
-function updateAll(){
- updateXP();
- updateProfile();
- showLeaderboard();
- showWishlist();
- showAchievements();
- showReward();
- showShop();
- renderAdmin();
- showNotifications();
+function previousTrack() {
+    chooseTrack(currentTrack - 1);
 }
-updateAll();
-renderAdmin();
+
+function updateMusicDisplay() {
+    const track = tracks[currentTrack];
+    document.getElementById("musicTitle").textContent = track.name;
+    document.getElementById("musicCategory").textContent = track.type + " • Original";
+    document.getElementById("musicArt").textContent = track.icon;
+
+    document.querySelectorAll(".track").forEach((el, index) => {
+        el.classList.toggle("active", index === currentTrack);
+    });
+}
+
+function renderPlaylist() {
+    document.getElementById("playlist").innerHTML = tracks.map((track, index) => `
+        <div class="track ${index === currentTrack ? "active" : ""}" onclick="chooseTrack(${index})">
+            <div>
+                <div class="track-name">${track.icon} ${track.name}</div>
+                <div class="track-type">${track.type}</div>
+            </div>
+            <span>${index === currentTrack && musicPlaying ? "🔊 Playing" : "▶ Play"}</span>
+        </div>
+    `).join("");
+}
+
+function updateMusicProgress() {
+    const progress = document.getElementById("musicProgress");
+    const currentTime = document.getElementById("musicCurrentTime");
+    const duration = document.getElementById("musicDuration");
+
+    let elapsed = musicElapsed;
+    if (musicPlaying) {
+        elapsed = Math.min(trackLength, (Date.now() - musicStartTime) / 1000);
+    }
+
+    progress.value = elapsed;
+    currentTime.textContent = formatTime(elapsed);
+    duration.textContent = formatTime(trackLength);
+
+    if (elapsed >= trackLength && musicPlaying) {
+        nextTrack();
+        return;
+    }
+
+    if (musicPlaying) {
+        requestAnimationFrame(updateMusicProgress);
+    }
+}
+
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return mins + ":" + String(secs).padStart(2, "0");
+}
+
+document.getElementById("volumeControl").addEventListener("input", function() {
+    const volume = Number(this.value);
+    document.getElementById("volumeValue").textContent = volume + "%";
+    if (masterGain) {
+        masterGain.gain.setTargetAtTime(volume / 100, audioContext.currentTime, 0.03);
+    }
+});
+
+document.getElementById("musicProgress").addEventListener("change", function() {
+    const value = Number(this.value);
+    musicElapsed = value;
+    if (musicPlaying) {
+        musicStartTime = Date.now() - value * 1000;
+    }
+    musicStep = Math.floor(value / (60 / tracks[currentTrack].bpm));
+});
+
+// NEWS
+function addNews() {
+    const title = document.getElementById("newsTitle").value.trim();
+    const description = document.getElementById("newsDescription").value.trim();
+    if (!title || !description) return toast("Fill in both news fields.");
+    let news = getData("gh_news", []);
+    news.unshift({title, description});
+    saveData("gh_news", news);
+    renderNews();
+    document.getElementById("newsTitle").value = "";
+    document.getElementById("newsDescription").value = "";
+    toast("News added!");
+}
+function renderNews() {
+    const news = getData("gh_news", []);
+    const defaultCards = `
+        <div class="card"><h3>🎮 Gaming Hub Update</h3><p>Explore the new features and discover your favorite games.</p></div>
+        <div class="card"><h3>🏆 New Challenges</h3><p>Try the daily missions and collect XP.</p></div>
+        <div class="card"><h3>🌟 Player Spotlight</h3><p>Build your profile and show your gaming interests.</p></div>`;
+    document.getElementById("newsGrid").innerHTML = defaultCards + news.map(n => `
+        <div class="card"><h3>${escapeHTML(n.title)}</h3><p>${escapeHTML(n.description)}</p><span class="tag">Community News</span></div>
+    `).join("");
+}
+
+// POLLS
+function vote(option) {
+    let votes = getData("gh_votes", {});
+    votes[option] = (votes[option] || 0) + 1;
+    saveData("gh_votes", votes);
+    renderPoll();
+    toast("Your vote was saved!");
+}
+function renderPoll() {
+    const votes = getData("gh_votes", {});
+    const total = Object.values(votes).reduce((a,b) => a+b, 0);
+    document.getElementById("pollResults").innerHTML = ["Mobile","PC","Console"].map(name => {
+        const count = votes[name] || 0;
+        const percent = total ? Math.round(count / total * 100) : 0;
+        return `<p>${name}: ${count} votes (${percent}%)</p><div class="progress"><div style="width:${percent}%"></div></div>`;
+    }).join("");
+}
+
+// RELEASE CALENDAR
+function addRelease() {
+    const name = document.getElementById("releaseName").value.trim();
+    const date = document.getElementById("releaseDate").value;
+    if (!name || !date) return toast("Enter a game and date.");
+    let list = getData("gh_releases", []);
+    list.push({name,date});
+    list.sort((a,b) => a.date.localeCompare(b.date));
+    saveData("gh_releases", list);
+    renderReleases();
+    toast("Release date added!");
+}
+function renderReleases() {
+    const list = getData("gh_releases", []);
+    document.getElementById("releaseList").innerHTML = list.length
+        ? list.map(r => `<div class="list-item">📅 ${escapeHTML(r.name)} — ${r.date}</div>`).join("")
+        : '<p class="muted">No release dates added yet.</p>';
+}
+
+// MISSIONS
+function completeMission(id, points) {
+    let done = getData("gh_missions", []);
+    if (done.includes(id)) return toast("Mission already completed!");
+    done.push(id);
+    saveData("gh_missions", done);
+    addXP(points);
+    activity("Completed a daily mission");
+    addNotification("You completed a mission!");
+    renderMissions();
+}
+function renderMissions() {
+    const done = getData("gh_missions", []);
+    ["mission1","mission2","mission3"].forEach(id => {
+        document.getElementById(id + "Status").textContent =
+            done.includes(id) ? "✅ Completed" : "Not completed";
+    });
+}
+
+// LEADERBOARD
+function renderLeaderboard() {
+    const list = getData("gh_leaderboard", []);
+    document.getElementById("leaderboardList").innerHTML = list.length
+        ? [...list].sort((a,b) => b.score-a.score).map((p,i) =>
+            `<div class="list-item">#${i+1} 🏆 ${escapeHTML(p.name)} — ${p.score} XP</div>`
+        ).join("")
+        : "No scores yet.";
+}
+function addLeaderboardScore() {
+    const name = document.getElementById("leaderboardName").value.trim();
+    if (!name) return toast("Enter a player name.");
+    let list = getData("gh_leaderboard", []);
+    list.push({name,score:getData("gh_xp",0)});
+    saveData("gh_leaderboard", list);
+    renderLeaderboard();
+    toast("Your demo score was added!");
+}
+
+// QUIZ
+function answerQuiz(correct) {
+    const result = document.getElementById("quizResult");
+    if (correct) {
+        result.textContent = "✅ Correct! Minecraft is famous for building with blocks.";
+        if (!getData("gh_quiz_done", false)) {
+            saveData("gh_quiz_done", true);
+            addXP(15);
+        }
+    } else {
+        result.textContent = "❌ Try again!";
+    }
+}
+
+// COMMUNITY
+function sendMessage() {
+    const name = document.getElementById("chatName").value.trim();
+    const message = document.getElementById("chatMessage").value.trim();
+    if (!name || !message) return toast("Enter a nickname and message.");
+    let list = getData("gh_chat", []);
+    list.push({name,message});
+    saveData("gh_chat", list.slice(-30));
+    document.getElementById("chatMessage").value = "";
+    renderChat();
+}
+function renderChat() {
+    const list = getData("gh_chat", []);
+    document.getElementById("chatMessages").innerHTML = list.map(m =>
+        `<div class="list-item"><b>${escapeHTML(m.name)}:</b> ${escapeHTML(m.message)}</div>`
+    ).join("");
+}
+
+// REVIEWS
+function addReview() {
+    const game = document.getElementById("reviewGame").value.trim();
+    const rating = document.getElementById("reviewRating").value;
+    const text = document.getElementById("reviewText").value.trim();
+    if (!game || !text) return toast("Enter a game and review.");
+    let reviews = getData("gh_reviews", []);
+    reviews.unshift({game,rating,text});
+    saveData("gh_reviews", reviews);
+    renderReviews();
+    document.getElementById("reviewText").value = "";
+    toast("Review added!");
+}
+function renderReviews() {
+    const list = getData("gh_reviews", []);
+    document.getElementById("reviewList").innerHTML = list.map(r =>
+        `<div class="list-item"><b>${escapeHTML(r.game)}</b> — ${"⭐".repeat(Number(r.rating))}<p>${escapeHTML(r.text)}</p></div>`
+    ).join("");
+}
+
+// PROFILE
+function saveProfile() {
+    const profile = {
+        name:document.getElementById("profileName").value.trim() || "Player",
+        avatar:document.getElementById("profileAvatar").value,
+        color:document.getElementById("profileColor").value
+    };
+    saveData("gh_profile", profile);
+    renderProfile();
+    toast("Profile saved!");
+}
+function renderProfile() {
+    const p = getData("gh_profile", {name:"Player",avatar:"🎮",color:"#24245a"});
+    document.getElementById("profileDisplayName").textContent = p.avatar + " " + p.name;
+    document.getElementById("profileName").value = p.name;
+    document.getElementById("profileAvatar").value = p.avatar;
+    document.getElementById("profileColor").value = p.color;
+    document.getElementById("profileBackground").style.background = p.color;
+    document.getElementById("profileBackground").textContent = p.avatar;
+}
+
+// TOURNAMENTS
+function joinTournament(name) {
+    let joined = getData("gh_tournaments", []);
+    if (joined.includes(name)) return toast("You already joined this demo event.");
+    joined.push(name);
+    saveData("gh_tournaments", joined);
+    activity("Joined " + name);
+    toast("You joined the demo event!");
+}
+
+// SUPPORT
+function sendSupport() {
+    const message = document.getElementById("supportMessage").value.trim();
+    const email = document.getElementById("supportEmail").value.trim();
+    if (!message) return toast("Write a message first.");
+    let list = getData("gh_support", []);
+    list.unshift({email,message});
+    saveData("gh_support", list);
+    document.getElementById("supportMessage").value = "";
+    toast("Feedback saved in this browser!");
+}
+
+// THEME & RESET
+function toggleTheme() {
+    document.body.classList.toggle("light");
+    saveData("gh_theme", document.body.classList.contains("light") ? "light" : "dark");
+}
+function loadTheme() {
+    if (getData("gh_theme", "dark") === "light") document.body.classList.add("light");
+}
+function resetData() {
+    if (!confirm("Reset all Gaming Hub data saved in this browser?")) return;
+    Object.keys(localStorage).filter(k => k.startsWith("gh_")).forEach(k => localStorage.removeItem(k));
+    location.reload();
+}
+
+// SECURITY HELPER
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    })[char]);
+}
+
+// STARTUP
+function startHub() {
+    loadTheme();
+    renderGames();
+    renderRecent();
+    renderActivity();
+    renderNotifications();
+    renderNews();
+    renderPoll();
+    renderReleases();
+    renderMissions();
+    renderLeaderboard();
+    renderChat();
+    renderReviews();
+    renderProfile();
+    setupComparison();
+    updateDashboard();
+    renderPlaylist();
+    updateMusicDisplay();
+}
+startHub();
 </script>
 
 </body>
