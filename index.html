@@ -1,186 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaming Hub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaming Hub</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #111827;
-            color: white;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #111827;
+    color: white;
+}
 
-        header {
-            background: #1f2937;
-            padding: 20px;
-            text-align: center;
-        }
+header {
+    background: #1f2937;
+    padding: 20px;
+    text-align: center;
+}
 
-        header h1 {
-            color: #38bdf8;
-            margin-bottom: 15px;
-        }
+header h1 {
+    color: #38bdf8;
+    margin-bottom: 15px;
+}
 
-        nav {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-        nav a:hover {
-            color: #38bdf8;
-        }
+nav a:hover {
+    color: #38bdf8;
+}
 
-        section {
-            padding: 40px 20px;
-            max-width: 1100px;
-            margin: auto;
-        }
+section {
+    padding: 40px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
 
-        h2 {
-            color: #38bdf8;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+h2 {
+    color: #38bdf8;
+    margin-bottom: 20px;
+    text-align: center;
+}
 
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #1e3a8a, #111827);
-        }
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #1e3a8a, #111827);
+}
 
-        .hero h2 {
-            font-size: 40px;
-        }
+.hero h2 {
+    font-size: 40px;
+}
 
-        .hero p {
-            margin: 15px 0;
-        }
+.hero p {
+    margin: 15px 0;
+}
 
-        .button {
-            display: inline-block;
-            background: #0284c7;
-            color: white;
-            padding: 12px 22px;
-            border-radius: 8px;
-            text-decoration: none;
-            margin-top: 10px;
-        }
+.button {
+    display: inline-block;
+    background: #0284c7;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+}
 
-        .button:hover {
-            background: #0369a1;
-        }
+.button:hover {
+    background: #0369a1;
+}
 
-        .featured {
-            background: #1f2937;
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
-        }
+.featured {
+    background: #1f2937;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+}
 
-        .featured h3 {
-            font-size: 28px;
-            margin: 15px;
-        }
+.featured h3 {
+    font-size: 28px;
+    margin: 15px;
+}
 
-        .games {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
+.games {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
 
-        .game {
-            background: #1f2937;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            transition: 0.2s;
-        }
+.game, .info, .feature-card {
+    background: #1f2937;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
 
-        .game:hover {
-            transform: translateY(-5px);
-            background: #374151;
-        }
+.game {
+    text-align: center;
+    transition: 0.2s;
+}
 
-        .game h3 {
-            margin: 10px 0;
-        }
+.game:hover {
+    transform: translateY(-5px);
+    background: #374151;
+}
 
-        .game p {
-            color: #d1d5db;
-        }
+.game h3 {
+    margin: 10px 0;
+}
 
-        .game a {
-            color: #38bdf8;
-            text-decoration: none;
-        }
+.game p {
+    color: #d1d5db;
+}
 
-        .search {
-            display: block;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto 25px;
-            padding: 12px;
-            border-radius: 8px;
-            border: none;
-        }
+.game a, .info a {
+    color: #38bdf8;
+    text-decoration: none;
+}
 
-        .info {
-            background: #1f2937;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
+.search {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 25px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+}
 
-        input, textarea, select {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 6px;
-            border: none;
-        }
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: none;
+    font-family: Arial, sans-serif;
+}
 
-        button {
-            background: #0284c7;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
 
-        button:hover {
-            background: #0369a1;
-        }
+button {
+    background: #0284c7;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 8px;
+}
 
-        footer {
-            background: #1f2937;
-            text-align: center;
-            padding: 25px;
-            margin-top: 30px;
-            color: #d1d5db;
-        }
+button:hover {
+    background: #0369a1;
+}
 
-        .hidden {
-            display: none;
-        }
-    </style>
+button:disabled {
+    background: #4b5563;
+    cursor: not-allowed;
+}
+
+footer {
+    background: #1f2937;
+    text-align: center;
+    padding: 25px;
+    margin-top: 30px;
+    color: #d1d5db;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* NEW FEATURES */
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.feature-card {
+    text-align: center;
+    transition: 0.2s;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    background: #374151;
+}
+
+.feature-icon {
+    font-size: 45px;
+    margin-bottom: 12px;
+}
+
+.score {
+    color: #38bdf8;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.leaderboard-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    background: #374151;
+    border-radius: 8px;
+    margin: 8px 0;
+}
+
+.rank {
+    color: #facc15;
+    font-weight: bold;
+}
+
+.quiz-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 8px 0;
+    background: #374151;
+}
+
+.quiz-option:hover {
+    background: #0369a1;
+}
+
+.chat-message {
+    background: #374151;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 10px 0;
+    overflow-wrap: anywhere;
+}
+
+.chat-name {
+    color: #38bdf8;
+    font-weight: bold;
+}
+
+.badge-card {
+    background: #374151;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.badge-card.locked {
+    opacity: 0.4;
+}
+
+.badge-icon {
+    font-size: 35px;
+    margin-bottom: 8px;
+}
+
+.challenge {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.progress {
+    height: 12px;
+    background: #111827;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #22c55e;
+    transition: width 0.3s;
+}
+
+.small-text {
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+#quizResult {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .hero h2 {
+        font-size: 30px;
+    }
+
+    nav {
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -195,17 +339,26 @@
         <a href="#news">News</a>
         <a href="#freefire">Free Fire</a>
         <a href="#minecraft">Minecraft</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#community">Community</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#challenges">Challenges</a>
         <a href="#reviews">Reviews</a>
         <a href="#account">Account</a>
         <a href="#help">Help</a>
     </nav>
 </header>
 
+<!-- HOME -->
+
 <section class="hero" id="home">
     <h2>Welcome to Gaming Hub!</h2>
-    <p>Discover games, gaming news, tips and more.</p>
+    <p>Discover games, gaming news, challenges and more.</p>
     <a href="#games" class="button">Explore Games</a>
 </section>
+
+<!-- FEATURED GAME -->
 
 <section id="featured">
     <h2>⭐ Featured Game of the Day</h2>
@@ -214,11 +367,15 @@
         <div id="featuredIcon" style="font-size:60px;">🎮</div>
         <h3 id="featuredName">Free Fire</h3>
         <p id="featuredDescription">Battle, survive and become the champion!</p>
-        <a id="featuredLink" class="button" href="https://ff.garena.com/" target="_blank">
+
+        <a id="featuredLink" class="button"
+           href="https://ff.garena.com/" target="_blank">
             Discover Game
         </a>
     </div>
 </section>
+
+<!-- GAMES -->
 
 <section id="games">
     <h2>🎮 All Games</h2>
@@ -271,7 +428,7 @@
 
         <div class="game">
             <h3>⚔️ Genshin Impact</h3>
-            <p>Explore a huge fantasy world.</p>
+            <p>Explore a fantasy world.</p>
             <a href="https://genshin.hoyoverse.com/" target="_blank">Visit Website</a>
         </div>
 
@@ -308,6 +465,8 @@
     </div>
 </section>
 
+<!-- NEWS -->
+
 <section id="news">
     <h2>📰 Gaming News</h2>
 
@@ -327,6 +486,8 @@
     </div>
 </section>
 
+<!-- FREE FIRE -->
+
 <section id="freefire">
     <h2>🔥 Free Fire Zone</h2>
 
@@ -344,6 +505,8 @@
         Official Free Fire Website
     </a>
 </section>
+
+<!-- MINECRAFT -->
 
 <section id="minecraft">
     <h2>⛏️ Minecraft Zone</h2>
@@ -363,6 +526,8 @@
     </a>
 </section>
 
+<!-- TIPS -->
+
 <section id="tips">
     <h2>💡 Gaming Tips</h2>
 
@@ -381,6 +546,8 @@
         <p>Remember to enjoy your games and take breaks.</p>
     </div>
 </section>
+
+<!-- VIDEOS -->
 
 <section id="videos">
     <h2>▶️ Gaming Videos</h2>
@@ -406,6 +573,118 @@
         </a>
     </div>
 </section>
+
+<!-- 1. LEADERBOARD -->
+
+<section id="leaderboard">
+    <h2>🏆 Gaming Leaderboard</h2>
+
+    <div class="info">
+        <h3>Top Players</h3>
+        <p class="small-text">
+            Scores on this leaderboard are saved in this browser.
+        </p>
+
+        <div id="leaderboardList"></div>
+
+        <hr style="margin:20px 0; border-color:#4b5563;">
+
+        <h3>Add Your Score</h3>
+
+        <input id="playerName" type="text" placeholder="Enter your username">
+
+        <input id="playerScore" type="number"
+               min="0" placeholder="Enter your points">
+
+        <button onclick="addPlayer()">Add Score</button>
+    </div>
+</section>
+
+<!-- 2. GAMING QUIZ -->
+
+<section id="quiz">
+    <h2>🧠 Gaming Quiz</h2>
+
+    <div class="info">
+        <h3 id="questionNumber">Question 1</h3>
+
+        <h3 id="questionText">Loading question...</h3>
+
+        <div id="quizOptions"></div>
+
+        <p id="quizResult"></p>
+
+        <p id="quizScore" class="score">Score: 0</p>
+
+        <button id="nextQuestion" onclick="nextQuestion()" disabled>
+            Next Question
+        </button>
+
+        <button onclick="restartQuiz()">Restart Quiz</button>
+    </div>
+</section>
+
+<!-- 3. COMMUNITY CHAT -->
+
+<section id="community">
+    <h2>💬 Gaming Community</h2>
+
+    <div class="info">
+        <h3>Community Chat</h3>
+
+        <p class="small-text">
+            Messages are saved locally in this browser.
+            This is not an online multiplayer chat.
+        </p>
+
+        <div id="chatMessages"></div>
+
+        <hr style="margin:20px 0; border-color:#4b5563;">
+
+        <input type="text" id="chatName" placeholder="Your username">
+
+        <textarea id="chatInput" placeholder="Write a message..."></textarea>
+
+        <button onclick="sendChatMessage()">Send Message</button>
+    </div>
+</section>
+
+<!-- 4. ACHIEVEMENTS -->
+
+<section id="achievements">
+    <h2>🎖️ Achievements</h2>
+
+    <p style="text-align:center; margin-bottom:20px;">
+        Complete activities to unlock achievements!
+    </p>
+
+    <div class="feature-grid" id="achievementList"></div>
+</section>
+
+<!-- 5. DAILY CHALLENGES -->
+
+<section id="challenges">
+    <h2>🎁 Daily Challenges</h2>
+
+    <div class="info">
+        <h3>Today's Challenges</h3>
+
+        <p class="small-text">
+            Complete these activities to earn points.
+            Challenges reset when the date changes.
+        </p>
+
+        <div id="challengeList"></div>
+
+        <hr style="margin:20px 0; border-color:#4b5563;">
+
+        <h3>Your Challenge Points</h3>
+
+        <p class="score" id="challengePoints">0 Points</p>
+    </div>
+</section>
+
+<!-- REVIEWS -->
 
 <section id="reviews">
     <h2>⭐ Game Reviews</h2>
@@ -440,6 +719,8 @@
     <div id="reviewList"></div>
 </section>
 
+<!-- ACCOUNT -->
+
 <section id="account">
     <h2>👤 Account</h2>
 
@@ -454,6 +735,8 @@
     </div>
 </section>
 
+<!-- HELP -->
+
 <section id="help">
     <h2>❓ Help & Support</h2>
 
@@ -462,6 +745,7 @@
         <p>Send us your question or suggestion.</p>
 
         <input type="text" id="helpName" placeholder="Your name">
+
         <textarea id="helpMessage" placeholder="Your message..."></textarea>
 
         <button onclick="sendMessage()">Submit</button>
@@ -476,198 +760,790 @@
 </footer>
 
 <script>
-    // Featured Game of the Day
-    const featuredGames = [
-        {
-            icon: "🔥",
-            name: "Free Fire",
-            description: "Battle, survive and become the champion!",
-            link: "https://ff.garena.com/"
-        },
-        {
-            icon: "⛏️",
-            name: "Minecraft",
-            description: "Build, explore and survive in your own world.",
-            link: "https://www.minecraft.net/"
-        },
-        {
-            icon: "🎯",
-            name: "Fortnite",
-            description: "Discover Battle Royale and creative adventures.",
-            link: "https://www.fortnite.com/"
-        },
-        {
-            icon: "🪖",
-            name: "PUBG",
-            description: "Fight to become the last survivor.",
-            link: "https://www.pubg.com/"
-        },
-        {
-            icon: "🧱",
-            name: "Roblox",
-            description: "Play millions of experiences created by players.",
-            link: "https://www.roblox.com/"
-        },
-        {
-            icon: "🚗",
-            name: "Rocket League",
-            description: "Football meets rocket-powered cars.",
-            link: "https://www.rocketleague.com/"
-        },
-        {
-            icon: "⚔️",
-            name: "Genshin Impact",
-            description: "Explore a beautiful fantasy world.",
-            link: "https://genshin.hoyoverse.com/"
+
+/* FEATURED GAME */
+
+const featuredGames = [
+    {
+        icon: "🔥",
+        name: "Free Fire",
+        description: "Battle, survive and become the champion!",
+        link: "https://ff.garena.com/"
+    },
+    {
+        icon: "⛏️",
+        name: "Minecraft",
+        description: "Build, explore and survive in your own world.",
+        link: "https://www.minecraft.net/"
+    },
+    {
+        icon: "🎯",
+        name: "Fortnite",
+        description: "Discover Battle Royale and creative adventures.",
+        link: "https://www.fortnite.com/"
+    },
+    {
+        icon: "🪖",
+        name: "PUBG",
+        description: "Fight to become the last survivor.",
+        link: "https://www.pubg.com/"
+    },
+    {
+        icon: "🧱",
+        name: "Roblox",
+        description: "Play millions of experiences created by players.",
+        link: "https://www.roblox.com/"
+    },
+    {
+        icon: "🚗",
+        name: "Rocket League",
+        description: "Football meets rocket-powered cars.",
+        link: "https://www.rocketleague.com/"
+    },
+    {
+        icon: "⚔️",
+        name: "Genshin Impact",
+        description: "Explore a beautiful fantasy world.",
+        link: "https://genshin.hoyoverse.com/"
+    }
+];
+
+function showFeaturedGame() {
+    const today = new Date();
+
+    const dayIndex = Math.floor(
+        today.getTime() / (1000 * 60 * 60 * 24)
+    ) % featuredGames.length;
+
+    const game = featuredGames[dayIndex];
+
+    document.getElementById("featuredIcon").textContent = game.icon;
+    document.getElementById("featuredName").textContent = game.name;
+    document.getElementById("featuredDescription").textContent = game.description;
+    document.getElementById("featuredLink").href = game.link;
+}
+
+showFeaturedGame();
+
+
+/* SEARCH GAMES */
+
+function searchGames() {
+    const search = document.getElementById("gameSearch").value.toLowerCase();
+
+    const games = document.querySelectorAll("#gameList .game");
+
+    games.forEach(function(game) {
+        const name = game.textContent.toLowerCase();
+
+        game.classList.toggle("hidden", !name.includes(search));
+    });
+}
+
+
+/* LEADERBOARD */
+
+function getPlayers() {
+    return JSON.parse(localStorage.getItem("gamingPlayers")) || [];
+}
+
+function addPlayer() {
+    const name = document.getElementById("playerName").value.trim();
+
+    const score = Number(document.getElementById("playerScore").value);
+
+    if (!name || !Number.isFinite(score) || score < 0) {
+        alert("Enter a username and a valid score.");
+        return;
+    }
+
+    const players = getPlayers();
+
+    players.push({
+        name: name,
+        score: score
+    });
+
+    players.sort((a, b) => b.score - a.score);
+
+    localStorage.setItem("gamingPlayers", JSON.stringify(players));
+
+    document.getElementById("playerName").value = "";
+    document.getElementById("playerScore").value = "";
+
+    showLeaderboard();
+    updateAchievements();
+}
+
+function showLeaderboard() {
+    const players = getPlayers();
+
+    const list = document.getElementById("leaderboardList");
+
+    list.innerHTML = "";
+
+    if (players.length === 0) {
+        list.textContent = "No players yet. Be the first!";
+        return;
+    }
+
+    players
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 10)
+        .forEach(function(player, index) {
+            const row = document.createElement("div");
+
+            row.className = "leaderboard-row";
+
+            const rank = document.createElement("span");
+            rank.className = "rank";
+            rank.textContent = "#" + (index + 1);
+
+            const name = document.createElement("span");
+            name.textContent = player.name;
+
+            const score = document.createElement("span");
+            score.textContent = player.score + " pts";
+
+            row.append(rank, name, score);
+
+            list.appendChild(row);
+        });
+}
+
+showLeaderboard();
+
+
+/* GAMING QUIZ */
+
+const questions = [
+    {
+        question: "Which game lets you build with blocks?",
+        options: ["Free Fire", "Minecraft", "PUBG", "FIFA"],
+        answer: "Minecraft"
+    },
+    {
+        question: "What does Battle Royale usually mean?",
+        options: [
+            "A racing game",
+            "A cooking game",
+            "Players compete until one remains",
+            "A puzzle game"
+        ],
+        answer: "Players compete until one remains"
+    },
+    {
+        question: "Which game is famous for its Gloo Wall?",
+        options: ["Minecraft", "Free Fire", "Roblox", "Rocket League"],
+        answer: "Free Fire"
+    },
+    {
+        question: "Which game features rocket-powered cars?",
+        options: ["Rocket League", "PUBG", "Among Us", "Minecraft"],
+        answer: "Rocket League"
+    },
+    {
+        question: "Which platform lets users create their own experiences?",
+        options: ["Roblox", "PUBG", "Forza", "Apex Legends"],
+        answer: "Roblox"
+    }
+];
+
+let currentQuestion = 0;
+let quizPoints = 0;
+let questionAnswered = false;
+
+function showQuestion() {
+    const question = questions[currentQuestion];
+
+    document.getElementById("questionNumber").textContent =
+        "Question " + (currentQuestion + 1) + " of " + questions.length;
+
+    document.getElementById("questionText").textContent =
+        question.question;
+
+    document.getElementById("quizResult").textContent = "";
+
+    document.getElementById("nextQuestion").disabled = true;
+
+    const optionsContainer = document.getElementById("quizOptions");
+
+    optionsContainer.innerHTML = "";
+
+    questionAnswered = false;
+
+    question.options.forEach(function(option) {
+        const button = document.createElement("button");
+
+        button.className = "quiz-option";
+        button.textContent = option;
+
+        button.onclick = function() {
+            checkAnswer(option, button);
+        };
+
+        optionsContainer.appendChild(button);
+    });
+
+    document.getElementById("quizScore").textContent =
+        "Score: " + quizPoints;
+}
+
+function checkAnswer(selected, button) {
+    if (questionAnswered) return;
+
+    questionAnswered = true;
+
+    const correct = questions[currentQuestion].answer;
+
+    if (selected === correct) {
+        quizPoints++;
+
+        document.getElementById("quizResult").textContent =
+            "✅ Correct! Great job!";
+
+        document.getElementById("quizResult").style.color = "#22c55e";
+
+        button.style.background = "#15803d";
+
+    } else {
+        document.getElementById("quizResult").textContent =
+            "❌ Incorrect! The answer is " + correct;
+
+        document.getElementById("quizResult").style.color = "#f87171";
+
+        button.style.background = "#b91c1c";
+    }
+
+    document.querySelectorAll(".quiz-option").forEach(function(option) {
+        option.disabled = true;
+    });
+
+    document.getElementById("quizScore").textContent =
+        "Score: " + quizPoints;
+
+    document.getElementById("nextQuestion").disabled = false;
+}
+
+function nextQuestion() {
+    if (!questionAnswered) return;
+
+    currentQuestion++;
+
+    if (currentQuestion >= questions.length) {
+        document.getElementById("questionNumber").textContent = "Quiz Finished!";
+
+        document.getElementById("questionText").textContent =
+            "You scored " + quizPoints + " out of " + questions.length + "!";
+
+        document.getElementById("quizOptions").innerHTML = "";
+
+        document.getElementById("quizResult").textContent =
+            "Thanks for playing!";
+
+        document.getElementById("nextQuestion").disabled = true;
+
+        if (quizPoints === questions.length) {
+            localStorage.setItem("perfectQuiz", "true");
         }
-    ];
 
-    function showFeaturedGame() {
-        const today = new Date();
-        const dayIndex = Math.floor(
-            today.getTime() / (1000 * 60 * 60 * 24)
-        ) % featuredGames.length;
+        updateAchievements();
 
-        const game = featuredGames[dayIndex];
-
-        document.getElementById("featuredIcon").textContent = game.icon;
-        document.getElementById("featuredName").textContent = game.name;
-        document.getElementById("featuredDescription").textContent = game.description;
-        document.getElementById("featuredLink").href = game.link;
+        return;
     }
 
-    showFeaturedGame();
+    showQuestion();
+}
 
-    // Search Games
-    function searchGames() {
-        const search = document.getElementById("gameSearch").value.toLowerCase();
-        const games = document.querySelectorAll("#gameList .game");
+function restartQuiz() {
+    currentQuestion = 0;
+    quizPoints = 0;
+    showQuestion();
+}
 
-        games.forEach(function(game) {
-            const name = game.textContent.toLowerCase();
+showQuestion();
 
-            if (name.includes(search)) {
-                game.classList.remove("hidden");
-            } else {
-                game.classList.add("hidden");
-            }
-        });
+
+/* COMMUNITY CHAT */
+
+function getChatMessages() {
+    return JSON.parse(localStorage.getItem("gamingChat")) || [];
+}
+
+function sendChatMessage() {
+    const name = document.getElementById("chatName").value.trim();
+
+    const message = document.getElementById("chatInput").value.trim();
+
+    if (!name || !message) {
+        alert("Enter your username and a message.");
+        return;
     }
 
-    // Reviews
-    function getReviews() {
-        return JSON.parse(localStorage.getItem("gamingReviews")) || [];
+    const messages = getChatMessages();
+
+    messages.push({
+        name: name,
+        message: message,
+        date: new Date().toLocaleString()
+    });
+
+    localStorage.setItem("gamingChat", JSON.stringify(messages));
+
+    document.getElementById("chatInput").value = "";
+
+    showChatMessages();
+
+    updateAchievements();
+}
+
+function showChatMessages() {
+    const messages = getChatMessages();
+
+    const container = document.getElementById("chatMessages");
+
+    container.innerHTML = "";
+
+    messages.slice(-30).forEach(function(message) {
+        const card = document.createElement("div");
+
+        card.className = "chat-message";
+
+        const name = document.createElement("div");
+        name.className = "chat-name";
+        name.textContent = message.name;
+
+        const text = document.createElement("p");
+        text.textContent = message.message;
+
+        const date = document.createElement("p");
+        date.className = "small-text";
+        date.textContent = message.date;
+
+        card.append(name, text, date);
+
+        container.appendChild(card);
+    });
+
+    if (messages.length === 0) {
+        container.textContent = "No messages yet. Start the conversation!";
+    }
+}
+
+showChatMessages();
+
+
+/* ACHIEVEMENTS */
+
+const achievements = [
+    {
+        id: "first_score",
+        icon: "🏆",
+        name: "First Player",
+        description: "Add your first leaderboard score."
+    },
+    {
+        id: "first_message",
+        icon: "💬",
+        name: "Communicator",
+        description: "Send your first community message."
+    },
+    {
+        id: "quiz_complete",
+        icon: "🧠",
+        name: "Quiz Master",
+        description: "Get every quiz answer correct."
+    },
+    {
+        id: "first_review",
+        icon: "⭐",
+        name: "Game Critic",
+        description: "Write your first game review."
+    },
+    {
+        id: "challenge_complete",
+        icon: "🎁",
+        name: "Challenge Winner",
+        description: "Complete a daily challenge."
+    }
+];
+
+function getUnlockedAchievements() {
+    return JSON.parse(localStorage.getItem("gamingAchievements")) || [];
+}
+
+function unlockAchievement(id) {
+    const unlocked = getUnlockedAchievements();
+
+    if (!unlocked.includes(id)) {
+        unlocked.push(id);
+
+        localStorage.setItem(
+            "gamingAchievements",
+            JSON.stringify(unlocked)
+        );
+    }
+}
+
+function updateAchievements() {
+    if (getPlayers().length > 0) {
+        unlockAchievement("first_score");
     }
 
-    function addReview() {
-        const name = document.getElementById("reviewName").value.trim();
-        const game = document.getElementById("reviewGame").value;
-        const rating = document.getElementById("reviewRating").value;
-        const review = document.getElementById("reviewText").value.trim();
+    if (getChatMessages().length > 0) {
+        unlockAchievement("first_message");
+    }
 
-        if (!name || !review) {
-            alert("Please enter your name and review.");
-            return;
+    if (localStorage.getItem("perfectQuiz") === "true") {
+        unlockAchievement("quiz_complete");
+    }
+
+    if (getReviews().length > 0) {
+        unlockAchievement("first_review");
+    }
+
+    const challenges = getDailyChallenges();
+
+    if (challenges.some(challenge => challenge.done)) {
+        unlockAchievement("challenge_complete");
+    }
+
+    showAchievements();
+}
+
+function showAchievements() {
+    const unlocked = getUnlockedAchievements();
+
+    const container = document.getElementById("achievementList");
+
+    container.innerHTML = "";
+
+    achievements.forEach(function(achievement) {
+        const isUnlocked = unlocked.includes(achievement.id);
+
+        const card = document.createElement("div");
+
+        card.className = "badge-card";
+
+        if (!isUnlocked) {
+            card.classList.add("locked");
         }
 
-        const reviews = getReviews();
+        const icon = document.createElement("div");
+        icon.className = "badge-icon";
+        icon.textContent = achievement.icon;
 
-        reviews.push({
-            name: name,
-            game: game,
-            rating: rating,
-            review: review
-        });
+        const name = document.createElement("h3");
+        name.textContent = achievement.name;
 
-        localStorage.setItem("gamingReviews", JSON.stringify(reviews));
+        const description = document.createElement("p");
+        description.textContent = achievement.description;
 
-        document.getElementById("reviewName").value = "";
-        document.getElementById("reviewText").value = "";
+        const status = document.createElement("p");
+        status.style.marginTop = "10px";
+        status.textContent = isUnlocked ? "✅ Unlocked" : "🔒 Locked";
 
-        showReviews();
+        card.append(icon, name, description, status);
+
+        container.appendChild(card);
+    });
+}
+
+updateAchievements();
+
+
+/* DAILY CHALLENGES */
+
+const challengeTemplates = [
+    {
+        id: "quiz",
+        name: "Play the Gaming Quiz",
+        description: "Try answering the gaming quiz.",
+        points: 20
+    },
+    {
+        id: "chat",
+        name: "Send a Community Message",
+        description: "Share a message with the community.",
+        points: 15
+    },
+    {
+        id: "review",
+        name: "Write a Game Review",
+        description: "Write your opinion about a game.",
+        points: 25
+    }
+];
+
+function todayKey() {
+    const date = new Date();
+
+    return date.getFullYear() + "-" +
+        (date.getMonth() + 1) + "-" +
+        date.getDate();
+}
+
+function getDailyChallenges() {
+    const saved = JSON.parse(localStorage.getItem("dailyChallenges"));
+
+    if (!saved || saved.date !== todayKey()) {
+        const fresh = {
+            date: todayKey(),
+            challenges: challengeTemplates.map(function(challenge) {
+                return {
+                    ...challenge,
+                    done: false
+                };
+            })
+        };
+
+        localStorage.setItem("dailyChallenges", JSON.stringify(fresh));
+
+        return fresh.challenges;
     }
 
-    function showReviews() {
-        const reviews = getReviews();
-        const list = document.getElementById("reviewList");
+    return saved.challenges;
+}
 
-        list.innerHTML = "";
+function saveDailyChallenges(challenges) {
+    localStorage.setItem("dailyChallenges", JSON.stringify({
+        date: todayKey(),
+        challenges: challenges
+    }));
+}
 
-        reviews.forEach(function(review) {
-            const card = document.createElement("div");
-            card.className = "info";
+function completeChallenge(id) {
+    const challenges = getDailyChallenges();
 
-            const title = document.createElement("h3");
-            title.textContent = review.game;
+    const challenge = challenges.find(item => item.id === id);
 
-            const author = document.createElement("p");
-            author.textContent = "By: " + review.name;
+    if (!challenge || challenge.done) return;
 
-            const rating = document.createElement("p");
-            rating.textContent = "Rating: " + "⭐".repeat(Number(review.rating));
+    let canComplete = false;
 
-            const message = document.createElement("p");
-            message.textContent = review.review;
-
-            card.appendChild(title);
-            card.appendChild(author);
-            card.appendChild(rating);
-            card.appendChild(message);
-
-            list.appendChild(card);
-        });
+    if (id === "quiz") {
+        canComplete = localStorage.getItem("perfectQuiz") === "true";
     }
+
+    if (id === "chat") {
+        canComplete = getChatMessages().length > 0;
+    }
+
+    if (id === "review") {
+        canComplete = getReviews().length > 0;
+    }
+
+    if (!canComplete) {
+        alert("Complete the activity first!");
+        return;
+    }
+
+    challenge.done = true;
+
+    saveDailyChallenges(challenges);
+
+    showChallenges();
+    updateAchievements();
+}
+
+function showChallenges() {
+    const challenges = getDailyChallenges();
+
+    const container = document.getElementById("challengeList");
+
+    container.innerHTML = "";
+
+    let totalPoints = 0;
+
+    challenges.forEach(function(challenge) {
+        if (challenge.done) {
+            totalPoints += challenge.points;
+        }
+
+        const card = document.createElement("div");
+
+        card.className = "info";
+
+        const row = document.createElement("div");
+        row.className = "challenge";
+
+        const details = document.createElement("div");
+
+        const title = document.createElement("h3");
+        title.textContent = challenge.name;
+
+        const description = document.createElement("p");
+        description.textContent = challenge.description;
+
+        const points = document.createElement("p");
+        points.className = "score";
+        points.textContent = "+" + challenge.points + " points";
+
+        details.append(title, description, points);
+
+        const button = document.createElement("button");
+
+        button.textContent = challenge.done ? "Completed ✓" : "Claim Challenge";
+
+        button.disabled = challenge.done;
+
+        button.onclick = function() {
+            completeChallenge(challenge.id);
+        };
+
+        row.append(details, button);
+
+        card.appendChild(row);
+
+        const progress = document.createElement("div");
+        progress.className = "progress";
+
+        const fill = document.createElement("div");
+        fill.className = "progress-fill";
+        fill.style.width = challenge.done ? "100%" : "0%";
+
+        progress.appendChild(fill);
+
+        card.appendChild(progress);
+
+        container.appendChild(card);
+    });
+
+    document.getElementById("challengePoints").textContent =
+        totalPoints + " Points";
+}
+
+showChallenges();
+
+
+/* REVIEWS */
+
+function getReviews() {
+    return JSON.parse(localStorage.getItem("gamingReviews")) || [];
+}
+
+function addReview() {
+    const name = document.getElementById("reviewName").value.trim();
+
+    const game = document.getElementById("reviewGame").value;
+
+    const rating = document.getElementById("reviewRating").value;
+
+    const review = document.getElementById("reviewText").value.trim();
+
+    if (!name || !review) {
+        alert("Please enter your name and review.");
+        return;
+    }
+
+    const reviews = getReviews();
+
+    reviews.push({
+        name: name,
+        game: game,
+        rating: rating,
+        review: review
+    });
+
+    localStorage.setItem("gamingReviews", JSON.stringify(reviews));
+
+    document.getElementById("reviewName").value = "";
+    document.getElementById("reviewText").value = "";
 
     showReviews();
+    showChallenges();
+    updateAchievements();
+}
 
-    // Account
-    function saveAccount() {
-        const username = document.getElementById("username").value.trim();
+function showReviews() {
+    const reviews = getReviews();
 
-        if (!username) {
-            alert("Please enter a username.");
-            return;
-        }
+    const list = document.getElementById("reviewList");
 
-        localStorage.setItem("gamingUsername", username);
+    list.innerHTML = "";
 
-        document.getElementById("accountMessage").textContent =
-            "Welcome, " + username + "!";
+    reviews.forEach(function(review) {
+        const card = document.createElement("div");
+
+        card.className = "info";
+
+        const title = document.createElement("h3");
+        title.textContent = review.game;
+
+        const author = document.createElement("p");
+        author.textContent = "By: " + review.name;
+
+        const rating = document.createElement("p");
+        rating.textContent = "Rating: " + "⭐".repeat(Number(review.rating));
+
+        const message = document.createElement("p");
+        message.textContent = review.review;
+
+        card.append(title, author, rating, message);
+
+        list.appendChild(card);
+    });
+}
+
+showReviews();
+
+
+/* ACCOUNT */
+
+function saveAccount() {
+    const username = document.getElementById("username").value.trim();
+
+    if (!username) {
+        alert("Please enter a username.");
+        return;
     }
 
-    const savedUsername = localStorage.getItem("gamingUsername");
+    localStorage.setItem("gamingUsername", username);
 
-    if (savedUsername) {
-        document.getElementById("username").value = savedUsername;
-        document.getElementById("accountMessage").textContent =
-            "Welcome back, " + savedUsername + "!";
+    document.getElementById("accountMessage").textContent =
+        "Welcome, " + username + "!";
+}
+
+const savedUsername = localStorage.getItem("gamingUsername");
+
+if (savedUsername) {
+    document.getElementById("username").value = savedUsername;
+
+    document.getElementById("accountMessage").textContent =
+        "Welcome back, " + savedUsername + "!";
+}
+
+
+/* HELP */
+
+function sendMessage() {
+    const name = document.getElementById("helpName").value.trim();
+
+    const message = document.getElementById("helpMessage").value.trim();
+
+    if (!name || !message) {
+        alert("Please complete both fields.");
+        return;
     }
 
-    // Help
-    function sendMessage() {
-        const name = document.getElementById("helpName").value.trim();
-        const message = document.getElementById("helpMessage").value.trim();
+    const messages =
+        JSON.parse(localStorage.getItem("gamingMessages")) || [];
 
-        if (!name || !message) {
-            alert("Please complete both fields.");
-            return;
-        }
+    messages.push({
+        name: name,
+        message: message,
+        date: new Date().toLocaleString()
+    });
 
-        const messages = JSON.parse(localStorage.getItem("gamingMessages")) || [];
+    localStorage.setItem("gamingMessages", JSON.stringify(messages));
 
-        messages.push({
-            name: name,
-            message: message,
-            date: new Date().toLocaleString()
-        });
+    document.getElementById("helpName").value = "";
+    document.getElementById("helpMessage").value = "";
 
-        localStorage.setItem("gamingMessages", JSON.stringify(messages));
+    document.getElementById("helpResult").textContent =
+        "Your message has been saved on this browser!";
+}
 
-        document.getElementById("helpName").value = "";
-        document.getElementById("helpMessage").value = "";
-        document.getElementById("helpResult").textContent =
-            "Your message has been saved on this browser!";
-    }
 </script>
 
 </body>
