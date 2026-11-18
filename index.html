@@ -4,110 +4,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gaming Hub</title>
+<title>Gaming Hub 2.0</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth}
-body{font-family:Arial,sans-serif;background:#111827;color:white}
-header{background:#1f2937;padding:20px;text-align:center}
+body{font-family:Arial,sans-serif;background:#111827;color:white;transition:.3s}
+body.light{background:#f1f5f9;color:#111827}
+body.light header,body.light footer,body.light .card,body.light .game,body.light .info{background:#fff;color:#111827}
+body.light input,body.light textarea,body.light select{background:#e2e8f0;color:#111827}
+header{background:#1f2937;padding:20px;text-align:center;position:sticky;top:0;z-index:10}
 header h1{color:#38bdf8;margin-bottom:15px}
-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:15px}
-nav a{color:white;text-decoration:none;font-weight:bold;font-size:14px}
+nav{display:flex;justify-content:center;flex-wrap:wrap;gap:13px}
+nav a{color:inherit;text-decoration:none;font-weight:bold;font-size:13px}
 nav a:hover{color:#38bdf8}
-section{padding:40px 20px;max-width:1100px;margin:auto}
-h2{color:#38bdf8;margin-bottom:20px;text-align:center}
+section{padding:40px 20px;max-width:1150px;margin:auto;scroll-margin-top:130px}
+h2{color:#38bdf8;text-align:center;margin-bottom:20px}
 h3{margin-bottom:10px}
 p{line-height:1.5}
-.hero{text-align:center;padding:80px 20px;background:linear-gradient(135deg,#1e3a8a,#111827)}
-.hero h2{font-size:40px}
-.hero p{margin:15px 0}
-.button,button{display:inline-block;background:#0284c7;color:white;padding:12px 20px;border-radius:8px;text-decoration:none;margin-top:10px;border:0;cursor:pointer;font-size:14px}
-.button:hover,button:hover{background:#0369a1}
-button:disabled{background:#4b5563;cursor:not-allowed}
-.featured,.game,.info,.feature-card{background:#1f2937;padding:20px;border-radius:12px;margin-bottom:15px}
-.featured{text-align:center}
-.featured h3{font-size:28px;margin:15px}
-.games,.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
+.hero{text-align:center;padding:85px 20px;background:linear-gradient(135deg,#1e3a8a,#111827)}
+.hero h2{font-size:42px}
+.hero p{margin:15px}
+button,.button{display:inline-block;background:#0284c7;color:white;padding:11px 17px;border:0;border-radius:8px;margin:5px 3px;cursor:pointer;text-decoration:none;font-size:14px}
+button:hover,.button:hover{background:#0369a1}
+button:disabled{opacity:.5;cursor:not-allowed}
+input,textarea,select{width:100%;padding:12px;margin:7px 0;border:0;border-radius:7px;background:#e5e7eb;color:#111827;font-family:Arial}
+textarea{min-height:85px}
+.card,.info,.game,.featured,.news-card,.tournament-card{background:#1f2937;padding:20px;border-radius:12px;margin-bottom:15px}
+.games,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
 .game{text-align:center;transition:.2s}
-.game:hover,.feature-card:hover{transform:translateY(-4px);background:#374151}
-.game p{color:#d1d5db;margin:8px 0}
-.game a,.info a{color:#38bdf8;text-decoration:none}
-.search{display:block;max-width:450px;margin:0 auto 15px}
-input,textarea,select{width:100%;padding:12px;margin:8px 0;border-radius:6px;border:0;font-family:Arial}
-textarea{min-height:90px;resize:vertical}
-footer{background:#1f2937;text-align:center;padding:25px;margin-top:30px;color:#d1d5db}
-.hidden{display:none!important}
-.small-text{color:#9ca3af;font-size:13px}
-.score{color:#38bdf8;font-weight:bold;font-size:20px}
-.leaderboard-row{display:flex;justify-content:space-between;gap:10px;padding:14px;background:#374151;border-radius:8px;margin:8px 0;overflow-wrap:anywhere}
-.rank{color:#facc15;font-weight:bold}
-.quiz-option{display:block;width:100%;text-align:left;background:#374151;margin:8px 0}
-.chat-message{background:#374151;padding:12px;border-radius:8px;margin:10px 0;overflow-wrap:anywhere}
-.chat-name{color:#38bdf8;font-weight:bold}
-.badge-card{background:#374151;padding:15px;border-radius:10px;text-align:center}
-.badge-card.locked{opacity:.4}
-.badge-icon{font-size:35px;margin-bottom:8px}
-.challenge{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-.progress{height:12px;background:#111827;border-radius:20px;overflow:hidden;margin-top:10px}
-.progress-fill{height:100%;background:#22c55e;transition:width .3s}
-.game-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
-.game-actions button{font-size:12px;padding:8px}
+.game:hover{transform:translateY(-4px);background:#374151}
+.game-icon{font-size:45px;margin:10px}
+.game p{color:#cbd5e1;margin:8px}
 .tag{display:inline-block;background:#374151;padding:5px 9px;border-radius:15px;font-size:12px;margin:4px}
-.news-card,.tournament-card{background:#1f2937;padding:20px;border-radius:12px;margin-bottom:15px}
-.admin-box{border:1px solid #38bdf8}
-.avatar{font-size:55px;margin:10px}
-.rating-stars{color:#facc15;font-size:20px}
-hr{border:0;border-top:1px solid #4b5563;margin:20px}
-
-/* GTA VI SECTION */
-.gta-banner{
-    text-align:center;
-    padding:55px 20px;
-    border-radius:15px;
-    background:linear-gradient(135deg,#7c2d12,#451a03,#111827);
-    margin-bottom:20px;
-}
-.gta-banner h3{font-size:35px;color:#fbbf24}
-.gta-banner p{margin:15px 0;color:#f3f4f6}
-.gta-info{
-    background:#1f2937;
-    border-radius:12px;
-    padding:20px;
-    margin-bottom:15px;
-}
-.ad-box{
-    background:#1f2937;
-    border:2px dashed #64748b;
-    border-radius:12px;
-    min-height:120px;
-    padding:25px;
-    margin:20px auto;
-    text-align:center;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-}
-.ad-label{
-    color:#9ca3af;
-    font-size:11px;
-    letter-spacing:2px;
-    margin-bottom:12px;
-}
-.ad-box p{color:#d1d5db}
-.ad-box strong{color:#38bdf8}
-.sponsored-title{
-    text-align:center;
-    margin:30px 0 15px;
-    color:#facc15;
-}
+.small{font-size:12px;color:#9ca3af}
+.score{font-size:22px;color:#38bdf8;font-weight:bold}
+.progress{height:12px;background:#111827;border-radius:20px;overflow:hidden;margin:10px 0}
+.fill{height:100%;background:#22c55e}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.center{text-align:center}
+.hidden{display:none!important}
+hr{border:0;border-top:1px solid #4b5563;margin:18px 0}
+.avatar{font-size:55px}
+.leaderboard-row,.message{padding:12px;background:#374151;border-radius:8px;margin:8px 0;overflow-wrap:anywhere}
+.rank{color:#facc15;font-weight:bold}
+footer{text-align:center;background:#1f2937;padding:25px;margin-top:30px;color:#cbd5e1}
+.gallery img{width:100%;height:170px;object-fit:cover;border-radius:10px}
+.poll-option{display:block;width:100%;text-align:left;background:#374151}
+.stat{background:#374151;padding:15px;border-radius:10px;text-align:center}
+.stat strong{display:block;font-size:25px;color:#38bdf8}
+#toast{position:fixed;bottom:20px;right:20px;background:#0284c7;padding:14px 20px;border-radius:9px;display:none;z-index:30}
+.ad-box{border:2px dashed #64748b;padding:25px;text-align:center;border-radius:10px;margin:15px 0;color:#9ca3af}
 @media(max-width:600px){
-.hero h2{font-size:30px}
-nav{gap:10px}
-nav a{font-size:12px}
-section{padding:30px 15px}
-.leaderboard-row{font-size:13px}
-.gta-banner h3{font-size:27px}
+ header{position:relative}
+ nav{gap:10px}
+ nav a{font-size:12px}
+ section{padding:30px 14px}
+ .hero h2{font-size:30px}
 }
 </style>
 </head>
@@ -115,129 +67,90 @@ section{padding:30px 15px}
 <body>
 
 <header>
-<h1>🎮 Gaming Hub</h1>
+<h1>🎮 Gaming Hub 2.0</h1>
 <nav>
 <a href="#home">Home</a>
-<a href="#featured">Featured</a>
+<a href="#dashboard">Dashboard</a>
 <a href="#games">Games</a>
-<a href="#gta6">GTA VI</a>
-<a href="#news">News</a>
+<a href="#store">Store</a>
+<a href="#gta">GTA VI</a>
 <a href="#freefire">Free Fire</a>
 <a href="#minecraft">Minecraft</a>
-<a href="#tips">Tips</a>
+<a href="#news">News</a>
 <a href="#videos">Videos</a>
-<a href="#leaderboard">Leaderboard</a>
-<a href="#quiz">Quiz</a>
+<a href="#tips">Tips</a>
+<a href="#minigames">Mini Games</a>
 <a href="#community">Community</a>
-<a href="#achievements">Achievements</a>
-<a href="#challenges">Challenges</a>
-<a href="#reviews">Reviews</a>
-<a href="#account">Account</a>
+<a href="#messages">Messages</a>
+<a href="#polls">Polls</a>
+<a href="#events">Events</a>
+<a href="#rankings">Rankings</a>
+<a href="#missions">Missions</a>
 <a href="#profile">Profile</a>
+<a href="#gallery">Gallery</a>
+<a href="#setups">Setups</a>
+<a href="#music">Music</a>
+<a href="#wishlist">Wishlist</a>
+<a href="#comparison">Compare</a>
+<a href="#shop">Shop</a>
+<a href="#reviews">Reviews</a>
 <a href="#tournaments">Tournaments</a>
-<a href="#favorites">Favorites</a>
-<a href="#rewards">Rewards</a>
+<a href="#achievements">Achievements</a>
+<a href="#notifications">Notifications</a>
 <a href="#help">Help</a>
 <a href="#admin">Admin</a>
 </nav>
 </header>
 
-<section class="hero" id="home">
-<h2>Welcome to Gaming Hub!</h2>
-<p>Discover games, gaming news, challenges and more.</p>
-<a href="#games" class="button">Explore Games</a>
+<div class="hero" id="home">
+<h2>WELCOME TO GAMING HUB!</h2>
+<p>Your ultimate destination for gaming, challenges, news and entertainment.</p>
+<a href="#games" class="button">Explore Games 🎮</a>
+<a href="#dashboard" class="button">My Dashboard</a>
+</div>
+
+<!-- DASHBOARD -->
+<section id="dashboard">
+<h2>📊 Gaming Dashboard</h2>
+<div class="grid">
+<div class="stat"><strong id="dashLevel">1</strong>Player Level</div>
+<div class="stat"><strong id="dashXP">0</strong>Total XP</div>
+<div class="stat"><strong id="dashFavorites">0</strong>Favorites</div>
+<div class="stat"><strong id="dashReviews">0</strong>Reviews</div>
+</div>
+<div class="info">
+<h3>Welcome back, <span id="dashName">Guest</span>!</h3>
+<p>Your XP progress</p>
+<div class="progress"><div class="fill" id="xpFill" style="width:0%"></div></div>
+<p id="xpText">0 / 100 XP</p>
+<button onclick="location.href='#profile'">View Profile</button>
+</div>
 </section>
 
+<!-- FEATURED -->
 <section id="featured">
 <h2>⭐ Featured Game of the Day</h2>
-<div class="featured">
-<div id="featuredIcon" style="font-size:60px">🎮</div>
+<div class="featured center">
+<div class="game-icon" id="featuredIcon">🔥</div>
 <h3 id="featuredName">Free Fire</h3>
 <p id="featuredDescription">Battle, survive and become the champion!</p>
-<a id="featuredLink" class="button" href="https://ff.garena.com/" target="_blank" rel="noopener">Discover Game</a>
+<a id="featuredLink" class="button" href="https://ff.garena.com/" target="_blank">Discover Game</a>
 </div>
 </section>
 
-<!-- GTA VI SECTION -->
-<section id="gta6">
-<h2>🌴 Grand Theft Auto VI</h2>
-
-<div class="gta-banner">
-<h3>GTA VI</h3>
-<p>Welcome to the world of Grand Theft Auto VI!</p>
-<a class="button" href="https://www.rockstargames.com/VI" target="_blank" rel="noopener">Official GTA VI Website</a>
-</div>
-
-<!-- ADVERTISEMENT 1 -->
-<div class="ad-box">
-<span class="ad-label">ADVERTISEMENT</span>
-<strong>Your Advertisement Here</strong>
-<p>This space is reserved for an approved advertisement.</p>
-</div>
-
-<div class="gta-info">
-<h3>🎮 About GTA VI</h3>
-<p>Grand Theft Auto VI is an upcoming open-world action-adventure game from Rockstar Games.</p>
-</div>
-
-<div class="gta-info">
-<h3>🌴 Explore Vice City</h3>
-<p>Discover the fictional state of Leonida and the world inspired by Florida.</p>
-</div>
-
-<div class="gta-info">
-<h3>📰 GTA VI Information</h3>
-<p>Visit the official Rockstar Games website for announcements, trailers and updates.</p>
-<a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener">Visit Rockstar Games</a>
-</div>
-
-<!-- ADVERTISEMENT 2 -->
-<div class="ad-box">
-<span class="ad-label">ADVERTISEMENT</span>
-<strong>Your Advertisement Here</strong>
-<p>Sponsored content can appear in this space.</p>
-</div>
-
-<h3 class="sponsored-title">⭐ Sponsored Gaming Zone</h3>
-
-<div class="games">
-<div class="game">
-<h3>🎮 Gaming Products</h3>
-<p>Advertisement space for gaming products.</p>
-<span class="tag">Sponsored</span>
-</div>
-<div class="game">
-<h3>🖥️ Gaming Accessories</h3>
-<p>Advertisement space for gaming accessories.</p>
-<span class="tag">Sponsored</span>
-</div>
-<div class="game">
-<h3>🎧 Gaming Headsets</h3>
-<p>Advertisement space for gaming equipment.</p>
-<span class="tag">Sponsored</span>
-</div>
-</div>
-
-<!-- ADVERTISEMENT 3 -->
-<div class="ad-box">
-<span class="ad-label">ADVERTISEMENT</span>
-<strong>Your Advertisement Here</strong>
-<p>This is another reserved advertising space.</p>
-</div>
-</section>
-
+<!-- ALL GAMES -->
 <section id="games">
 <h2>🎮 All Games</h2>
-<input class="search" id="gameSearch" placeholder="Search for a game..." oninput="searchGames()">
-<select id="gameCategory" onchange="searchGames()">
-<option value="all">All categories</option>
+<input id="gameSearch" placeholder="Search games..." oninput="showGames()">
+<select id="gameCategory" onchange="showGames()">
+<option value="all">All Categories</option>
 <option value="battle">Battle Royale</option>
 <option value="creative">Creative</option>
 <option value="sports">Sports & Racing</option>
 <option value="adventure">Adventure</option>
 </select>
-<select id="gamePlatform" onchange="searchGames()">
-<option value="all">All platforms</option>
+<select id="gamePlatform" onchange="showGames()">
+<option value="all">All Platforms</option>
 <option value="mobile">Mobile</option>
 <option value="pc">PC</option>
 <option value="console">Console</option>
@@ -245,141 +158,180 @@ section{padding:30px 15px}
 <div class="games" id="gameList"></div>
 </section>
 
+<!-- GAME STORE -->
+<section id="store">
+<h2>🛍️ Game Store</h2>
+<p class="center small">Discover games and visit their official websites.</p>
+<div class="games" id="storeList"></div>
+</section>
+
+<!-- GTA -->
+<section id="gta">
+<h2>🌴 Grand Theft Auto VI</h2>
+<div class="card center" style="background:linear-gradient(135deg,#7c2d12,#451a03)">
+<div style="font-size:60px">🌴</div>
+<h3 style="font-size:32px;color:#fbbf24">GTA VI</h3>
+<p>Explore the world of Vice City.</p>
+<a class="button" href="https://www.rockstargames.com/VI" target="_blank">Official GTA VI Website</a>
+</div>
+<div class="info"><h3>🎮 About GTA VI</h3><p>Discover the open-world adventure from Rockstar Games.</p></div>
+<div class="info"><h3>🌴 Vice City</h3><p>Explore the fictional state of Leonida.</p></div>
+<div class="info"><h3>📰 GTA VI Updates</h3><a href="https://www.rockstargames.com/VI" target="_blank">Visit Rockstar Games</a></div>
+<div class="ad-box">ADVERTISEMENT<br>Your Advertisement Here</div>
+</section>
+
+<!-- FREE FIRE -->
+<section id="freefire">
+<h2>🔥 Free Fire Zone</h2>
+<div class="grid">
+<div class="info"><h3>🎯 Aim Training</h3><p>Practice regularly to improve your aim.</p></div>
+<div class="info"><h3>🛡️ Gloo Wall</h3><p>Learn how to use Gloo Walls effectively.</p></div>
+<div class="info"><h3>🏆 Game Modes</h3><p>Explore Battle Royale and Clash Squad.</p></div>
+</div>
+<a class="button" href="https://ff.garena.com/" target="_blank">Official Free Fire Website</a>
+</section>
+
+<!-- MINECRAFT -->
+<section id="minecraft">
+<h2>⛏️ Minecraft Zone</h2>
+<div class="grid">
+<div class="info"><h3>Survival Mode</h3><p>Collect resources and explore.</p></div>
+<div class="info"><h3>Creative Mode</h3><p>Build anything you imagine.</p></div>
+<div class="info"><h3>Building Ideas</h3><p>Create houses, castles and cities.</p></div>
+</div>
+<a class="button" href="https://www.minecraft.net/" target="_blank">Minecraft Website</a>
+</section>
+
+<!-- NEWS -->
 <section id="news">
 <h2>📰 Gaming News</h2>
-<p class="small-text">Demo news articles. Admin can add local news below.</p>
 <div id="newsList"></div>
 </section>
 
-<section id="freefire">
-<h2>🔥 Free Fire Zone</h2>
-<div class="info"><h3>Free Fire Tips</h3><p>Practice your aim and learn how to use the Gloo Wall.</p></div>
-<div class="info"><h3>Game Modes</h3><p>Explore Battle Royale, Clash Squad and other modes.</p></div>
-<a href="https://ff.garena.com/" class="button" target="_blank" rel="noopener">Official Free Fire Website</a>
+<!-- VIDEOS -->
+<section id="videos">
+<h2>▶️ Gaming Videos</h2>
+<div class="grid">
+<div class="info"><h3>🔥 Free Fire</h3><a href="https://www.youtube.com/results?search_query=free+fire+gameplay" target="_blank">Watch Videos</a></div>
+<div class="info"><h3>⛏️ Minecraft</h3><a href="https://www.youtube.com/results?search_query=minecraft+gameplay" target="_blank">Watch Videos</a></div>
+<div class="info"><h3>🎮 Gaming</h3><a href="https://www.youtube.com/results?search_query=gaming" target="_blank">Discover Videos</a></div>
+</div>
 </section>
 
-<section id="minecraft">
-<h2>⛏️ Minecraft Zone</h2>
-<div class="info"><h3>Survival Mode</h3><p>Collect resources, build a house and explore.</p></div>
-<div class="info"><h3>Creative Mode</h3><p>Build anything you can imagine.</p></div>
-<a href="https://www.minecraft.net/" class="button" target="_blank" rel="noopener">Official Minecraft Website</a>
-</section>
-
+<!-- TIPS -->
 <section id="tips">
 <h2>💡 Gaming Tips</h2>
 <div class="info"><h3>1. Practice</h3><p>Practice regularly to improve your skills.</p></div>
-<div class="info"><h3>2. Learn</h3><p>Watch tutorials and learn new strategies.</p></div>
-<div class="info"><h3>3. Have Fun</h3><p>Enjoy your games and take breaks.</p></div>
+<div class="info"><h3>2. Learn</h3><p>Watch tutorials and discover new strategies.</p></div>
+<div class="info"><h3>3. Have Fun</h3><p>Enjoy gaming and take breaks.</p></div>
 </section>
 
-<section id="videos">
-<h2>▶️ Gaming Videos</h2>
-<div class="info"><h3>Free Fire Videos</h3><a href="https://www.youtube.com/results?search_query=free+fire+gameplay" target="_blank" rel="noopener">Watch Free Fire videos</a></div>
-<div class="info"><h3>Minecraft Videos</h3><a href="https://www.youtube.com/results?search_query=minecraft+gameplay" target="_blank" rel="noopener">Watch Minecraft videos</a></div>
-<div class="info"><h3>Gaming Videos</h3><a href="https://www.youtube.com/results?search_query=gaming" target="_blank" rel="noopener">Discover gaming videos</a></div>
-</section>
-
-<section id="leaderboard">
-<h2>🏆 Gaming Leaderboard</h2>
-<div class="info">
-<p class="small-text">Scores are saved in this browser only.</p>
-<div id="leaderboardList"></div>
-<hr>
-<h3>Add Your Score</h3>
-<input id="playerName" placeholder="Enter your username" maxlength="20">
-<input id="playerScore" type="number" min="0" max="1000000" placeholder="Enter your points">
-<button onclick="addPlayer()">Add Score</button>
+<!-- MINI GAMES -->
+<section id="minigames">
+<h2>🕹️ Mini Games Arcade</h2>
+<div class="grid">
+<div class="card center">
+<h3>🔢 Number Guessing</h3>
+<p>Guess a number between 1 and 10.</p>
+<input id="guessInput" type="number" min="1" max="10" placeholder="Your guess">
+<button onclick="guessNumber()">Guess</button>
+<p id="guessResult"></p>
+</div>
+<div class="card center">
+<h3>⚡ Reaction Game</h3>
+<p>Press the button as quickly as possible!</p>
+<button id="reactionButton" onclick="reactionGame()">START</button>
+<p id="reactionResult">Ready?</p>
+</div>
+<div class="card center">
+<h3>✊ Rock Paper Scissors</h3>
+<select id="rpsChoice">
+<option>Rock</option><option>Paper</option><option>Scissors</option>
+</select>
+<button onclick="playRPS()">Play</button>
+<p id="rpsResult"></p>
+</div>
 </div>
 </section>
 
-<section id="quiz">
-<h2>🧠 Gaming Quiz</h2>
-<div class="info">
-<h3 id="questionNumber">Question 1</h3>
-<h3 id="questionText">Loading...</h3>
-<div id="quizOptions"></div>
-<p id="quizResult"></p>
-<p id="quizScore" class="score">Score: 0</p>
-<button id="nextQuestion" onclick="nextQuestion()" disabled>Next Question</button>
-<button onclick="restartQuiz()">Restart Quiz</button>
-</div>
-</section>
-
+<!-- COMMUNITY -->
 <section id="community">
 <h2>💬 Gaming Community</h2>
 <div class="info">
-<p class="small-text">Local demo chat. Messages are not shared online.</p>
+<p class="small">Local demo chat. Messages are saved in this browser only.</p>
 <div id="chatMessages"></div>
-<hr>
-<input id="chatName" placeholder="Your display name" maxlength="20">
+<input id="chatName" placeholder="Display name" maxlength="20">
 <textarea id="chatInput" placeholder="Write a message..." maxlength="300"></textarea>
-<button onclick="sendChatMessage()">Send Message</button>
+<button onclick="sendChat()">Send Message</button>
 </div>
 </section>
 
-<section id="achievements">
-<h2>🎖️ Achievements</h2>
-<p style="text-align:center;margin-bottom:20px">Complete activities to unlock achievements!</p>
-<div class="feature-grid" id="achievementList"></div>
-</section>
-
-<section id="challenges">
-<h2>🎁 Daily Challenges</h2>
+<!-- PLAYER MESSAGES -->
+<section id="messages">
+<h2>✉️ Player Messaging</h2>
 <div class="info">
-<p class="small-text">Complete activities to earn points. Challenges reset each day.</p>
-<div id="challengeList"></div>
-<hr>
-<h3>Your Challenge Points</h3>
-<p class="score" id="challengePoints">0 Points</p>
+<p class="small">Local demo messaging. No messages are sent to other devices.</p>
+<input id="msgFrom" placeholder="Your name">
+<input id="msgTo" placeholder="Recipient name">
+<textarea id="msgText" placeholder="Write your message..."></textarea>
+<button onclick="sendPrivateMessage()">Send</button>
+<div id="privateMessages"></div>
 </div>
 </section>
 
-<section id="reviews">
-<h2>⭐ Game Reviews & Ratings</h2>
+<!-- POLLS -->
+<section id="polls">
+<h2>📊 Gaming Polls</h2>
 <div class="info">
-<h3>Write a Review</h3>
-<input id="reviewName" placeholder="Display name" maxlength="20">
-<select id="reviewGame">
-<option>Free Fire</option><option>Minecraft</option><option>Fortnite</option>
-<option>PUBG</option><option>Roblox</option><option>Rocket League</option>
-<option>Genshin Impact</option><option>Forza Horizon</option>
-<option>EA SPORTS FC</option><option>Among Us</option>
-<option>Call of Duty</option><option>Apex Legends</option>
-</select>
-<select id="reviewRating">
-<option value="5">⭐⭐⭐⭐⭐</option>
-<option value="4">⭐⭐⭐⭐</option>
-<option value="3">⭐⭐⭐</option>
-<option value="2">⭐⭐</option>
-<option value="1">⭐</option>
-</select>
-<textarea id="reviewText" placeholder="Write your review..." maxlength="500"></textarea>
-<button onclick="addReview()">Submit Review</button>
+<h3>Which game do you like most?</h3>
+<div id="pollOptions"></div>
+<p id="pollResult"></p>
+<button onclick="resetPoll()">Reset Demo Poll</button>
 </div>
-<div id="reviewList"></div>
 </section>
 
-<section id="account">
-<h2>👤 Account</h2>
+<!-- EVENTS -->
+<section id="events">
+<h2>📅 Events Calendar</h2>
+<div id="eventList"></div>
+</section>
+
+<!-- RANKINGS -->
+<section id="rankings">
+<h2>🌍 Player Rankings</h2>
+<p class="small center">Demo rankings saved on this browser, not a global online leaderboard.</p>
+<div id="rankingList"></div>
+</section>
+
+<!-- LEADERBOARD -->
+<section id="leaderboard">
+<h2>🏆 Leaderboard</h2>
 <div class="info">
-<p>Create a simple local account name for this browser.</p>
-<input id="username" placeholder="Enter a display name" maxlength="20">
-<button onclick="saveAccount()">Save Username</button>
-<p id="accountMessage"></p>
+<input id="playerName" placeholder="Username">
+<input id="playerScore" type="number" min="0" placeholder="Points">
+<button onclick="addPlayer()">Add Score</button>
+<div id="leaderboardList"></div>
 </div>
 </section>
 
+<!-- MISSIONS -->
+<section id="missions">
+<h2>🎯 Daily Missions</h2>
+<div id="missionList"></div>
+</section>
+
+<!-- PROFILE -->
 <section id="profile">
 <h2>🧑 Player Profile</h2>
-<div class="info" style="text-align:center">
+<div class="info center">
 <div class="avatar" id="profileAvatar">🎮</div>
 <h3 id="profileName">Guest Player</h3>
 <p id="profileLevel">Level 1</p>
-<p class="score" id="profilePoints">0 Points</p>
-<p class="small-text">Your profile is saved only in this browser.</p>
+<p class="score" id="profileXP">0 XP</p>
+<div class="progress"><div class="fill" id="profileFill" style="width:0%"></div></div>
 <hr>
-<h3>Choose an avatar</h3>
-<div class="game-actions">
+<h3>Choose Avatar</h3>
+<div>
 <button onclick="chooseAvatar('🎮')">🎮</button>
 <button onclick="chooseAvatar('👾')">👾</button>
 <button onclick="chooseAvatar('🚀')">🚀</button>
@@ -387,679 +339,902 @@ section{padding:30px 15px}
 <button onclick="chooseAvatar('⚡')">⚡</button>
 <button onclick="chooseAvatar('🏆')">🏆</button>
 </div>
+<h3 style="margin-top:20px">Change Profile Name</h3>
+<input id="username" placeholder="Enter your name">
+<button onclick="saveAccount()">Save Profile</button>
+<p id="accountMessage"></p>
 </div>
 </section>
 
+<!-- GALLERY -->
+<section id="gallery">
+<h2>📸 Screenshot Gallery</h2>
+<div class="info">
+<p>Choose images from your computer to preview them here.</p>
+<input type="file" id="galleryInput" accept="image/*" multiple onchange="addGallery(event)">
+<div class="games gallery" id="galleryList"></div>
+<p class="small">Gallery previews are temporary and reset when you reload the page.</p>
+</div>
+</section>
+
+<!-- SETUPS -->
+<section id="setups">
+<h2>🖥️ Gaming Setups</h2>
+<div class="info">
+<h3>Share Your Setup</h3>
+<input id="setupName" placeholder="Setup name">
+<input id="setupDescription" placeholder="Describe your gaming setup">
+<button onclick="addSetup()">Add Setup</button>
+<div id="setupList"></div>
+</div>
+</section>
+
+<!-- MUSIC -->
+<section id="music">
+<h2>🎵 Gaming Music Zone</h2>
+<div class="grid">
+<div class="info"><h3>🎧 Gaming Music</h3><a href="https://www.youtube.com/results?search_query=gaming+music" target="_blank">Discover Music</a></div>
+<div class="info"><h3>🔥 Gaming Phonk</h3><a href="https://www.youtube.com/results?search_query=gaming+phonk" target="_blank">Discover Phonk</a></div>
+<div class="info"><h3>⚡ Epic Soundtracks</h3><a href="https://www.youtube.com/results?search_query=epic+gaming+soundtracks" target="_blank">Discover Soundtracks</a></div>
+</div>
+</section>
+
+<!-- WISHLIST -->
+<section id="wishlist">
+<h2>❤️ Wishlist</h2>
+<p class="small center">Save games you want to play later.</p>
+<div id="wishlistList" class="games"></div>
+</section>
+
+<!-- COMPARISON -->
+<section id="comparison">
+<h2>⚖️ Game Comparison</h2>
+<div class="info">
+<select id="compareA"></select>
+<select id="compareB"></select>
+<button onclick="compareGames()">Compare Games</button>
+<div id="compareResult"></div>
+</div>
+</section>
+
+<!-- SHOP -->
+<section id="shop">
+<h2>🛍️ Virtual Gaming Shop</h2>
+<p class="small center">Demo items purchased with your earned XP.</p>
+<p class="score center" id="shopXP">0 XP</p>
+<div class="games" id="shopList"></div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+<h2>⭐ Game Reviews</h2>
+<div class="info">
+<input id="reviewName" placeholder="Display name">
+<select id="reviewGame"></select>
+<select id="reviewRating">
+<option value="5">⭐⭐⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+<option value="2">⭐⭐</option>
+<option value="1">⭐</option>
+</select>
+<textarea id="reviewText" placeholder="Write your review..."></textarea>
+<button onclick="addReview()">Submit Review</button>
+</div>
+<div id="reviewList"></div>
+</section>
+
+<!-- TOURNAMENTS -->
 <section id="tournaments">
 <h2>🏅 Tournaments</h2>
-<p class="small-text" style="text-align:center;margin-bottom:15px">Demo tournaments. Joining is saved in this browser only.</p>
 <div id="tournamentList"></div>
 </section>
 
-<section id="favorites">
-<h2>❤️ My Favorite Games</h2>
-<div id="favoriteList" class="games"></div>
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+<h2>🎖️ Achievements</h2>
+<div class="games" id="achievementList"></div>
 </section>
 
+<!-- NOTIFICATIONS -->
+<section id="notifications">
+<h2>🔔 Notifications Center</h2>
+<div id="notificationList"></div>
+<button onclick="clearNotifications()">Clear Notifications</button>
+</section>
+
+<!-- DAILY REWARDS -->
 <section id="rewards">
-<h2>🎁 Daily Login Reward</h2>
-<div class="info" style="text-align:center">
+<h2>🎁 Daily Rewards</h2>
+<div class="info center">
 <div style="font-size:55px">💎</div>
-<h3>Come back every day!</h3>
-<p>Collect 10 points once per day.</p>
-<p class="score" id="rewardPoints">Your points: 0</p>
-<button id="claimRewardButton" onclick="claimDailyReward()">Claim Today's Reward</button>
+<h3>Claim your daily reward!</h3>
+<p>Collect 10 XP once per day.</p>
+<p id="rewardPoints" class="score">0 XP</p>
+<button id="claimRewardButton" onclick="claimReward()">Claim Reward</button>
 <p id="rewardMessage"></p>
 </div>
 </section>
 
+<!-- LANGUAGE -->
+<section id="settings">
+<h2>🌐 Language & Appearance</h2>
+<div class="info">
+<h3>Language</h3>
+<select id="languageSelect" onchange="changeLanguage()">
+<option value="en">English</option>
+<option value="fr">Français</option>
+<option value="ar">العربية</option>
+</select>
+<h3>Appearance</h3>
+<button onclick="toggleTheme()">Switch Dark / Light Theme</button>
+</div>
+</section>
+
+<!-- HELP -->
 <section id="help">
 <h2>❓ Help & Support</h2>
 <div class="info">
-<h3>Contact</h3>
-<p>Send a question or suggestion. This demo saves it in this browser only.</p>
-<input id="helpName" placeholder="Display name" maxlength="30">
-<textarea id="helpMessage" placeholder="Your message..." maxlength="500"></textarea>
-<button onclick="sendMessage()">Submit</button>
+<input id="helpName" placeholder="Your name">
+<textarea id="helpMessage" placeholder="Your question or suggestion"></textarea>
+<button onclick="sendHelp()">Submit</button>
 <p id="helpResult"></p>
 </div>
 </section>
 
+<!-- ADMIN -->
 <section id="admin">
 <h2>⚙️ Admin Dashboard</h2>
-<div class="info admin-box">
-<h3>Local Demo Admin Panel</h3>
-<p class="small-text">This panel only manages data saved in this browser. It is not a secure online admin system.</p>
-<hr>
+<div class="info">
+<p class="small">Local demo admin panel. This is not a secure online administration system.</p>
 <h3>Website Statistics</h3>
-<p id="adminStats"></p>
+<div id="adminStats"></div>
 <hr>
-<h3>Publish a News Article</h3>
-<input id="adminNewsTitle" placeholder="News title" maxlength="80">
-<textarea id="adminNewsText" placeholder="News content..." maxlength="500"></textarea>
+<h3>Publish News</h3>
+<input id="adminNewsTitle" placeholder="News title">
+<textarea id="adminNewsText" placeholder="News content"></textarea>
 <button onclick="addNews()">Publish News</button>
 <hr>
-<h3>Help Messages Saved Here</h3>
+<h3>Manage News</h3>
+<div id="adminNewsList"></div>
+<hr>
+<h3>Help Messages</h3>
 <div id="adminMessages"></div>
 <hr>
 <h3>Manage Reviews</h3>
 <div id="adminReviews"></div>
 <hr>
-<h3>Manage News</h3>
-<div id="adminNewsList"></div>
+<button onclick="resetWebsite()">Reset All Demo Data</button>
 </div>
 </section>
 
 <footer>
-<p>© 2026 Gaming Hub. All rights reserved.</p>
+<p>© 2026 Gaming Hub 2.0</p>
 <p>Made for gamers 🎮</p>
+<a href="#home">Back to Top ↑</a>
 </footer>
 
+<div id="toast"></div>
+
 <script>
-/* STORAGE HELPERS */
-function readData(key, fallback) {
-    try {
-        const value = JSON.parse(localStorage.getItem(key));
-        return value === null ? fallback : value;
-    } catch {
-        return fallback;
-    }
+/* STORAGE */
+function get(key,fallback=[]){
+ try{
+  const value=JSON.parse(localStorage.getItem("gh_"+key));
+  return value===null?fallback:value;
+ }catch{return fallback;}
 }
-function saveData(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+function put(key,value){
+ localStorage.setItem("gh_"+key,JSON.stringify(value));
 }
-function makeElement(tag, className, text) {
-    const element = document.createElement(tag);
-    if (className) element.className = className;
-    if (text !== undefined) element.textContent = text;
-    return element;
+function el(tag,cls,txt){
+ const e=document.createElement(tag);
+ if(cls)e.className=cls;
+ if(txt!==undefined)e.textContent=txt;
+ return e;
+}
+function toast(message){
+ const t=document.getElementById("toast");
+ t.textContent=message;
+ t.style.display="block";
+ setTimeout(()=>t.style.display="none",2500);
+}
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
 }
 
-/* GAMES */
-const games = [
- {name:"Free Fire",icon:"🔥",description:"Battle Royale survival game.",category:"battle",platform:"mobile",url:"https://ff.garena.com/"},
- {name:"Minecraft",icon:"⛏️",description:"Build, explore and survive.",category:"creative",platform:"pc",url:"https://www.minecraft.net/"},
- {name:"Fortnite",icon:"🎯",description:"Battle Royale and creative modes.",category:"battle",platform:"console",url:"https://www.fortnite.com/"},
- {name:"PUBG",icon:"🪖",description:"Fight to become the last survivor.",category:"battle",platform:"mobile",url:"https://www.pubg.com/"},
- {name:"Roblox",icon:"🧱",description:"Play and create experiences.",category:"creative",platform:"pc",url:"https://www.roblox.com/"},
- {name:"Rocket League",icon:"🚗",description:"Football with rocket-powered cars.",category:"sports",platform:"console",url:"https://www.rocketleague.com/"},
- {name:"Genshin Impact",icon:"⚔️",description:"Explore a fantasy world.",category:"adventure",platform:"pc",url:"https://genshin.hoyoverse.com/"},
- {name:"Forza Horizon",icon:"🏎️",description:"Explore and race amazing cars.",category:"sports",platform:"console",url:"https://forza.net/"},
- {name:"EA SPORTS FC",icon:"⚽",description:"Enjoy football matches.",category:"sports",platform:"console",url:"https://www.ea.com/games/ea-sports-fc"},
- {name:"Among Us",icon:"👻",description:"Find the impostor among your friends.",category:"adventure",platform:"mobile",url:"https://www.innersloth.com/games/among-us/"},
- {name:"Call of Duty",icon:"🧟",description:"Discover action and multiplayer games.",category:"battle",platform:"pc",url:"https://www.callofduty.com/"},
- {name:"Apex Legends",icon:"🚀",description:"Team-based battle royale action.",category:"battle",platform:"console",url:"https://www.ea.com/games/apex-legends"}
+/* XP SYSTEM */
+function xp(){
+ return Number(localStorage.getItem("gh_xp")||0);
+}
+function addXP(amount,reason){
+ localStorage.setItem("gh_xp",xp()+amount);
+ addNotification("+"+amount+" XP: "+reason);
+ updateAll();
+}
+function level(){
+ return Math.floor(xp()/100)+1;
+}
+function updateXP(){
+ const current=xp();
+ const progress=current%100;
+ document.getElementById("dashLevel").textContent=level();
+ document.getElementById("dashXP").textContent=current;
+ document.getElementById("xpFill").style.width=progress+"%";
+ document.getElementById("xpText").textContent=progress+" / 100 XP";
+ document.getElementById("profileLevel").textContent="Level "+level();
+ document.getElementById("profileXP").textContent=current+" XP";
+ document.getElementById("profileFill").style.width=progress+"%";
+ document.getElementById("shopXP").textContent=current+" XP";
+ document.getElementById("dashFavorites").textContent=get("favorites").length;
+ document.getElementById("dashReviews").textContent=get("reviews").length;
+ document.getElementById("dashName").textContent=localStorage.getItem("gh_username")||"Guest";
+}
+
+/* GAMES DATABASE */
+const games=[
+ {name:"Free Fire",icon:"🔥",description:"Battle Royale survival game.",category:"battle",platform:"mobile",url:"https://ff.garena.com/",year:"2017"},
+ {name:"Minecraft",icon:"⛏️",description:"Build, explore and survive.",category:"creative",platform:"pc",url:"https://www.minecraft.net/",year:"2011"},
+ {name:"Fortnite",icon:"🎯",description:"Battle Royale and creative modes.",category:"battle",platform:"console",url:"https://www.fortnite.com/",year:"2017"},
+ {name:"PUBG",icon:"🪖",description:"Battle Royale action.",category:"battle",platform:"mobile",url:"https://www.pubg.com/",year:"2017"},
+ {name:"Roblox",icon:"🧱",description:"Play and create experiences.",category:"creative",platform:"pc",url:"https://www.roblox.com/",year:"2006"},
+ {name:"Rocket League",icon:"🚗",description:"Football with rocket-powered cars.",category:"sports",platform:"console",url:"https://www.rocketleague.com/",year:"2015"},
+ {name:"Genshin Impact",icon:"⚔️",description:"Explore a fantasy world.",category:"adventure",platform:"pc",url:"https://genshin.hoyoverse.com/",year:"2020"},
+ {name:"Forza Horizon",icon:"🏎️",description:"Explore and race amazing cars.",category:"sports",platform:"console",url:"https://forza.net/",year:"2021"},
+ {name:"EA SPORTS FC",icon:"⚽",description:"Enjoy football matches.",category:"sports",platform:"console",url:"https://www.ea.com/games/ea-sports-fc",year:"2023"},
+ {name:"Among Us",icon:"👻",description:"Find the impostor.",category:"adventure",platform:"mobile",url:"https://www.innersloth.com/games/among-us/",year:"2018"},
+ {name:"Call of Duty",icon:"🎖️",description:"Multiplayer action games.",category:"battle",platform:"pc",url:"https://www.callofduty.com/",year:"2003"},
+ {name:"Apex Legends",icon:"🚀",description:"Team-based battle royale.",category:"battle",platform:"console",url:"https://www.ea.com/games/apex-legends",year:"2019"}
 ];
 
-function getFavorites(){return readData("gamingFavorites",[]);}
+function favorites(){return get("favorites");}
+function isFavorite(name){return favorites().includes(name);}
 function toggleFavorite(name){
-    let favorites=getFavorites();
-    if(favorites.includes(name)) favorites=favorites.filter(x=>x!==name);
-    else favorites.push(name);
-    saveData("gamingFavorites",favorites);
-    showGames();
-    showFavorites();
+ let list=favorites();
+ if(list.includes(name))list=list.filter(x=>x!==name);
+ else{
+  list.push(name);
+  addXP(5,"Added a favorite");
+ }
+ put("favorites",list);
+ showGames();
+ showWishlist();
+ updateAll();
+}
+function gameCard(game){
+ const card=el("div","game");
+ card.append(el("div","game-icon",game.icon));
+ card.append(el("h3","",game.name));
+ card.append(el("p","",game.description));
+ card.append(el("span","tag",game.category));
+ card.append(el("span","tag",game.platform));
+ const a=el("a","button","Visit Website");
+ a.href=game.url;a.target="_blank";a.rel="noopener";
+ card.append(a);
+ const fav=el("button","",isFavorite(game.name)?"❤️ Saved":"♡ Wishlist");
+ fav.onclick=()=>toggleFavorite(game.name);
+ card.append(fav);
+ return card;
 }
 function showGames(){
-    const container=document.getElementById("gameList");
-    container.innerHTML="";
-    const search=document.getElementById("gameSearch").value.toLowerCase();
-    const category=document.getElementById("gameCategory").value;
-    const platform=document.getElementById("gamePlatform").value;
-    const favorites=getFavorites();
-
-    games.filter(game=>
-        (game.name.toLowerCase().includes(search) || game.description.toLowerCase().includes(search)) &&
-        (category==="all" || game.category===category) &&
-        (platform==="all" || game.platform===platform)
-    ).forEach(game=>{
-        const card=makeElement("div","game");
-        card.appendChild(makeElement("div","",game.icon));
-        card.appendChild(makeElement("h3","",game.name));
-        card.appendChild(makeElement("p","",game.description));
-        card.appendChild(makeElement("span","tag",game.category));
-        card.appendChild(makeElement("span","tag",game.platform));
-        const link=makeElement("a","","Visit Website");
-        link.href=game.url;
-        link.target="_blank";
-        link.rel="noopener";
-        card.appendChild(link);
-        const actions=makeElement("div","game-actions");
-        const favorite=makeElement("button","",favorites.includes(game.name)?"❤️ Favorited":"♡ Add Favorite");
-        favorite.onclick=()=>toggleFavorite(game.name);
-        actions.appendChild(favorite);
-        card.appendChild(actions);
-        container.appendChild(card);
-    });
-    if(!container.children.length) container.textContent="No games found. Try another search.";
+ const box=document.getElementById("gameList");
+ box.innerHTML="";
+ const s=document.getElementById("gameSearch").value.toLowerCase();
+ const cat=document.getElementById("gameCategory").value;
+ const plat=document.getElementById("gamePlatform").value;
+ games.filter(g=>
+  (g.name.toLowerCase().includes(s)||g.description.toLowerCase().includes(s))&&
+  (cat==="all"||g.category===cat)&&
+  (plat==="all"||g.platform===plat)
+ ).forEach(g=>box.append(gameCard(g)));
+ if(!box.children.length)box.textContent="No games found.";
 }
-function searchGames(){showGames();}
-showGames();
-
-function showFavorites(){
-    const container=document.getElementById("favoriteList");
-    container.innerHTML="";
-    const favorites=getFavorites();
-    games.filter(game=>favorites.includes(game.name)).forEach(game=>{
-        const card=makeElement("div","game");
-        card.appendChild(makeElement("h3","",game.icon+" "+game.name));
-        card.appendChild(makeElement("p","",game.description));
-        const link=makeElement("a","","Visit Website");
-        link.href=game.url;link.target="_blank";link.rel="noopener";
-        card.appendChild(link);
-        const remove=makeElement("button","","Remove Favorite");
-        remove.onclick=()=>toggleFavorite(game.name);
-        card.appendChild(remove);
-        container.appendChild(card);
-    });
-    if(!container.children.length) container.textContent="You have no favorite games yet. Add some from All Games!";
+function showStore(){
+ const box=document.getElementById("storeList");
+ games.forEach(g=>box.append(gameCard(g)));
 }
-showFavorites();
+function showWishlist(){
+ const box=document.getElementById("wishlistList");
+ box.innerHTML="";
+ games.filter(g=>isFavorite(g.name)).forEach(g=>box.append(gameCard(g)));
+ if(!box.children.length)box.textContent="Your wishlist is empty.";
+}
+showGames();showStore();showWishlist();
 
 /* FEATURED GAME */
-const featuredGames=[
- {icon:"🔥",name:"Free Fire",description:"Battle, survive and become the champion!",link:"https://ff.garena.com/"},
- {icon:"⛏️",name:"Minecraft",description:"Build, explore and survive in your own world.",link:"https://www.minecraft.net/"},
- {icon:"🎯",name:"Fortnite",description:"Discover Battle Royale and creative adventures.",link:"https://www.fortnite.com/"},
- {icon:"🪖",name:"PUBG",description:"Fight to become the last survivor.",link:"https://www.pubg.com/"},
- {icon:"🧱",name:"Roblox",description:"Play millions of experiences created by players.",link:"https://www.roblox.com/"},
- {icon:"🚗",name:"Rocket League",description:"Football meets rocket-powered cars.",link:"https://www.rocketleague.com/"},
- {icon:"⚔️",name:"Genshin Impact",description:"Explore a beautiful fantasy world.",link:"https://genshin.hoyoverse.com/"}
+const featured=[
+ {icon:"🔥",name:"Free Fire",description:"Battle, survive and become champion!",link:"https://ff.garena.com/"},
+ {icon:"⛏️",name:"Minecraft",description:"Build and explore your own world.",link:"https://www.minecraft.net/"},
+ {icon:"🎯",name:"Fortnite",description:"Discover Battle Royale adventures.",link:"https://www.fortnite.com/"},
+ {icon:"🧱",name:"Roblox",description:"Explore experiences created by players.",link:"https://www.roblox.com/"}
 ];
-function showFeaturedGame(){
-    const index=Math.floor(Date.now()/86400000)%featuredGames.length;
-    const game=featuredGames[index];
-    document.getElementById("featuredIcon").textContent=game.icon;
-    document.getElementById("featuredName").textContent=game.name;
-    document.getElementById("featuredDescription").textContent=game.description;
-    document.getElementById("featuredLink").href=game.link;
-}
-showFeaturedGame();
-
-/* LEADERBOARD */
-function getPlayers(){return readData("gamingPlayers",[]);}
-function addPlayer(){
-    const name=document.getElementById("playerName").value.trim();
-    const score=Number(document.getElementById("playerScore").value);
-    if(!name || !Number.isInteger(score) || score<0 || score>1000000){
-        alert("Enter a username and a score from 0 to 1,000,000.");
-        return;
-    }
-    const players=getPlayers();
-    players.push({name,score});
-    players.sort((a,b)=>b.score-a.score);
-    saveData("gamingPlayers",players);
-    document.getElementById("playerName").value="";
-    document.getElementById("playerScore").value="";
-    showLeaderboard();
-    updateAchievements();
-    updateProfile();
-}
-function showLeaderboard(){
-    const container=document.getElementById("leaderboardList");
-    container.innerHTML="";
-    const players=getPlayers().sort((a,b)=>b.score-a.score).slice(0,10);
-    if(!players.length){container.textContent="No players yet. Be the first!";return;}
-    players.forEach((player,index)=>{
-        const row=makeElement("div","leaderboard-row");
-        row.appendChild(makeElement("span","rank","#"+(index+1)));
-        row.appendChild(makeElement("span","",player.name));
-        row.appendChild(makeElement("span","",player.score+" pts"));
-        container.appendChild(row);
-    });
-}
-showLeaderboard();
-
-/* QUIZ */
-const questions=[
- {question:"Which game lets you build with blocks?",options:["Free Fire","Minecraft","PUBG","FIFA"],answer:"Minecraft"},
- {question:"What does Battle Royale usually mean?",options:["A racing game","A cooking game","Players compete until one remains","A puzzle game"],answer:"Players compete until one remains"},
- {question:"Which game is famous for its Gloo Wall?",options:["Minecraft","Free Fire","Roblox","Rocket League"],answer:"Free Fire"},
- {question:"Which game features rocket-powered cars?",options:["Rocket League","PUBG","Among Us","Minecraft"],answer:"Rocket League"},
- {question:"Which platform lets users create their own experiences?",options:["Roblox","PUBG","Forza","Apex Legends"],answer:"Roblox"}
-];
-let currentQuestion=0,quizPoints=0,questionAnswered=false;
-function showQuestion(){
-    const question=questions[currentQuestion];
-    document.getElementById("questionNumber").textContent="Question "+(currentQuestion+1)+" of "+questions.length;
-    document.getElementById("questionText").textContent=question.question;
-    document.getElementById("quizResult").textContent="";
-    document.getElementById("nextQuestion").disabled=true;
-    const container=document.getElementById("quizOptions");
-    container.innerHTML="";
-    questionAnswered=false;
-    question.options.forEach(option=>{
-        const button=makeElement("button","quiz-option",option);
-        button.onclick=()=>checkAnswer(option,button);
-        container.appendChild(button);
-    });
-    document.getElementById("quizScore").textContent="Score: "+quizPoints;
-}
-function checkAnswer(selected,button){
-    if(questionAnswered)return;
-    questionAnswered=true;
-    const correct=questions[currentQuestion].answer;
-    const result=document.getElementById("quizResult");
-    if(selected===correct){
-        quizPoints++;
-        result.textContent="✅ Correct! Great job!";
-        result.style.color="#22c55e";
-        button.style.background="#15803d";
-    }else{
-        result.textContent="❌ Incorrect! The answer is "+correct;
-        result.style.color="#f87171";
-        button.style.background="#b91c1c";
-    }
-    document.querySelectorAll(".quiz-option").forEach(option=>option.disabled=true);
-    document.getElementById("quizScore").textContent="Score: "+quizPoints;
-    document.getElementById("nextQuestion").disabled=false;
-}
-function nextQuestion(){
-    if(!questionAnswered)return;
-    currentQuestion++;
-    if(currentQuestion>=questions.length){
-        document.getElementById("questionNumber").textContent="Quiz Finished!";
-        document.getElementById("questionText").textContent="You scored "+quizPoints+" out of "+questions.length+"!";
-        document.getElementById("quizOptions").innerHTML="";
-        document.getElementById("quizResult").textContent="Thanks for playing!";
-        document.getElementById("nextQuestion").disabled=true;
-        if(quizPoints===questions.length){
-            localStorage.setItem("perfectQuiz","true");
-        }
-        updateAchievements();
-        showChallenges();
-        return;
-    }
-    showQuestion();
-}
-function restartQuiz(){
-    currentQuestion=0;quizPoints=0;showQuestion();
-}
-showQuestion();
-
-/* COMMUNITY CHAT */
-function getChatMessages(){return readData("gamingChat",[]);}
-function sendChatMessage(){
-    const name=document.getElementById("chatName").value.trim();
-    const message=document.getElementById("chatInput").value.trim();
-    if(!name||!message){alert("Enter your display name and a message.");return;}
-    const messages=getChatMessages();
-    messages.push({name,message,date:new Date().toLocaleString()});
-    saveData("gamingChat",messages.slice(-100));
-    document.getElementById("chatInput").value="";
-    showChatMessages();
-    updateAchievements();
-    showChallenges();
-    renderAdmin();
-}
-function showChatMessages(){
-    const container=document.getElementById("chatMessages");
-    container.innerHTML="";
-    const messages=getChatMessages().slice(-30);
-    if(!messages.length){container.textContent="No messages yet. Start the conversation!";return;}
-    messages.forEach(message=>{
-        const card=makeElement("div","chat-message");
-        card.appendChild(makeElement("div","chat-name",message.name));
-        card.appendChild(makeElement("p","",message.message));
-        card.appendChild(makeElement("p","small-text",message.date));
-        container.appendChild(card);
-    });
-}
-showChatMessages();
-
-/* ACHIEVEMENTS */
-const achievements=[
- {id:"first_score",icon:"🏆",name:"First Player",description:"Add your first leaderboard score."},
- {id:"first_message",icon:"💬",name:"Communicator",description:"Send your first community message."},
- {id:"quiz_complete",icon:"🧠",name:"Quiz Master",description:"Get every quiz answer correct."},
- {id:"first_review",icon:"⭐",name:"Game Critic",description:"Write your first game review."},
- {id:"challenge_complete",icon:"🎁",name:"Challenge Winner",description:"Complete a daily challenge."},
- {id:"first_favorite",icon:"❤️",name:"Collector",description:"Add a favorite game."},
- {id:"first_tournament",icon:"🏅",name:"Competitor",description:"Join a tournament."},
- {id:"daily_reward",icon:"💎",name:"Daily Visitor",description:"Claim a daily reward."}
-];
-function getUnlockedAchievements(){return readData("gamingAchievements",[]);}
-function unlockAchievement(id){
-    const unlocked=getUnlockedAchievements();
-    if(!unlocked.includes(id)){unlocked.push(id);saveData("gamingAchievements",unlocked);}
-}
-function updateAchievements(){
-    if(getPlayers().length)unlockAchievement("first_score");
-    if(getChatMessages().length)unlockAchievement("first_message");
-    if(localStorage.getItem("perfectQuiz")==="true")unlockAchievement("quiz_complete");
-    if(getReviews().length)unlockAchievement("first_review");
-    if(getDailyChallenges().some(x=>x.done))unlockAchievement("challenge_complete");
-    if(getFavorites().length)unlockAchievement("first_favorite");
-    if(readData("joinedTournaments",[]).length)unlockAchievement("first_tournament");
-    if(localStorage.getItem("lastRewardDate"))unlockAchievement("daily_reward");
-    showAchievements();
-}
-function showAchievements(){
-    const container=document.getElementById("achievementList");
-    container.innerHTML="";
-    const unlocked=getUnlockedAchievements();
-    achievements.forEach(item=>{
-        const card=makeElement("div","badge-card"+(unlocked.includes(item.id)?"":" locked"));
-        card.appendChild(makeElement("div","badge-icon",item.icon));
-        card.appendChild(makeElement("h3","",item.name));
-        card.appendChild(makeElement("p","",item.description));
-        card.appendChild(makeElement("p","",""));
-        card.lastChild.textContent=unlocked.includes(item.id)?"✅ Unlocked":"🔒 Locked";
-        container.appendChild(card);
-    });
-}
-updateAchievements();
-
-/* DAILY CHALLENGES */
-const challengeTemplates=[
- {id:"quiz",name:"Play the Gaming Quiz",description:"Get every answer correct.",points:20},
- {id:"chat",name:"Send a Community Message",description:"Share a message with the community.",points:15},
- {id:"review",name:"Write a Game Review",description:"Write your opinion about a game.",points:25}
-];
-function todayKey(){
-    const d=new Date();
-    return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
-}
-function getDailyChallenges(){
-    const saved=readData("dailyChallenges",null);
-    if(!saved||saved.date!==todayKey()){
-        const fresh={date:todayKey(),challenges:challengeTemplates.map(x=>({...x,done:false}))};
-        saveData("dailyChallenges",fresh);
-        return fresh.challenges;
-    }
-    return saved.challenges;
-}
-function saveDailyChallenges(challenges){
-    saveData("dailyChallenges",{date:todayKey(),challenges});
-}
-function completeChallenge(id){
-    const challenges=getDailyChallenges();
-    const challenge=challenges.find(x=>x.id===id);
-    if(!challenge||challenge.done)return;
-    let canComplete=false;
-    if(id==="quiz")canComplete=localStorage.getItem("perfectQuiz")==="true";
-    if(id==="chat")canComplete=getChatMessages().length>0;
-    if(id==="review")canComplete=getReviews().length>0;
-    if(!canComplete){alert("Complete the activity first!");return;}
-    challenge.done=true;
-    saveDailyChallenges(challenges);
-    showChallenges();
-    updateAchievements();
-    updateProfile();
-}
-function showChallenges(){
-    const container=document.getElementById("challengeList");
-    container.innerHTML="";
-    let total=0;
-    getDailyChallenges().forEach(challenge=>{
-        if(challenge.done)total+=challenge.points;
-        const card=makeElement("div","info");
-        const row=makeElement("div","challenge");
-        const details=makeElement("div","");
-        details.appendChild(makeElement("h3","",challenge.name));
-        details.appendChild(makeElement("p","",challenge.description));
-        details.appendChild(makeElement("p","score","+"+challenge.points+" points"));
-        const button=makeElement("button","",challenge.done?"Completed ✓":"Claim Challenge");
-        button.disabled=challenge.done;
-        button.onclick=()=>completeChallenge(challenge.id);
-        row.append(details,button);
-        card.appendChild(row);
-        const progress=makeElement("div","progress");
-        const fill=makeElement("div","progress-fill");
-        fill.style.width=challenge.done?"100%":"0%";
-        progress.appendChild(fill);
-        card.appendChild(progress);
-        container.appendChild(card);
-    });
-    document.getElementById("challengePoints").textContent=total+" Points";
-    updateProfile();
-}
-showChallenges();
-
-/* REVIEWS */
-function getReviews(){return readData("gamingReviews",[]);}
-function addReview(){
-    const name=document.getElementById("reviewName").value.trim();
-    const game=document.getElementById("reviewGame").value;
-    const rating=Number(document.getElementById("reviewRating").value);
-    const review=document.getElementById("reviewText").value.trim();
-    if(!name||!review){alert("Please enter your display name and review.");return;}
-    const reviews=getReviews();
-    reviews.push({name,game,rating,review,date:new Date().toLocaleString()});
-    saveData("gamingReviews",reviews.slice(-100));
-    document.getElementById("reviewName").value="";
-    document.getElementById("reviewText").value="";
-    showReviews();
-    showChallenges();
-    updateAchievements();
-    renderAdmin();
-}
-function showReviews(){
-    const container=document.getElementById("reviewList");
-    container.innerHTML="";
-    const reviews=getReviews();
-    if(!reviews.length){container.textContent="No reviews yet. Be the first!";return;}
-    reviews.slice().reverse().forEach(review=>{
-        const card=makeElement("div","info");
-        card.appendChild(makeElement("h3","",review.game));
-        card.appendChild(makeElement("p","","By: "+review.name));
-        card.appendChild(makeElement("p","rating-stars","⭐".repeat(review.rating)));
-        card.appendChild(makeElement("p","",review.review));
-        card.appendChild(makeElement("p","small-text",review.date||""));
-        container.appendChild(card);
-    });
-}
-showReviews();
-
-/* ACCOUNT AND PROFILE */
-function saveAccount(){
-    const username=document.getElementById("username").value.trim();
-    if(!username){alert("Please enter a display name.");return;}
-    localStorage.setItem("gamingUsername",username);
-    document.getElementById("accountMessage").textContent="Welcome, "+username+"!";
-    updateProfile();
-}
-function chooseAvatar(avatar){
-    localStorage.setItem("gamingAvatar",avatar);
-    updateProfile();
-}
-function updateProfile(){
-    const name=localStorage.getItem("gamingUsername")||"Guest Player";
-    const avatar=localStorage.getItem("gamingAvatar")||"🎮";
-    const points=Number(localStorage.getItem("dailyRewardPoints")||0)+getDailyChallenges().filter(x=>x.done).reduce((sum,x)=>sum+x.points,0);
-    const level=Math.floor(points/100)+1;
-    document.getElementById("profileName").textContent=name;
-    document.getElementById("profileAvatar").textContent=avatar;
-    document.getElementById("profilePoints").textContent=points+" Points";
-    document.getElementById("profileLevel").textContent="Level "+level;
-}
-const savedUsername=localStorage.getItem("gamingUsername");
-if(savedUsername){
-    document.getElementById("username").value=savedUsername;
-    document.getElementById("accountMessage").textContent="Welcome back, "+savedUsername+"!";
-}
-updateProfile();
-
-/* TOURNAMENTS */
-const tournaments=[
- {id:"ff-cup",name:"Free Fire Friendly Cup",game:"Free Fire",description:"A friendly demo tournament for Free Fire fans.",date:"Open demo event"},
- {id:"minecraft-build",name:"Minecraft Build Challenge",game:"Minecraft",description:"Show your creativity with a build idea.",date:"Open demo event"},
- {id:"fortnite-cup",name:"Fortnite Challenge",game:"Fortnite",description:"A friendly community challenge.",date:"Open demo event"}
-];
-function joinTournament(id){
-    const joined=readData("joinedTournaments",[]);
-    if(joined.includes(id)){alert("You already joined this demo tournament.");return;}
-    joined.push(id);
-    saveData("joinedTournaments",joined);
-    showTournaments();
-    updateAchievements();
-}
-function showTournaments(){
-    const container=document.getElementById("tournamentList");
-    container.innerHTML="";
-    const joined=readData("joinedTournaments",[]);
-    tournaments.forEach(item=>{
-        const card=makeElement("div","tournament-card");
-        card.appendChild(makeElement("h3","", "🏅 "+item.name));
-        card.appendChild(makeElement("p","",item.description));
-        card.appendChild(makeElement("span","tag",item.game));
-        card.appendChild(makeElement("p","small-text",item.date));
-        const button=makeElement("button","",joined.includes(item.id)?"Joined ✓":"Join Tournament");
-        button.disabled=joined.includes(item.id);
-        button.onclick=()=>joinTournament(item.id);
-        card.appendChild(button);
-        container.appendChild(card);
-    });
-}
-showTournaments();
-
-/* DAILY REWARDS */
-function claimDailyReward(){
-    const today=todayKey();
-    if(localStorage.getItem("lastRewardDate")===today){
-        document.getElementById("rewardMessage").textContent="You already claimed today's reward. Come back tomorrow!";
-        return;
-    }
-    const points=Number(localStorage.getItem("dailyRewardPoints")||0)+10;
-    localStorage.setItem("dailyRewardPoints",points);
-    localStorage.setItem("lastRewardDate",today);
-    document.getElementById("rewardMessage").textContent="🎉 You received 10 points!";
-    showRewards();
-    updateAchievements();
-    updateProfile();
-}
-function showRewards(){
-    const points=Number(localStorage.getItem("dailyRewardPoints")||0);
-    const claimed=localStorage.getItem("lastRewardDate")===todayKey();
-    document.getElementById("rewardPoints").textContent="Your points: "+points;
-    document.getElementById("claimRewardButton").disabled=claimed;
-    document.getElementById("claimRewardButton").textContent=claimed?"Reward Claimed ✓":"Claim Today's Reward";
-}
-showRewards();
-
-/* HELP MESSAGES */
-function sendMessage(){
-    const name=document.getElementById("helpName").value.trim();
-    const message=document.getElementById("helpMessage").value.trim();
-    if(!name||!message){alert("Please complete both fields.");return;}
-    const messages=readData("gamingMessages",[]);
-    messages.push({name,message,date:new Date().toLocaleString()});
-    saveData("gamingMessages",messages.slice(-100));
-    document.getElementById("helpName").value="";
-    document.getElementById("helpMessage").value="";
-    document.getElementById("helpResult").textContent="Your message has been saved in this browser only.";
-    renderAdmin();
-}
+const fg=featured[Math.floor(Date.now()/86400000)%featured.length];
+document.getElementById("featuredIcon").textContent=fg.icon;
+document.getElementById("featuredName").textContent=fg.name;
+document.getElementById("featuredDescription").textContent=fg.description;
+document.getElementById("featuredLink").href=fg.link;
 
 /* NEWS */
 const defaultNews=[
- {title:"Welcome to Gaming Hub",text:"Explore games, challenges, reviews and community features."},
- {title:"Gaming Updates",text:"Visit official game websites for the latest updates."},
- {title:"Gaming Events",text:"Check out our demo tournaments and challenges."}
+ {title:"Welcome to Gaming Hub!",text:"Explore games, challenges and community features."},
+ {title:"Gaming Updates",text:"Visit official game websites for announcements."},
+ {title:"Welcome to Gaming Hub 2.0",text:"Discover our new gaming features!"}
 ];
-function getNews(){return readData("gamingNews",defaultNews);}
+function news(){return get("news",defaultNews);}
 function showNews(){
-    const container=document.getElementById("newsList");
-    container.innerHTML="";
-    getNews().forEach(article=>{
-        const card=makeElement("div","news-card");
-        card.appendChild(makeElement("h3","",article.title));
-        card.appendChild(makeElement("p","",article.text));
-        container.appendChild(card);
-    });
+ const box=document.getElementById("newsList");
+ box.innerHTML="";
+ news().forEach(n=>{
+  const c=el("div","news-card");
+  c.append(el("h3","",n.title),el("p","",n.text));
+  box.append(c);
+ });
 }
 function addNews(){
-    const title=document.getElementById("adminNewsTitle").value.trim();
-    const text=document.getElementById("adminNewsText").value.trim();
-    if(!title||!text){alert("Enter a news title and content.");return;}
-    const news=getNews();
-    news.unshift({title,text});
-    saveData("gamingNews",news.slice(0,30));
-    document.getElementById("adminNewsTitle").value="";
-    document.getElementById("adminNewsText").value="";
-    showNews();
-    renderAdmin();
+ const title=document.getElementById("adminNewsTitle").value.trim();
+ const text=document.getElementById("adminNewsText").value.trim();
+ if(!title||!text)return toast("Complete both fields.");
+ const list=news();
+ list.unshift({title,text});
+ put("news",list.slice(0,30));
+ document.getElementById("adminNewsTitle").value="";
+ document.getElementById("adminNewsText").value="";
+ showNews();renderAdmin();
+ addNotification("New news article published.");
+ toast("News published!");
 }
 showNews();
 
-/* LOCAL ADMIN DASHBOARD */
-function deleteHelpMessage(index){
-    const messages=readData("gamingMessages",[]);
-    messages.splice(index,1);
-    saveData("gamingMessages",messages);
-    renderAdmin();
+/* NOTIFICATIONS */
+function addNotification(text){
+ const list=get("notifications");
+ list.unshift({text,date:new Date().toLocaleString()});
+ put("notifications",list.slice(0,50));
+ showNotifications();
 }
-function deleteReview(index){
-    const reviews=getReviews();
-    reviews.splice(index,1);
-    saveData("gamingReviews",reviews);
-    showReviews();
-    renderAdmin();
+function showNotifications(){
+ const box=document.getElementById("notificationList");
+ box.innerHTML="";
+ const list=get("notifications");
+ if(!list.length)box.textContent="No notifications.";
+ list.forEach(n=>{
+  const c=el("div","message");
+  c.append(el("p","",n.text),el("p","small",n.date));
+  box.append(c);
+ });
 }
-function deleteNews(index){
-    const news=getNews();
-    news.splice(index,1);
-    saveData("gamingNews",news);
-    showNews();
-    renderAdmin();
+function clearNotifications(){
+ put("notifications",[]);
+ showNotifications();
+ toast("Notifications cleared.");
 }
+
+/* LEADERBOARD */
+function addPlayer(){
+ const name=document.getElementById("playerName").value.trim();
+ const score=Number(document.getElementById("playerScore").value);
+ if(!name||!Number.isInteger(score)||score<0||score>1000000)return toast("Enter a valid name and score.");
+ const list=get("players");
+ list.push({name,score});
+ list.sort((a,b)=>b.score-a.score);
+ put("players",list);
+ document.getElementById("playerName").value="";
+ document.getElementById("playerScore").value="";
+ addXP(10,"Leaderboard entry");
+ showLeaderboard();updateAll();
+}
+function showLeaderboard(){
+ const box=document.getElementById("leaderboardList");
+ box.innerHTML="";
+ const list=get("players").sort((a,b)=>b.score-a.score).slice(0,10);
+ if(!list.length)box.textContent="No players yet.";
+ list.forEach((p,i)=>{
+  const row=el("div","leaderboard-row");
+  row.append(el("span","rank","#"+(i+1)),el("span","",p.name),el("span","",p.score+" pts"));
+  box.append(row);
+ });
+ document.getElementById("rankingList").innerHTML=box.innerHTML;
+}
+
+/* QUIZ-LIKE MINI GAMES */
+function guessNumber(){
+ const n=Number(document.getElementById("guessInput").value);
+ if(!Number.isInteger(n)||n<1||n>10)return toast("Choose a number from 1 to 10.");
+ const answer=Math.floor(Math.random()*10)+1;
+ if(n===answer){
+  document.getElementById("guessResult").textContent="🎉 Correct! The number was "+answer;
+  addXP(10,"Number game winner");
+ }else document.getElementById("guessResult").textContent="Not this time! The number was "+answer+". Try again!";
+}
+let reactionStart=0,reactionTimer=null;
+function reactionGame(){
+ const b=document.getElementById("reactionButton");
+ const result=document.getElementById("reactionResult");
+ if(b.dataset.waiting==="yes"){
+  clearTimeout(reactionTimer);
+  reactionStart=Date.now();
+  b.dataset.waiting="no";
+  b.textContent="CLICK!";
+  result.textContent="GO!";
+ }else if(b.dataset.waiting==="no"){
+  const ms=Date.now()-reactionStart;
+  b.dataset.waiting="";
+  b.textContent="START";
+  result.textContent="Your reaction time: "+ms+" ms";
+  if(ms<500)addXP(5,"Reaction game");
+ }else{
+  b.dataset.waiting="yes";
+  b.textContent="WAIT...";
+  result.textContent="Wait for GO...";
+  reactionTimer=setTimeout(()=>{
+   if(b.dataset.waiting==="yes"){
+    b.dataset.waiting="no";
+    b.textContent="CLICK!";
+    reactionStart=Date.now();
+    result.textContent="GO!";
+   }
+  },1000+Math.random()*3000);
+ }
+}
+function playRPS(){
+ const player=document.getElementById("rpsChoice").value;
+ const choices=["Rock","Paper","Scissors"];
+ const computer=choices[Math.floor(Math.random()*3)];
+ let result;
+ if(player===computer)result="It's a draw!";
+ else if((player==="Rock"&&computer==="Scissors")||(player==="Paper"&&computer==="Rock")||(player==="Scissors"&&computer==="Paper")){
+  result="You win!";addXP(5,"Rock Paper Scissors");
+ }else result="Computer wins!";
+ document.getElementById("rpsResult").textContent="You: "+player+" | Computer: "+computer+" — "+result;
+}
+
+/* COMMUNITY CHAT */
+function sendChat(){
+ const name=document.getElementById("chatName").value.trim();
+ const message=document.getElementById("chatInput").value.trim();
+ if(!name||!message)return toast("Enter your name and message.");
+ const list=get("chat");
+ list.push({name,message,date:new Date().toLocaleString()});
+ put("chat",list.slice(-100));
+ document.getElementById("chatInput").value="";
+ showChat();
+ addXP(5,"Community message");
+}
+function showChat(){
+ const box=document.getElementById("chatMessages");
+ box.innerHTML="";
+ const list=get("chat").slice(-30);
+ if(!list.length)box.textContent="No messages yet.";
+ list.forEach(m=>{
+  const c=el("div","message");
+  c.append(el("strong","",m.name),el("p","",m.message),el("p","small",m.date));
+  box.append(c);
+ });
+}
+showChat();
+
+/* PRIVATE MESSAGES */
+function sendPrivateMessage(){
+ const from=document.getElementById("msgFrom").value.trim();
+ const to=document.getElementById("msgTo").value.trim();
+ const message=document.getElementById("msgText").value.trim();
+ if(!from||!to||!message)return toast("Complete all fields.");
+ const list=get("privateMessages");
+ list.unshift({from,to,message,date:new Date().toLocaleString()});
+ put("privateMessages",list.slice(0,100));
+ document.getElementById("msgText").value="";
+ showPrivateMessages();
+ toast("Saved locally.");
+}
+function showPrivateMessages(){
+ const box=document.getElementById("privateMessages");
+ box.innerHTML="";
+ get("privateMessages").forEach(m=>{
+  const c=el("div","message");
+  c.append(el("strong","",m.from+" → "+m.to),el("p","",m.message),el("p","small",m.date));
+  box.append(c);
+ });
+}
+
+/* POLLS */
+const pollChoices=["Free Fire","Minecraft","Fortnite","Roblox"];
+function votePoll(choice){
+ const votes=get("votes",{});
+ votes[choice]=(votes[choice]||0)+1;
+ put("votes",votes);
+ localStorage.setItem("gh_voted","yes");
+ showPoll();
+ addXP(2,"Poll vote");
+}
+function showPoll(){
+ const box=document.getElementById("pollOptions");
+ box.innerHTML="";
+ const votes=get("votes",{});
+ pollChoices.forEach(choice=>{
+  const b=el("button","poll-option",choice+" — "+(votes[choice]||0)+" votes");
+  b.disabled=localStorage.getItem("gh_voted")==="yes";
+  b.onclick=()=>votePoll(choice);
+  box.append(b);
+ });
+ document.getElementById("pollResult").textContent=
+  localStorage.getItem("gh_voted")==="yes"?"Thanks for voting!":"Choose your favorite game.";
+}
+function resetPoll(){
+ localStorage.removeItem("gh_voted");
+ put("votes",{});
+ showPoll();
+}
+showPoll();
+
+/* EVENTS */
+const events=[
+ {name:"Gaming Community Day",date:"2026-12-01",description:"Share your favorite games."},
+ {name:"Minecraft Building Challenge",date:"2026-12-05",description:"Create an amazing building idea."},
+ {name:"Free Fire Fan Event",date:"2026-12-10",description:"A friendly community activity."}
+];
+function showEvents(){
+ const box=document.getElementById("eventList");
+ events.forEach(e=>{
+  const c=el("div","event-card info");
+  c.append(el("h3","","📅 "+e.name),el("p","",e.description),el("p","small",e.date));
+  box.append(c);
+ });
+}
+showEvents();
+
+/* MISSIONS */
+const missions=[
+ {id:"favorite",name:"Save a Favorite Game",points:10,check:()=>favorites().length>0},
+ {id:"review",name:"Write a Game Review",points:15,check:()=>get("reviews").length>0},
+ {id:"message",name:"Send a Community Message",points:10,check:()=>get("chat").length>0}
+];
+function showMissions(){
+ const box=document.getElementById("missionList");
+ box.innerHTML="";
+ const done=get("missions");
+ missions.forEach(m=>{
+  const c=el("div","info");
+  c.append(el("h3","",m.name),el("p","score","+"+m.points+" XP"));
+  const b=el("button","",done.includes(m.id)?"Completed ✓":"Claim Mission");
+  b.disabled=done.includes(m.id);
+  b.onclick=()=>{
+   if(!m.check())return toast("Complete the activity first!");
+   const d=get("missions");d.push(m.id);put("missions",d);
+   addXP(m.points,"Mission completed");
+   showMissions();showAchievements();
+  };
+  c.append(b);box.append(c);
+ });
+}
+showMissions();
+
+/* PROFILE */
+function saveAccount(){
+ const name=document.getElementById("username").value.trim();
+ if(!name)return toast("Enter a name.");
+ localStorage.setItem("gh_username",name);
+ document.getElementById("accountMessage").textContent="Welcome, "+name+"!";
+ updateAll();
+ toast("Profile saved!");
+}
+function chooseAvatar(a){
+ localStorage.setItem("gh_avatar",a);
+ updateAll();
+}
+function updateProfile(){
+ document.getElementById("profileName").textContent=localStorage.getItem("gh_username")||"Guest Player";
+ document.getElementById("profileAvatar").textContent=localStorage.getItem("gh_avatar")||"🎮";
+}
+if(localStorage.getItem("gh_username")){
+ document.getElementById("username").value=localStorage.getItem("gh_username");
+}
+
+/* GALLERY */
+function addGallery(event){
+ const box=document.getElementById("galleryList");
+ [...event.target.files].forEach(file=>{
+  if(!file.type.startsWith("image/"))return;
+  const url=URL.createObjectURL(file);
+  const img=document.createElement("img");
+  img.src=url;img.alt="Gaming screenshot";
+  const card=el("div","game");
+  card.append(img,el("p","",file.name));
+  box.append(card);
+ });
+}
+
+/* GAMING SETUPS */
+function addSetup(){
+ const name=document.getElementById("setupName").value.trim();
+ const description=document.getElementById("setupDescription").value.trim();
+ if(!name||!description)return toast("Complete both fields.");
+ const list=get("setups");
+ list.unshift({name,description});
+ put("setups",list);
+ document.getElementById("setupName").value="";
+ document.getElementById("setupDescription").value="";
+ showSetups();
+ addXP(5,"Shared a gaming setup");
+}
+function showSetups(){
+ const box=document.getElementById("setupList");
+ box.innerHTML="";
+ get("setups").forEach(s=>{
+  const c=el("div","message");
+  c.append(el("h3","",s.name),el("p","",s.description));
+  box.append(c);
+ });
+}
+showSetups();
+
+/* GAME COMPARISON */
+function setupCompare(){
+ ["compareA","compareB","reviewGame"].forEach(id=>{
+  const select=document.getElementById(id);
+  games.forEach(g=>{
+   const option=el("option","",g.name);
+   option.value=g.name;
+   select.append(option);
+  });
+ });
+}
+function compareGames(){
+ const a=games.find(g=>g.name===document.getElementById("compareA").value);
+ const b=games.find(g=>g.name===document.getElementById("compareB").value);
+ const box=document.getElementById("compareResult");
+ box.innerHTML="";
+ if(!a||!b)return;
+ [a,b].forEach(g=>{
+  const c=el("div","message");
+  c.append(el("h3","",g.icon+" "+g.name),
+   el("p","","Category: "+g.category),
+   el("p","","Platform: "+g.platform),
+   el("p","","Release year: "+g.year));
+  box.append(c);
+ });
+}
+setupCompare();
+
+/* VIRTUAL SHOP */
+const shopItems=[
+ {id:"blue",name:"Blue Player Badge",icon:"🔵",cost:30},
+ {id:"crown",name:"Golden Crown",icon:"👑",cost:100},
+ {id:"dragon",name:"Dragon Avatar",icon:"🐉",cost:150},
+ {id:"legend",name:"Legend Title",icon:"🏆",cost:200}
+];
+function buyItem(item){
+ const owned=get("owned");
+ if(owned.includes(item.id))return toast("Already owned!");
+ if(xp()<item.cost)return toast("Not enough XP!");
+ localStorage.setItem("gh_xp",xp()-item.cost);
+ owned.push(item.id);put("owned",owned);
+ showShop();updateAll();
+ toast("Item purchased!");
+}
+function showShop(){
+ const box=document.getElementById("shopList");
+ box.innerHTML="";
+ shopItems.forEach(item=>{
+  const c=el("div","game");
+  c.append(el("div","game-icon",item.icon),el("h3","",item.name),el("p","","Cost: "+item.cost+" XP"));
+  const b=el("button","",get("owned").includes(item.id)?"Owned ✓":"Buy Item");
+  b.disabled=get("owned").includes(item.id);
+  b.onclick=()=>buyItem(item);
+  c.append(b);box.append(c);
+ });
+}
+showShop();
+
+/* REVIEWS */
+function addReview(){
+ const name=document.getElementById("reviewName").value.trim();
+ const game=document.getElementById("reviewGame").value;
+ const rating=Number(document.getElementById("reviewRating").value);
+ const text=document.getElementById("reviewText").value.trim();
+ if(!name||!text)return toast("Complete your review.");
+ const list=get("reviews");
+ list.push({name,game,rating,text,date:new Date().toLocaleString()});
+ put("reviews",list.slice(-100));
+ document.getElementById("reviewName").value="";
+ document.getElementById("reviewText").value="";
+ showReviews();
+ addXP(10,"Game review");
+ showAchievements();renderAdmin();
+}
+function showReviews(){
+ const box=document.getElementById("reviewList");
+ box.innerHTML="";
+ get("reviews").slice().reverse().forEach(r=>{
+  const c=el("div","info");
+  c.append(el("h3","",r.game),el("p","", "By: "+r.name),
+   el("p","", "⭐".repeat(r.rating)),el("p","",r.text),
+   el("p","small",r.date));
+  box.append(c);
+ });
+ if(!box.children.length)box.textContent="No reviews yet.";
+}
+
+/* TOURNAMENTS */
+const tournaments=[
+ {id:"ff",name:"Free Fire Friendly Cup",game:"Free Fire",description:"Friendly community demo event."},
+ {id:"mc",name:"Minecraft Building Challenge",game:"Minecraft",description:"Show your creativity."},
+ {id:"fn",name:"Fortnite Challenge",game:"Fortnite",description:"A friendly demo challenge."}
+];
+function joinTournament(id){
+ const joined=get("joined");
+ if(joined.includes(id))return toast("Already joined!");
+ joined.push(id);put("joined",joined);
+ addXP(10,"Joined a tournament");
+ showTournaments();showAchievements();
+}
+function showTournaments(){
+ const box=document.getElementById("tournamentList");
+ box.innerHTML="";
+ tournaments.forEach(t=>{
+  const c=el("div","tournament-card");
+  c.append(el("h3","","🏅 "+t.name),el("p","",t.description),el("span","tag",t.game));
+  const b=el("button","",get("joined").includes(t.id)?"Joined ✓":"Join Tournament");
+  b.disabled=get("joined").includes(t.id);
+  b.onclick=()=>joinTournament(t.id);
+  c.append(b);box.append(c);
+ });
+}
+showTournaments();
+
+/* ACHIEVEMENTS */
+const badges=[
+ {id:"favorite",name:"Collector",icon:"❤️",check:()=>favorites().length>0},
+ {id:"review",name:"Game Critic",icon:"⭐",check:()=>get("reviews").length>0},
+ {id:"chat",name:"Communicator",icon:"💬",check:()=>get("chat").length>0},
+ {id:"tournament",name:"Competitor",icon:"🏅",check:()=>get("joined").length>0},
+ {id:"level",name:"Level Up",icon:"🚀",check:()=>level()>=2},
+ {id:"xp",name:"XP Collector",icon:"💎",check:()=>xp()>=100}
+];
+function showAchievements(){
+ const box=document.getElementById("achievementList");
+ box.innerHTML="";
+ badges.forEach(b=>{
+  const unlocked=b.check();
+  const c=el("div","game");
+  c.append(el("div","game-icon",b.icon),el("h3","",b.name),el("p","",unlocked?"✅ Unlocked":"🔒 Locked"));
+  box.append(c);
+ });
+}
+showAchievements();
+
+/* DAILY REWARDS */
+function claimReward(){
+ const today=new Date().toDateString();
+ if(localStorage.getItem("gh_lastReward")===today)return toast("Already claimed today!");
+ localStorage.setItem("gh_lastReward",today);
+ addXP(10,"Daily login reward");
+ showReward();
+ document.getElementById("rewardMessage").textContent="🎉 You received 10 XP!";
+}
+function showReward(){
+ document.getElementById("rewardPoints").textContent=xp()+" XP";
+ const claimed=localStorage.getItem("gh_lastReward")===new Date().toDateString();
+ document.getElementById("claimRewardButton").disabled=claimed;
+ document.getElementById("claimRewardButton").textContent=claimed?"Claimed ✓":"Claim Reward";
+}
+showReward();
+
+/* THEME */
+function toggleTheme(){
+ document.body.classList.toggle("light");
+ localStorage.setItem("gh_theme",document.body.classList.contains("light")?"light":"dark");
+}
+if(localStorage.getItem("gh_theme")==="light")document.body.classList.add("light");
+
+/* LANGUAGE */
+const translations={
+ en:{home:"Home",games:"Games",news:"Gaming News"},
+ fr:{home:"Accueil",games:"Jeux",news:"Actualités"},
+ ar:{home:"الرئيسية",games:"الألعاب",news:"أخبار الألعاب"}
+};
+function changeLanguage(){
+ const lang=document.getElementById("languageSelect").value;
+ localStorage.setItem("gh_language",lang);
+ const t=translations[lang];
+ const links=document.querySelectorAll("nav a");
+ const mapping={"#home":"home","#games":"games","#news":"news"};
+ links.forEach(a=>{
+  if(mapping[a.getAttribute("href")])a.textContent=t[mapping[a.getAttribute("href")]];
+ });
+ document.documentElement.lang=lang;
+ document.body.dir=lang==="ar"?"rtl":"ltr";
+}
+const savedLanguage=localStorage.getItem("gh_language")||"en";
+document.getElementById("languageSelect").value=savedLanguage;
+changeLanguage();
+
+/* HELP */
+function sendHelp(){
+ const name=document.getElementById("helpName").value.trim();
+ const message=document.getElementById("helpMessage").value.trim();
+ if(!name||!message)return toast("Complete both fields.");
+ const list=get("help");
+ list.unshift({name,message,date:new Date().toLocaleString()});
+ put("help",list.slice(0,100));
+ document.getElementById("helpName").value="";
+ document.getElementById("helpMessage").value="";
+ document.getElementById("helpResult").textContent="Message saved in this browser.";
+ renderAdmin();
+}
+
+/* ADMIN */
 function renderAdmin(){
-    const messages=readData("gamingMessages",[]);
-    const reviews=getReviews();
-    const news=getNews();
-    const stats=document.getElementById("adminStats");
-    stats.textContent="Games: "+games.length+
-        " | Leaderboard entries: "+getPlayers().length+
-        " | Reviews: "+reviews.length+
-        " | Help messages: "+messages.length+
-        " | News articles: "+news.length;
+ const reviews=get("reviews");
+ const messages=get("help");
+ const newsItems=news();
+ document.getElementById("adminStats").textContent=
+ "Games: "+games.length+
+ " | XP: "+xp()+
+ " | Reviews: "+reviews.length+
+ " | Messages: "+messages.length+
+ " | News: "+newsItems.length;
 
-    const messageBox=document.getElementById("adminMessages");
-    messageBox.innerHTML="";
-    if(!messages.length)messageBox.textContent="No help messages saved here.";
-    messages.forEach((item,index)=>{
-        const card=makeElement("div","info");
-        card.appendChild(makeElement("h3","",item.name));
-        card.appendChild(makeElement("p","",item.message));
-        card.appendChild(makeElement("p","small-text",item.date));
-        const button=makeElement("button","","Delete Message");
-        button.onclick=()=>deleteHelpMessage(index);
-        card.appendChild(button);
-        messageBox.appendChild(card);
-    });
+ const newsBox=document.getElementById("adminNewsList");
+ newsBox.innerHTML="";
+ newsItems.forEach((n,i)=>{
+  const c=el("div","message");
+  c.append(el("strong","",n.title),el("p","",n.text));
+  const b=el("button","","Delete News");
+  b.onclick=()=>{
+   const list=news();
+   list.splice(i,1);put("news",list);
+   showNews();renderAdmin();
+  };
+  c.append(b);newsBox.append(c);
+ });
 
-    const reviewBox=document.getElementById("adminReviews");
-    reviewBox.innerHTML="";
-    if(!reviews.length)reviewBox.textContent="No reviews saved here.";
-    reviews.forEach((item,index)=>{
-        const card=makeElement("div","info");
-        card.appendChild(makeElement("h3","",item.game+" — "+item.name));
-        card.appendChild(makeElement("p","","⭐".repeat(item.rating)));
-        card.appendChild(makeElement("p","",item.review));
-        const button=makeElement("button","","Delete Review");
-        button.onclick=()=>deleteReview(index);
-        card.appendChild(button);
-        reviewBox.appendChild(card);
-    });
+ const helpBox=document.getElementById("adminMessages");
+ helpBox.innerHTML="";
+ messages.forEach((m,i)=>{
+  const c=el("div","message");
+  c.append(el("strong","",m.name),el("p","",m.message));
+  const b=el("button","","Delete Message");
+  b.onclick=()=>{
+   const list=get("help");list.splice(i,1);put("help",list);renderAdmin();
+  };
+  c.append(b);helpBox.append(c);
+ });
 
-    const newsBox=document.getElementById("adminNewsList");
-    newsBox.innerHTML="";
-    news.forEach((item,index)=>{
-        const card=makeElement("div","info");
-        card.appendChild(makeElement("h3","",item.title));
-        card.appendChild(makeElement("p","",item.text));
-        const button=makeElement("button","","Delete News");
-        button.onclick=()=>deleteNews(index);
-        card.appendChild(button);
-        newsBox.appendChild(card);
-    });
+ const reviewBox=document.getElementById("adminReviews");
+ reviewBox.innerHTML="";
+ reviews.forEach((r,i)=>{
+  const c=el("div","message");
+  c.append(el("strong","",r.game+" — "+r.name),el("p","",r.text));
+  const b=el("button","","Delete Review");
+  b.onclick=()=>{
+   const list=get("reviews");list.splice(i,1);put("reviews",list);
+   showReviews();renderAdmin();updateAll();
+  };
+  c.append(b);reviewBox.append(c);
+ });
 }
-renderAdmin();
+function resetWebsite(){
+ if(!confirm("Delete all Gaming Hub demo data from this browser?"))return;
+ Object.keys(localStorage).filter(k=>k.startsWith("gh_")).forEach(k=>localStorage.removeItem(k));
+ location.reload();
+}
 
-/* INITIAL REFRESH */
-showChallenges();
-updateAchievements();
-updateProfile();
+/* UPDATE EVERYTHING */
+function updateAll(){
+ updateXP();
+ updateProfile();
+ showLeaderboard();
+ showWishlist();
+ showAchievements();
+ showReward();
+ showShop();
+ renderAdmin();
+ showNotifications();
+}
+updateAll();
+renderAdmin();
 </script>
 
 </body>
