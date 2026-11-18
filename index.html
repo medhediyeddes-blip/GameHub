@@ -105,6 +105,54 @@
             color: #4caf50;
             margin-top: 10px;
         }
+
+        /* FEATURED GAME */
+
+        .featured-section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .featured-card {
+            max-width: 650px;
+            margin: 25px auto;
+            padding: 30px;
+            border-radius: 15px;
+            background: #222;
+            color: white;
+            border: 2px solid #ff4747;
+            box-shadow: 0 0 18px rgba(255, 71, 71, 0.2);
+        }
+
+        .featured-icon {
+            font-size: 65px;
+            margin-bottom: 10px;
+        }
+
+        .featured-card h3 {
+            color: #ff4747;
+            font-size: 26px;
+        }
+
+        .featured-card p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .featured-button {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 12px 22px;
+            background: #ff4747;
+            color: white;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .featured-button:hover {
+            background: #d93636;
+        }
     </style>
 </head>
 
@@ -114,6 +162,7 @@
     <h2>🎮 Gaming Hub</h2>
     <div>
         <a href="index.html">Home</a>
+        <a href="#featured">Featured</a>
         <a href="#games">Games</a>
         <a href="#news">News</a>
         <a href="#freefire">Free Fire</a>
@@ -129,6 +178,23 @@
     <p>Discover your favourite games!</p>
     <a href="#games" class="main-button">Explore Games</a>
 </header>
+
+<!-- FEATURED GAME OF THE DAY -->
+
+<section class="featured-section" id="featured">
+    <h2>⭐ Featured Game of the Day</h2>
+    <p>Discover a different featured game every day!</p>
+
+    <div class="featured-card">
+        <div class="featured-icon" id="featuredIcon">🎮</div>
+        <h3 id="featuredName">Loading...</h3>
+        <p id="featuredDescription">Discover today's featured game!</p>
+        <a id="featuredLink" class="featured-button"
+           href="#games" target="_blank" rel="noopener noreferrer">
+            Explore Game →
+        </a>
+    </div>
+</section>
 
 <section class="account-section" id="account">
     <h2>👤 Your Account</h2>
@@ -588,6 +654,70 @@
 <script src="script.js"></script>
 
 <script>
+
+// FEATURED GAME OF THE DAY
+
+(function () {
+
+    const featuredGames = [
+        {
+            name: "Free Fire",
+            icon: "🔥",
+            description: "Jump into exciting Battle Royale matches and discover new ways to play!",
+            link: "https://ff.garena.com/"
+        },
+        {
+            name: "Minecraft",
+            icon: "⛏️",
+            description: "Build amazing creations, explore new worlds and enjoy your adventure!",
+            link: "https://www.minecraft.net/"
+        },
+        {
+            name: "Fortnite",
+            icon: "🎯",
+            description: "Explore the island, discover new updates and enjoy the action!",
+            link: "https://www.fortnite.com/"
+        },
+        {
+            name: "PUBG Mobile",
+            icon: "🎖️",
+            description: "Discover PUBG Mobile and enjoy exciting Battle Royale matches!",
+            link: "https://www.pubgmobile.com/"
+        },
+        {
+            name: "Roblox",
+            icon: "🧱",
+            description: "Explore thousands of experiences and discover something new!",
+            link: "https://www.roblox.com/"
+        },
+        {
+            name: "Rocket League",
+            icon: "🚀",
+            description: "Play football with rocket-powered cars!",
+            link: "https://www.rocketleague.com/"
+        },
+        {
+            name: "Genshin Impact",
+            icon: "✨",
+            description: "Explore a huge fantasy world full of adventures!",
+            link: "https://genshin.hoyoverse.com/"
+        }
+    ];
+
+    const dayNumber = Math.floor(
+        new Date().getTime() / (1000 * 60 * 60 * 24)
+    );
+
+    const featured = featuredGames[dayNumber % featuredGames.length];
+
+    document.getElementById("featuredIcon").textContent = featured.icon;
+    document.getElementById("featuredName").textContent = featured.name;
+    document.getElementById("featuredDescription").textContent =
+        featured.description;
+    document.getElementById("featuredLink").href = featured.link;
+
+})();
+
 
 // SEARCH AND CATEGORY FILTER
 
