@@ -1,108 +1,65 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gaming Hub</title>
-
-<!-- Supabase JavaScript library -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
-:root{
- --bg:#080d1b;--panel:#111a2d;--panel2:#192640;
- --text:#f4f7ff;--muted:#9eacc6;--accent:#7567ff;
- --cyan:#00d9ff;--border:#263653;--danger:#ff5263;
-}
-body.light{
- --bg:#edf1fa;--panel:#fff;--panel2:#e5eafa;
- --text:#18213a;--muted:#58647d;--border:#d2dced;
-}
+:root{--bg:#080d1b;--panel:#111a2d;--panel2:#192640;--text:#f4f7ff;--muted:#9eacc6;--accent:#7567ff;--cyan:#00d9ff;--border:#263653;--danger:#ff5263}
+body.light{--bg:#edf1fa;--panel:#fff;--panel2:#e5eafa;--text:#18213a;--muted:#58647d;--border:#d2dced}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:100px}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;transition:.2s}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
 button,input,select,textarea{font:inherit}
 button,a{cursor:pointer}
 a{color:inherit;text-decoration:none}
-header{
- position:sticky;top:0;z-index:30;background:#0d1528ee;
- backdrop-filter:blur(14px);border-bottom:1px solid #263653;
- padding:13px 5%;display:flex;align-items:center;
- justify-content:space-between;gap:20px;
-}
+header{position:sticky;top:0;z-index:30;background:#0d1528ee;border-bottom:1px solid #263653;padding:13px 5%;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .logo{font-size:24px;font-weight:900;color:var(--cyan);white-space:nowrap}
 .logo span{color:#897dff}
 nav{display:flex;gap:17px;align-items:center}
-nav a{font-size:13px;color:#b8c5dc;transition:.2s}
+nav a{font-size:13px;color:#b8c5dc}
 nav a:hover{color:var(--cyan)}
 .menu-btn{display:none}
 .container{width:92%;max-width:1350px;margin:auto}
 section{padding:32px 0;scroll-margin-top:80px}
-.section-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:18px}
 h1,h2,h3{margin-top:0}
-h2{font-size:25px;margin-bottom:5px}
-h3{margin-bottom:10px}
+h2{font-size:25px;margin-bottom:10px}
 p{line-height:1.6}
 .muted{color:var(--muted)}
-.hero{
- margin:25px 0 10px;padding:75px 25px;border-radius:24px;
- text-align:center;position:relative;overflow:hidden;
- background:radial-gradient(circle at 20% 20%,#5b42c9 0,transparent 35%),
- linear-gradient(120deg,#171744,#10496b,#10182c);
- border:1px solid #344b7a;
-}
-.hero:after{content:"";position:absolute;width:240px;height:240px;border:1px solid #ffffff18;border-radius:50%;right:-70px;top:-90px}
-.hero h1{font-size:clamp(30px,5vw,52px);margin-bottom:12px}
+.hero{margin:25px 0 10px;padding:75px 25px;border-radius:24px;text-align:center;background:radial-gradient(circle at 20% 20%,#5b42c9 0,transparent 35%),linear-gradient(120deg,#171744,#10496b,#10182c);border:1px solid #344b7a}
+.hero h1{font-size:clamp(30px,5vw,52px)}
 .hero p{color:#d3e6ff;max-width:650px;margin:0 auto 22px}
 .hero-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}
-.btn{
- display:inline-block;background:var(--accent);color:white;border:0;
- padding:11px 16px;border-radius:9px;margin:4px 2px;font-weight:bold;
- transition:.2s;
-}
-.btn:hover{filter:brightness(1.18);transform:translateY(-1px)}
+.btn{display:inline-block;background:var(--accent);color:white;border:0;padding:11px 16px;border-radius:9px;margin:4px 2px;font-weight:bold}
+.btn:hover{filter:brightness(1.15)}
 .btn.secondary{background:var(--panel2);border:1px solid var(--border);color:var(--text)}
-.btn.green{background:#159b72}.btn.red{background:var(--danger)}
+.btn.green{background:#159b72}
+.btn.red{background:var(--danger)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:17px}
-.card{
- background:var(--panel);border:1px solid var(--border);
- border-radius:15px;padding:19px;min-width:0;transition:.2s;
-}
-.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:19px;min-width:0}
+.card:hover{border-color:var(--accent)}
 .stat{font-size:30px;font-weight:900;color:var(--cyan)}
-.game-image{
- height:135px;border-radius:12px;display:grid;place-items:center;
- font-size:55px;margin-bottom:14px;
- background:linear-gradient(135deg,#29245e,#087b9a);
-}
+.game-image{height:135px;border-radius:12px;display:grid;place-items:center;font-size:55px;margin-bottom:14px;background:linear-gradient(135deg,#29245e,#087b9a)}
 .tag{display:inline-block;background:var(--panel2);color:var(--cyan);padding:5px 9px;border-radius:20px;font-size:12px;margin:3px}
-input,select,textarea{
- width:100%;background:var(--panel2);border:1px solid var(--border);
- color:var(--text);border-radius:9px;padding:12px;margin:6px 0 12px;
-}
+input,select,textarea{width:100%;background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:9px;padding:12px;margin:6px 0 12px}
 textarea{min-height:90px;resize:vertical}
 label{font-size:13px;color:var(--muted)}
 .progress{background:var(--panel2);height:11px;border-radius:20px;overflow:hidden;margin:10px 0}
 .progress div{height:100%;background:linear-gradient(90deg,var(--accent),var(--cyan));width:0}
 .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .list-item{padding:12px 0;border-bottom:1px solid var(--border)}
-.list-item:last-child{border-bottom:0}
-.sidebar{
- display:none;background:#0d1528;padding:14px 5%;
- border-bottom:1px solid var(--border);
-}
+.sidebar{display:none;background:#0d1528;padding:14px 5%;border-bottom:1px solid var(--border)}
 .sidebar.show{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 .sidebar a{padding:10px;color:#c3cde0;border-radius:7px}
-.sidebar a:hover{background:#ffffff12;color:var(--cyan)}
-.group-label{font-size:11px;color:#7f8eaa;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 12px}
 footer{text-align:center;padding:35px;color:var(--muted);border-top:1px solid var(--border);margin-top:30px}
 .hidden{display:none!important}
 #toast{position:fixed;bottom:20px;right:20px;background:var(--accent);color:white;padding:13px 18px;border-radius:10px;display:none;z-index:100}
 #modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
 #modalContent{max-width:550px;width:100%;max-height:85vh;overflow:auto;background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:25px}
-.gallery-box{height:150px;border-radius:12px;display:grid;place-items:center;font-size:48px;background:linear-gradient(140deg,#29265e,#086b84)}
 .music-card{background:linear-gradient(135deg,#171c40,#123c58);border:1px solid #344d78;border-radius:18px;padding:25px;color:white}
-.music-art{width:165px;height:165px;margin:10px auto 20px;border-radius:22px;background:linear-gradient(135deg,#6c63ff,#00d4ff);display:grid;place-items:center;font-size:75px;box-shadow:0 10px 35px #0005}
+.music-art{width:165px;height:165px;margin:10px auto 20px;border-radius:22px;background:linear-gradient(135deg,#6c63ff,#00d4ff);display:grid;place-items:center;font-size:75px}
 .music-title{text-align:center;font-size:23px;font-weight:bold}
 .music-subtitle{text-align:center;color:#b9c8e5}
 .music-controls{display:flex;justify-content:center;align-items:center;gap:15px;margin:20px 0}
@@ -111,717 +68,296 @@ footer{text-align:center;padding:35px;color:var(--muted);border-top:1px solid va
 .music-range{accent-color:#00d4ff;width:100%}
 .track{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px;border-bottom:1px solid #ffffff22;cursor:pointer;border-radius:8px}
 .track:hover,.track.active{background:#ffffff18}
-.track-name{font-weight:bold}.track-type{color:#b9c8e5;font-size:13px}
 .auth-status{padding:12px;border-radius:9px;background:var(--panel2);margin:12px 0;color:var(--muted)}
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:20px 0}
+.pagination button{background:var(--panel2);color:var(--text);border:1px solid var(--border);padding:9px 13px;border-radius:8px}
+.pagination button.active{background:var(--accent);color:white}
+.pagination button:disabled{opacity:.4;cursor:not-allowed}
 @media(max-width:950px){nav{display:none}.menu-btn{display:block;background:var(--panel2);color:var(--text);border:1px solid var(--border);padding:10px 13px;border-radius:8px}}
-@media(max-width:600px){
- .container{width:93%}.hero{padding:55px 17px}.hero h1{font-size:31px}
- .sidebar.show{grid-template-columns:repeat(2,1fr)}
- section{padding:25px 0}.grid{grid-template-columns:1fr}
- header{padding:12px 4%}.logo{font-size:21px}
-}
+@media(max-width:600px){.container{width:93%}.hero{padding:55px 17px}.hero h1{font-size:31px}.sidebar.show{grid-template-columns:repeat(2,1fr)}section{padding:25px 0}.grid{grid-template-columns:1fr}header{padding:12px 4%}.logo{font-size:21px}}
 </style>
 </head>
-
 <body>
 
 <header>
- <a href="#home" class="logo">🎮 Gaming <span>Hub</span></a>
- <nav>
-  <a href="#home">Home</a><a href="#dashboard">Dashboard</a>
-  <a href="#games">Games</a><a href="#music">Music</a>
-  <a href="#news">News</a><a href="#community">Community</a>
-  <a href="#profile">Profile</a><a href="#account">Account</a>
- </nav>
- <button class="menu-btn" onclick="toggleMenu()">☰ Menu</button>
+<a href="#home" class="logo">🎮 Gaming <span>Hub</span></a>
+<nav>
+<a href="#home">Home</a><a href="#dashboard">Dashboard</a><a href="#games">Games</a><a href="#music">Music</a><a href="#community">Community</a><a href="#profile">Profile</a><a href="#account">Account</a>
+</nav>
+<button class="menu-btn" onclick="toggleMenu()">☰ Menu</button>
 </header>
 
 <div class="sidebar" id="sidebar">
- <a href="#home" onclick="toggleMenu()">🏠 Home</a>
- <a href="#dashboard" onclick="toggleMenu()">📊 Dashboard</a>
- <a href="#games" onclick="toggleMenu()">🎮 Games</a>
- <a href="#recent" onclick="toggleMenu()">🕒 Recently Played</a>
- <a href="#compare" onclick="toggleMenu()">⚖️ Compare</a>
- <a href="#music" onclick="toggleMenu()">🎵 Music</a>
- <a href="#news" onclick="toggleMenu()">📰 News</a>
- <a href="#freefire" onclick="toggleMenu()">🔥 Free Fire</a>
- <a href="#minecraft" onclick="toggleMenu()">⛏️ Minecraft</a>
- <a href="#gallery" onclick="toggleMenu()">🖼️ Gallery</a>
- <a href="#polls" onclick="toggleMenu()">🗳️ Polls</a>
- <a href="#calendar" onclick="toggleMenu()">📅 Calendar</a>
- <a href="#missions" onclick="toggleMenu()">🎯 Missions</a>
- <a href="#leaderboard" onclick="toggleMenu()">🏆 Leaderboard</a>
- <a href="#quiz" onclick="toggleMenu()">🧠 Quiz</a>
- <a href="#guides" onclick="toggleMenu()">📚 Guides</a>
- <a href="#tips" onclick="toggleMenu()">💡 Tips</a>
- <a href="#videos" onclick="toggleMenu()">▶️ Videos</a>
- <a href="#community" onclick="toggleMenu()">💬 Community</a>
- <a href="#reviews" onclick="toggleMenu()">⭐ Reviews</a>
- <a href="#profile" onclick="toggleMenu()">👤 Profile</a>
- <a href="#account" onclick="toggleMenu()">🔐 Account</a>
- <a href="#achievements" onclick="toggleMenu()">🏅 Achievements</a>
- <a href="#tournaments" onclick="toggleMenu()">🏆 Tournaments</a>
- <a href="#settings" onclick="toggleMenu()">⚙️ Settings</a>
- <a href="#support" onclick="toggleMenu()">📩 Support</a>
+<a href="#home">🏠 Home</a><a href="#dashboard">📊 Dashboard</a><a href="#games">🎮 Games</a><a href="#music">🎵 Music</a><a href="#news">📰 News</a><a href="#freefire">🔥 Free Fire</a><a href="#minecraft">⛏️ Minecraft</a><a href="#missions">🎯 Missions</a><a href="#leaderboard">🏆 Leaderboard</a><a href="#quiz">🧠 Quiz</a><a href="#guides">📚 Guides</a><a href="#community">💬 Community</a><a href="#reviews">⭐ Reviews</a><a href="#profile">👤 Profile</a><a href="#account">🔐 Account</a><a href="#settings">⚙️ Settings</a>
 </div>
 
 <main class="container">
 
 <section id="home">
- <div class="hero">
-  <p class="group-label">YOUR GAMING UNIVERSE</p>
-  <h1>WELCOME TO GAMING HUB</h1>
-  <p>Your place for games, music, gaming news, challenges and fun. Discover your next adventure!</p>
-  <div class="hero-actions">
-   <a href="#games" class="btn">🎮 Explore Games</a>
-   <a href="#music" class="btn secondary">🎵 Music Zone</a>
-   <a href="#dashboard" class="btn secondary">📊 My Dashboard</a>
-   <a href="#account" class="btn secondary">🔐 Create Account</a>
-  </div>
- </div>
+<div class="hero">
+<p>YOUR GAMING UNIVERSE</p>
+<h1>WELCOME TO GAMING HUB</h1>
+<p>Your place for games, music, gaming news, challenges and fun. Discover your next adventure!</p>
+<div class="hero-actions">
+<a href="#games" class="btn">🎮 Explore Games</a>
+<a href="#music" class="btn secondary">🎵 Music Zone</a>
+<a href="#dashboard" class="btn secondary">📊 My Dashboard</a>
+<a href="#account" class="btn secondary">🔐 Create Account</a>
+</div>
+</div>
 </section>
 
 <section id="account">
- <p class="group-label">ONLINE ACCOUNT</p>
- <h2>🔐 Player Account</h2>
- <p class="muted">Create an account or log in to save your player profile online.</p>
-
- <div class="card">
-  <div id="accountLoggedOut">
-   <div class="grid">
-    <div>
-     <h3>📝 Create Account</h3>
-     <label>Email address</label>
-     <input id="signupEmail" type="email" placeholder="Your email address" autocomplete="email">
-     <label>Password</label>
-     <input id="signupPassword" type="password" placeholder="At least 6 characters" autocomplete="new-password">
-     <label>Player nickname</label>
-     <input id="signupNickname" maxlength="24" placeholder="Choose a gaming nickname">
-     <button class="btn green" onclick="signUp()">Create Account</button>
-    </div>
-    <div>
-     <h3>🎮 Log In</h3>
-     <label>Email address</label>
-     <input id="loginEmail" type="email" placeholder="Your email address" autocomplete="email">
-     <label>Password</label>
-     <input id="loginPassword" type="password" placeholder="Your password" autocomplete="current-password">
-     <button class="btn" onclick="logIn()">Log In</button>
-    </div>
-   </div>
-   <div id="authMessage" class="auth-status">You are currently using Gaming Hub as a guest.</div>
-  </div>
-
-  <div id="accountLoggedIn" class="hidden">
-   <h3>✅ You are logged in!</h3>
-   <p id="loggedInNickname"></p>
-   <p class="muted">Your player profile can now be saved online.</p>
-   <button class="btn red" onclick="logOut()">Log Out</button>
-  </div>
-  <p class="muted">Use an email account with permission. Do not share your password or personal information with other players.</p>
- </div>
+<h2>🔐 Player Account</h2>
+<p class="muted">Create an account or log in to save your player profile online.</p>
+<div class="card">
+<div id="accountLoggedOut">
+<div class="grid">
+<div><h3>📝 Create Account</h3><label>Email</label><input id="signupEmail" type="email" autocomplete="email"><label>Password</label><input id="signupPassword" type="password" autocomplete="new-password"><label>Nickname</label><input id="signupNickname" maxlength="24"><button class="btn green" onclick="signUp()">Create Account</button></div>
+<div><h3>🎮 Log In</h3><label>Email</label><input id="loginEmail" type="email" autocomplete="email"><label>Password</label><input id="loginPassword" type="password" autocomplete="current-password"><button class="btn" onclick="logIn()">Log In</button></div>
+</div>
+<div id="authMessage" class="auth-status">You are currently using Gaming Hub as a guest.</div>
+</div>
+<div id="accountLoggedIn" class="hidden"><h3>✅ You are logged in!</h3><p id="loggedInNickname"></p><button class="btn red" onclick="logOut()">Log Out</button></div>
+<p class="muted">Do not share your password or personal information with other players.</p>
+</div>
 </section>
 
 <section id="dashboard">
- <div class="section-heading"><div><p class="group-label">YOUR ACCOUNT</p><h2>📊 Player Dashboard</h2><p class="muted">Your personal gaming overview.</p></div></div>
- <div class="grid">
-  <div class="card"><p class="muted">⭐ Your XP</p><div class="stat" id="xpStat">0</div></div>
-  <div class="card"><p class="muted">🏆 Your Level</p><div class="stat" id="levelStat">1</div></div>
-  <div class="card"><p class="muted">❤️ Favorites</p><div class="stat" id="favStat">0</div></div>
-  <div class="card"><p class="muted">🎮 Games Visited</p><div class="stat" id="playedStat">0</div></div>
- </div>
- <div class="card" style="margin-top:17px">
-  <div class="row"><h3>⭐ Your Level Progress</h3><span id="levelProgressText">0 / 100 XP</span></div>
-  <div class="progress"><div id="levelProgress"></div></div>
-  <p class="muted">Earn XP by completing missions and quizzes.</p>
- </div>
- <div class="grid" style="margin-top:17px">
-  <div class="card"><h3>🕹️ Quick Shortcuts</h3><a class="btn" href="#games">Browse Games</a><a class="btn secondary" href="#missions">Daily Missions</a><a class="btn secondary" href="#profile">My Profile</a></div>
-  <div class="card"><h3>🕒 Recent Activity</h3><div id="recentActivity" class="muted">No activity yet.</div></div>
- </div>
-</section>
-
-<section id="notifications">
- <div class="section-heading"><h2>🔔 Notifications</h2><button class="btn secondary" onclick="clearNotifications()">Clear All</button></div>
- <div class="card" id="notificationList">Welcome to Gaming Hub!</div>
+<h2>📊 Player Dashboard</h2>
+<div class="grid">
+<div class="card"><p class="muted">⭐ Your XP</p><div class="stat" id="xpStat">0</div></div>
+<div class="card"><p class="muted">🏆 Your Level</p><div class="stat" id="levelStat">1</div></div>
+<div class="card"><p class="muted">❤️ Favorites</p><div class="stat" id="favStat">0</div></div>
+<div class="card"><p class="muted">🎮 Games Visited</p><div class="stat" id="playedStat">0</div></div>
+</div>
+<div class="card" style="margin-top:17px"><div class="row"><h3>⭐ Level Progress</h3><span id="levelProgressText">0 / 100 XP</span></div><div class="progress"><div id="levelProgress"></div></div></div>
+<div class="card"><h3>🕒 Recent Activity</h3><div id="recentActivity">No activity yet.</div></div>
 </section>
 
 <section id="games">
- <p class="group-label">DISCOVER & PLAY</p><h2>🎮 All Games</h2><p class="muted">Search, filter, favorite and explore games.</p>
- <input id="gameSearch" placeholder="🔎 Search games..." oninput="showSuggestions()">
- <div id="suggestions" class="muted"></div>
- <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">
-  <select id="categoryFilter" onchange="renderGames()"><option value="all">All Categories</option><option>Battle Royale</option><option>Adventure</option><option>Action</option><option>Sports</option><option>Sandbox</option></select>
-  <select id="platformFilter" onchange="renderGames()"><option value="all">All Platforms</option><option>Mobile</option><option>PC</option><option>Console</option></select>
- </div>
- <div class="row"><button class="btn secondary" onclick="showFavorites()">❤️ Favorites</button><button class="btn secondary" onclick="renderGames()">Show All Games</button></div>
- <div class="grid" id="gamesGrid"></div>
+<h2>🎮 Gaming Library</h2>
+<p class="muted">Explore 10,000 game entries. The generated entries are demo entries, not verified real titles.</p>
+<div class="card">
+<input id="gameSearch" placeholder="🔎 Search 10,000 games..." oninput="changePage(1)">
+<div class="grid">
+<select id="categoryFilter" onchange="changePage(1)"><option value="all">All Categories</option><option>Battle Royale</option><option>Adventure</option><option>Action</option><option>Sports</option><option>Sandbox</option><option>Racing</option><option>Strategy</option></select>
+<select id="platformFilter" onchange="changePage(1)"><option value="all">All Platforms</option><option>Mobile</option><option>PC</option><option>Console</option></select>
+</div>
+<div class="row"><button class="btn secondary" onclick="showFavorites()">❤️ Favorites</button><button class="btn secondary" onclick="showAllGames()">Show All Games</button></div>
+<p class="muted" id="gameCount">Loading games...</p>
+<div class="grid" id="gamesGrid"></div>
+<div class="pagination" id="pagination"></div>
+</div>
 </section>
 
-<section id="recent"><h2>🕒 Recently Played</h2><div class="grid" id="recentGames"><p class="muted">Open a game to see it here.</p></div></section>
-
-<section id="compare">
- <h2>⚖️ Compare Games</h2><div class="card">
- <label>First Game</label><select id="compareA"></select>
- <label>Second Game</label><select id="compareB"></select>
- <button class="btn" onclick="compareGames()">Compare Games</button><div id="comparisonResult"></div>
- </div>
-</section>
+<section id="recent"><h2>🕒 Recently Played</h2><div class="grid" id="recentGames"></div></section>
+<section id="compare"><h2>⚖️ Compare Games</h2><div class="card"><label>First Game</label><select id="compareA"></select><label>Second Game</label><select id="compareB"></select><button class="btn" onclick="compareGames()">Compare</button><div id="comparisonResult"></div></div></section>
 
 <section id="music">
- <p class="group-label">LISTEN WHILE YOU PLAY</p><h2>🎵 Gaming Music Zone</h2>
- <p class="muted">Original instrumental gaming beats generated in your browser.</p>
- <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start">
-  <div class="music-card">
-   <div class="music-art" id="musicArt">🎧</div>
-   <div class="music-title" id="musicTitle">Neon Battle</div>
-   <div class="music-subtitle" id="musicCategory">Gaming Beat • Original</div>
-   <div style="margin-top:25px"><div class="row"><span id="musicCurrentTime">0:00</span><span id="musicDuration">0:30</span></div><input class="music-range" type="range" id="musicProgress" min="0" max="30" value="0"></div>
-   <div class="music-controls"><button onclick="previousTrack()">⏮</button><button class="main-play" id="playButton" onclick="toggleMusic()">▶</button><button onclick="nextTrack()">⏭</button></div>
-   <div class="row"><span>🔊 Volume</span><span id="volumeValue">60%</span></div>
-   <input class="music-range" id="volumeControl" type="range" min="0" max="100" value="60">
-   <p style="text-align:center;color:#b9c8e5;font-size:12px">Press Play to start the music.</p>
-  </div>
-  <div><h3>🎶 Your Playlist</h3><div class="card" id="playlist"></div></div>
- </div>
+<h2>🎵 Gaming Music Zone</h2><p class="muted">Original instrumental gaming beats generated in your browser.</p>
+<div class="grid">
+<div class="music-card">
+<div class="music-art" id="musicArt">🎧</div><div class="music-title" id="musicTitle">Neon Battle</div><div class="music-subtitle" id="musicCategory">Gaming Beat • Original</div>
+<div class="row"><span id="musicCurrentTime">0:00</span><span id="musicDuration">0:30</span></div>
+<input class="music-range" type="range" id="musicProgress" min="0" max="30" value="0">
+<div class="music-controls"><button onclick="previousTrack()">⏮</button><button class="main-play" id="playButton" onclick="toggleMusic()">▶</button><button onclick="nextTrack()">⏭</button></div>
+<div class="row"><span>🔊 Volume</span><span id="volumeValue">60%</span></div><input class="music-range" id="volumeControl" type="range" min="0" max="100" value="60">
+</div>
+<div class="card"><h3>🎶 Playlist</h3><div id="playlist"></div></div>
+</div>
 </section>
 
-<section id="news">
- <h2>📰 Gaming News</h2><div class="grid" id="newsGrid">
-  <div class="card"><h3>🎮 Gaming Hub Update</h3><p>Explore new features and discover your favorite games.</p><span class="tag">Gaming Hub</span></div>
-  <div class="card"><h3>🏆 New Challenges</h3><p>Try daily missions and collect XP.</p><span class="tag">Challenges</span></div>
-  <div class="card"><h3>🌟 Player Spotlight</h3><p>Build your profile and show your gaming interests.</p><span class="tag">Community</span></div>
- </div>
- <div class="card" style="margin-top:17px"><h3>➕ Add Your Own News</h3><input id="newsTitle" placeholder="News title"><textarea id="newsDescription" placeholder="Write your news..."></textarea><button class="btn" onclick="addNews()">Publish News</button></div>
-</section>
-
-<section id="freefire">
- <h2>🔥 Free Fire Zone</h2><div class="grid">
-  <div class="card"><div class="game-image">🔥</div><h3>Free Fire</h3><p>Discover tips, guides and information about Free Fire.</p><span class="tag">Battle Royale</span><a class="btn" href="https://ff.garena.com/" target="_blank" rel="noopener">Official Website</a></div>
-  <div class="card"><h3>🎯 Gameplay Tips</h3><p>Practice your aim, learn the maps and work with your team.</p></div>
-  <div class="card"><h3>🧱 Gloo Wall Tips</h3><p>Practice placing cover and moving carefully during matches.</p></div>
- </div>
-</section>
-
-<section id="minecraft">
- <h2>⛏️ Minecraft Zone</h2><div class="grid">
-  <div class="card"><div class="game-image">⛏️</div><h3>Minecraft</h3><p>Explore, build and create your own world.</p><a class="btn" href="https://www.minecraft.net/" target="_blank" rel="noopener">Official Website</a></div>
-  <div class="card"><h3>🏠 Building Ideas</h3><p>Try building houses, castles, farms and amazing cities.</p></div>
- </div>
-</section>
-
-<section id="gallery">
- <h2>🖼️ Gaming Gallery</h2><p class="muted">A collection of gaming-inspired artwork and icons.</p>
- <div class="grid"><div class="card"><div class="gallery-box">🏝️</div><h3>Battle Island</h3></div><div class="card"><div class="gallery-box">🚗</div><h3>Racing World</h3></div><div class="card"><div class="gallery-box">🏰</div><h3>Fantasy World</h3></div><div class="card"><div class="gallery-box">🌌</div><h3>Space Adventure</h3></div></div>
-</section>
-
-<section id="polls">
- <h2>🗳️ Gaming Polls</h2><div class="card"><h3>What is your favorite gaming platform?</h3>
- <button class="btn secondary" onclick="vote('Mobile')">📱 Mobile</button><button class="btn secondary" onclick="vote('PC')">💻 PC</button><button class="btn secondary" onclick="vote('Console')">🎮 Console</button><div id="pollResults"></div></div>
-</section>
-
-<section id="calendar">
- <h2>📅 Game Release Calendar</h2><div class="card"><p class="muted">Add release dates you want to remember.</p><input id="releaseName" placeholder="Game name"><input id="releaseDate" type="date"><button class="btn" onclick="addRelease()">Add Release</button><div id="releaseList"></div></div>
-</section>
-
-<section id="missions">
- <h2>🎯 Daily Missions</h2><p class="muted">Complete these activities to earn XP.</p>
- <div class="grid">
-  <div class="card"><h3>Mission 1</h3><p>Explore three games.</p><button class="btn" onclick="completeMission('mission1',30)">Complete +30 XP</button><p id="mission1Status" class="muted">Not completed</p></div>
-  <div class="card"><h3>Mission 2</h3><p>Visit the gaming guides.</p><button class="btn" onclick="completeMission('mission2',20)">Complete +20 XP</button><p id="mission2Status" class="muted">Not completed</p></div>
-  <div class="card"><h3>Mission 3</h3><p>Answer the gaming quiz.</p><button class="btn" onclick="completeMission('mission3',25)">Complete +25 XP</button><p id="mission3Status" class="muted">Not completed</p></div>
- </div>
-</section>
-
-<section id="leaderboard">
- <h2>🏆 Weekly Leaderboard</h2><div class="card"><p class="muted">Local demo leaderboard. Scores are saved in this browser.</p><div id="leaderboardList"></div><input id="leaderboardName" placeholder="Your player name"><button class="btn" onclick="addLeaderboardScore()">Add My Score</button></div>
-</section>
-
-<section id="quiz">
- <h2>🧠 Gaming Quiz</h2><div class="card"><h3>Which game is famous for building with blocks?</h3><button class="btn secondary" onclick="answerQuiz(false)">Free Fire</button><button class="btn secondary" onclick="answerQuiz(true)">Minecraft</button><button class="btn secondary" onclick="answerQuiz(false)">Rocket League</button><p id="quizResult"></p></div>
-</section>
-
-<section id="guides">
- <h2>📚 Gaming Guides</h2><div class="grid">
-  <div class="card"><h3>🎯 Beginner Guide</h3><p>Start with easy controls, practice regularly and learn one game at a time.</p></div>
-  <div class="card"><h3>🖥️ PC Gaming Guide</h3><p>Adjust your settings, keep your games updated and check system requirements.</p></div>
-  <div class="card"><h3>📱 Mobile Gaming Guide</h3><p>Choose comfortable controls and take breaks during long gaming sessions.</p></div>
- </div>
-</section>
-
-<section id="tips">
- <h2>💡 Gaming Tips</h2><div class="grid">
-  <div class="card"><h3>🎯 Practice</h3><p>Practice a little every day.</p></div>
-  <div class="card"><h3>⚙️ Settings</h3><p>Choose settings that feel comfortable.</p></div>
-  <div class="card"><h3>🤝 Teamwork</h3><p>Communicate respectfully with teammates.</p></div>
-  <div class="card"><h3>⏰ Breaks</h3><p>Take regular breaks and balance gaming with other activities.</p></div>
- </div>
-</section>
-
-<section id="videos">
- <h2>▶️ Gaming Videos</h2><div class="grid">
-  <div class="card"><h3>Free Fire Videos</h3><a class="btn" href="https://www.youtube.com/results?search_query=free+fire+gameplay" target="_blank" rel="noopener">Watch on YouTube</a></div>
-  <div class="card"><h3>Minecraft Videos</h3><a class="btn" href="https://www.youtube.com/results?search_query=minecraft+gameplay" target="_blank" rel="noopener">Watch on YouTube</a></div>
- </div>
-</section>
-
-<section id="community">
- <h2>💬 Community Chat</h2><div class="card"><p class="muted">Demo chat saved only in this browser. Do not share personal information.</p><div id="chatMessages"></div><input id="chatName" placeholder="Player nickname"><input id="chatMessage" placeholder="Write a friendly message..."><button class="btn" onclick="sendMessage()">Send Message</button></div>
-</section>
-
-<section id="reviews">
- <h2>⭐ Game Reviews</h2><div class="card"><input id="reviewGame" placeholder="Game name"><select id="reviewRating"><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select><textarea id="reviewText" placeholder="Write your review..."></textarea><button class="btn" onclick="addReview()">Submit Review</button><div id="reviewList"></div></div>
-</section>
-
-<section id="faq">
- <h2>❓ Frequently Asked Questions</h2><div class="card">
-  <h3>Is Gaming Hub free?</h3><p>Yes. This demo website is free to use.</p>
-  <h3>Are my account details online?</h3><p>Your login is handled by Supabase. Your player profile is saved online when you are logged in.</p>
-  <h3>Can I add more games?</h3><p>Yes. You can add games in the JavaScript games list.</p>
-  <h3>Does the leaderboard work online?</h3><p>No. The current leaderboard is local to this browser.</p>
- </div>
-</section>
-
-<section id="profile">
- <h2>👤 My Player Profile</h2><div class="card">
-  <div class="game-image" id="profileBackground">🎮</div><h3 id="profileDisplayName">Player</h3><p class="muted" id="profileLevel">Level 1</p>
-  <input id="profileName" maxlength="24" placeholder="Choose a nickname">
-  <select id="profileAvatar"><option value="🎮">🎮 Gamer</option><option value="👑">👑 King</option><option value="🔥">🔥 Fire</option><option value="🐉">🐉 Dragon</option><option value="🚀">🚀 Explorer</option></select>
-  <select id="profileColor"><option value="#24245a">Purple background</option><option value="#07556c">Blue background</option><option value="#145a38">Green background</option><option value="#783c22">Orange background</option></select>
-  <button class="btn" onclick="saveProfile()">Save Profile</button>
-  <p class="muted" id="profileSaveStatus">Guest profile is saved in this browser. Log in to save it online.</p>
- </div>
-</section>
-
-<section id="achievements">
- <h2>🏅 Achievements</h2><div class="grid">
-  <div class="card"><h3>🌟 Explorer</h3><p>Visit the games section.</p></div>
-  <div class="card"><h3>🎯 Mission Master</h3><p>Complete your daily missions.</p></div>
-  <div class="card"><h3>🧠 Quiz Player</h3><p>Answer a quiz question correctly.</p></div>
- </div>
-</section>
-
-<section id="tournaments">
- <h2>🏆 Tournaments</h2><div class="grid">
-  <div class="card"><h3>🎮 Community Challenge</h3><p>Practice your favorite game and challenge yourself.</p><button class="btn" onclick="joinTournament('Community Challenge')">Join Demo</button></div>
-  <div class="card"><h3>⚡ Gaming Quiz Challenge</h3><p>Test your gaming knowledge.</p><button class="btn" onclick="joinTournament('Gaming Quiz Challenge')">Join Demo</button></div>
- </div>
-</section>
-
-<section id="settings">
- <h2>⚙️ Website Settings</h2><div class="card">
-  <h3>Appearance</h3><button class="btn" onclick="toggleTheme()">🌗 Switch Dark / Light Mode</button>
-  <h3 style="margin-top:25px">Your Data</h3><p class="muted">Your demo data is stored in this browser.</p><button class="btn red" onclick="resetData()">Reset Website Data</button>
- </div>
-</section>
-
-<section id="support">
- <h2>📩 Help & Support</h2><div class="card"><input id="supportEmail" placeholder="Contact email (optional)"><textarea id="supportMessage" placeholder="How can we improve Gaming Hub?"></textarea><button class="btn" onclick="sendSupport()">Send Feedback</button><p class="muted">This demo stores feedback locally; it does not send an email.</p></div>
-</section>
+<section id="news"><h2>📰 Gaming News</h2><div class="grid" id="newsGrid"></div><div class="card"><h3>➕ Add News</h3><input id="newsTitle" placeholder="News title"><textarea id="newsDescription" placeholder="Write your news"></textarea><button class="btn" onclick="addNews()">Publish News</button></div></section>
+<section id="freefire"><h2>🔥 Free Fire Zone</h2><div class="grid"><div class="card"><div class="game-image">🔥</div><h3>Free Fire</h3><p>Discover tips and information about Free Fire.</p><a class="btn" href="https://ff.garena.com/" target="_blank" rel="noopener">Official Website</a></div><div class="card"><h3>🎯 Gameplay Tips</h3><p>Practice your aim and learn the maps.</p></div><div class="card"><h3>🧱 Gloo Wall Tips</h3><p>Practice placing cover and moving carefully.</p></div></div></section>
+<section id="minecraft"><h2>⛏️ Minecraft Zone</h2><div class="card"><h3>⛏️ Minecraft</h3><p>Explore, build and create your own world.</p><a class="btn" href="https://www.minecraft.net/" target="_blank" rel="noopener">Official Website</a></div></section>
+<section id="gallery"><h2>🖼️ Gaming Gallery</h2><div class="grid"><div class="card"><div class="game-image">🏝️</div>Battle Island</div><div class="card"><div class="game-image">🚗</div>Racing World</div><div class="card"><div class="game-image">🏰</div>Fantasy World</div></div></section>
+<section id="polls"><h2>🗳️ Gaming Polls</h2><div class="card"><h3>Favorite platform?</h3><button class="btn secondary" onclick="vote('Mobile')">Mobile</button><button class="btn secondary" onclick="vote('PC')">PC</button><button class="btn secondary" onclick="vote('Console')">Console</button><div id="pollResults"></div></div></section>
+<section id="calendar"><h2>📅 Release Calendar</h2><div class="card"><input id="releaseName" placeholder="Game name"><input id="releaseDate" type="date"><button class="btn" onclick="addRelease()">Add Release</button><div id="releaseList"></div></div></section>
+<section id="missions"><h2>🎯 Daily Missions</h2><div class="grid"><div class="card"><h3>Explore games</h3><p>Visit the game library.</p><button class="btn" onclick="completeMission('mission1',30)">Complete +30 XP</button><p id="mission1Status">Not completed</p></div><div class="card"><h3>Visit guides</h3><p>Read a gaming guide.</p><button class="btn" onclick="completeMission('mission2',20)">Complete +20 XP</button><p id="mission2Status">Not completed</p></div><div class="card"><h3>Answer quiz</h3><p>Answer the quiz.</p><button class="btn" onclick="completeMission('mission3',25)">Complete +25 XP</button><p id="mission3Status">Not completed</p></div></div></section>
+<section id="leaderboard"><h2>🏆 Leaderboard</h2><div class="card"><p class="muted">Local demo leaderboard.</p><div id="leaderboardList"></div><input id="leaderboardName" placeholder="Player name"><button class="btn" onclick="addLeaderboardScore()">Add My Score</button></div></section>
+<section id="quiz"><h2>🧠 Gaming Quiz</h2><div class="card"><h3>Which game is famous for building with blocks?</h3><button class="btn secondary" onclick="answerQuiz(false)">Free Fire</button><button class="btn secondary" onclick="answerQuiz(true)">Minecraft</button><button class="btn secondary" onclick="answerQuiz(false)">Rocket League</button><p id="quizResult"></p></div></section>
+<section id="guides"><h2>📚 Gaming Guides</h2><div class="grid"><div class="card"><h3>🎯 Beginner Guide</h3><p>Practice regularly and learn one game at a time.</p></div><div class="card"><h3>🖥️ PC Guide</h3><p>Adjust your settings and check system requirements.</p></div><div class="card"><h3>📱 Mobile Guide</h3><p>Choose comfortable controls and take breaks.</p></div></div></section>
+<section id="tips"><h2>💡 Gaming Tips</h2><div class="grid"><div class="card">🎯 Practice regularly.</div><div class="card">⚙️ Choose comfortable settings.</div><div class="card">🤝 Work with your team.</div><div class="card">⏰ Take breaks.</div></div></section>
+<section id="videos"><h2>▶️ Gaming Videos</h2><div class="grid"><div class="card"><h3>Free Fire Videos</h3><a class="btn" href="https://www.youtube.com/results?search_query=free+fire+gameplay" target="_blank" rel="noopener">Watch on YouTube</a></div><div class="card"><h3>Minecraft Videos</h3><a class="btn" href="https://www.youtube.com/results?search_query=minecraft+gameplay" target="_blank" rel="noopener">Watch on YouTube</a></div></div></section>
+<section id="community"><h2>💬 Community Chat</h2><div class="card"><p class="muted">Demo chat saved in this browser. Do not share personal information.</p><div id="chatMessages"></div><input id="chatName" placeholder="Nickname"><input id="chatMessage" maxlength="300" placeholder="Friendly message"><button class="btn" onclick="sendMessage()">Send</button></div></section>
+<section id="reviews"><h2>⭐ Game Reviews</h2><div class="card"><input id="reviewGame" placeholder="Game name"><select id="reviewRating"><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select><textarea id="reviewText" placeholder="Write your review"></textarea><button class="btn" onclick="addReview()">Submit Review</button><div id="reviewList"></div></div></section>
+<section id="faq"><h2>❓ FAQ</h2><div class="card"><h3>Is Gaming Hub free?</h3><p>Yes, this demo website is free.</p><h3>Are accounts online?</h3><p>Login is handled by Supabase. Player profiles can be saved online.</p><h3>Are all 10,000 games real?</h3><p>No. The library includes starter games and generated demo entries.</p></div></section>
+<section id="profile"><h2>👤 My Player Profile</h2><div class="card"><div class="game-image" id="profileBackground">🎮</div><h3 id="profileDisplayName">Player</h3><p id="profileLevel">Level 1</p><input id="profileName" maxlength="24" placeholder="Nickname"><select id="profileAvatar"><option>🎮</option><option>👑</option><option>🔥</option><option>🐉</option><option>🚀</option></select><select id="profileColor"><option value="#24245a">Purple</option><option value="#07556c">Blue</option><option value="#145a38">Green</option><option value="#783c22">Orange</option></select><button class="btn" onclick="saveProfile()">Save Profile</button><p id="profileSaveStatus" class="muted">Guest profile is saved in this browser.</p></div></section>
+<section id="achievements"><h2>🏅 Achievements</h2><div class="grid"><div class="card">🌟 Explorer</div><div class="card">🎯 Mission Master</div><div class="card">🧠 Quiz Player</div></div></section>
+<section id="tournaments"><h2>🏆 Tournaments</h2><div class="grid"><div class="card"><h3>Community Challenge</h3><button class="btn" onclick="joinTournament('Community Challenge')">Join Demo</button></div><div class="card"><h3>Quiz Challenge</h3><button class="btn" onclick="joinTournament('Quiz Challenge')">Join Demo</button></div></div></section>
+<section id="settings"><h2>⚙️ Settings</h2><div class="card"><button class="btn" onclick="toggleTheme()">🌗 Switch Theme</button><button class="btn red" onclick="resetData()">Reset Website Data</button></div></section>
+<section id="support"><h2>📩 Support</h2><div class="card"><textarea id="supportMessage" placeholder="How can we improve Gaming Hub?"></textarea><button class="btn" onclick="sendSupport()">Send Feedback</button></div></section>
 
 </main>
-
-<footer>
- <h3>🎮 Gaming Hub</h3><p>Your gaming world starts here.</p><p>Made for gaming fans | 2026</p><a href="#home">Back to Top ↑</a>
-</footer>
-
+<footer><h3>🎮 Gaming Hub</h3><p>Your gaming world starts here.</p><p>Made for gaming fans | 2026</p><a href="#home">Back to Top ↑</a></footer>
 <div id="toast"></div>
 <div id="modal" onclick="closeModal(event)"><div id="modalContent"></div></div>
 
 <script>
 // ==========================================
-// SUPABASE CONNECTION
+// SUPABASE
 // ==========================================
+const SUPABASE_URL="https://fcyrcyzqkggfxrmdxjqj.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_qs6GyDgOfAv3q-J4X1UR3A_9V9Wj5ZB";
+const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+let currentUser=null,authBusy=false;
 
-const SUPABASE_URL = "https://fcyrcyzqkggfxrmdxjqj.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_qs6GyDgOfAv3q-J4X1UR3A_9V9Wj5ZB";
-
-const supabaseClient = window.supabase.createClient(
- SUPABASE_URL,
- SUPABASE_PUBLISHABLE_KEY
-);
-
-let currentUser = null;
-let authBusy = false;
-
-// ==========================================
-// GENERAL FUNCTIONS
-// ==========================================
-
-function getData(key,fallback){
- try{
-  const v=localStorage.getItem(key);
-  return v?JSON.parse(v):fallback;
- }catch{
-  return fallback;
- }
-}
-
-function saveData(key,value){
- localStorage.setItem(key,JSON.stringify(value));
-}
-
-function toast(message){
- const el=document.getElementById("toast");
- el.textContent=message;
- el.style.display="block";
- setTimeout(()=>el.style.display="none",2500);
-}
-
-function addXP(amount){
- saveData("gh_xp",getData("gh_xp",0)+amount);
- updateDashboard();
- toast("+"+amount+" XP earned!");
-}
-
-function activity(message){
- let items=getData("gh_activity",[]);
- items.unshift(message);
- saveData("gh_activity",items.slice(0,6));
- renderActivity();
-}
-
-function toggleMenu(){
- document.getElementById("sidebar").classList.toggle("show");
-}
+function getData(key,fallback){try{const v=localStorage.getItem(key);return v?JSON.parse(v):fallback}catch{return fallback}}
+function saveData(key,value){localStorage.setItem(key,JSON.stringify(value))}
+function toast(message){const el=document.getElementById("toast");el.textContent=message;el.style.display="block";setTimeout(()=>el.style.display="none",2500)}
+function escapeHTML(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function toggleMenu(){document.getElementById("sidebar").classList.toggle("show")}
+function addXP(n){saveData("gh_xp",getData("gh_xp",0)+n);updateDashboard();toast("+"+n+" XP earned!")}
+function activity(message){let a=getData("gh_activity",[]);a.unshift(message);saveData("gh_activity",a.slice(0,6));renderActivity()}
 
 // ==========================================
 // AUTHENTICATION
 // ==========================================
-
-function setAuthMessage(message){
- document.getElementById("authMessage").textContent=message;
-}
-
+function setAuthMessage(m){document.getElementById("authMessage").textContent=m}
 function updateAccountUI(){
- const loggedOut=document.getElementById("accountLoggedOut");
- const loggedIn=document.getElementById("accountLoggedIn");
-
- if(currentUser){
-  loggedOut.classList.add("hidden");
-  loggedIn.classList.remove("hidden");
-
-  const nickname=getData("gh_profile",{name:"Player"}).name;
-  document.getElementById("loggedInNickname").textContent=
-   "Welcome, "+nickname+"!";
- }else{
-  loggedOut.classList.remove("hidden");
-  loggedIn.classList.add("hidden");
- }
+ const out=document.getElementById("accountLoggedOut"),inside=document.getElementById("accountLoggedIn");
+ if(currentUser){out.classList.add("hidden");inside.classList.remove("hidden");document.getElementById("loggedInNickname").textContent="Welcome, "+getData("gh_profile",{name:"Player"}).name+"!"}
+ else{out.classList.remove("hidden");inside.classList.add("hidden")}
 }
-
 async function signUp(){
  if(authBusy)return;
-
- const email=document.getElementById("signupEmail").value.trim();
- const password=document.getElementById("signupPassword").value;
- const nickname=document.getElementById("signupNickname").value.trim()||"Player";
-
- if(!email||!password){
-  setAuthMessage("Please enter your email and password.");
-  return;
- }
-
- if(password.length<6){
-  setAuthMessage("Your password must contain at least 6 characters.");
-  return;
- }
-
- if(nickname.length>24){
-  setAuthMessage("Your nickname must be 24 characters or fewer.");
-  return;
- }
-
- authBusy=true;
- setAuthMessage("Creating your account...");
-
+ const email=document.getElementById("signupEmail").value.trim(),password=document.getElementById("signupPassword").value,nickname=document.getElementById("signupNickname").value.trim()||"Player";
+ if(!email||!password)return setAuthMessage("Enter your email and password.");
+ if(password.length<6)return setAuthMessage("Password must have at least 6 characters.");
+ authBusy=true;setAuthMessage("Creating account...");
  try{
-  const {data,error}=await supabaseClient.auth.signUp({
-   email:email,
-   password:password,
-   options:{
-    data:{nickname:nickname}
-   }
-  });
-
+  const {data,error}=await supabaseClient.auth.signUp({email,password,options:{data:{nickname}}});
   if(error)throw error;
-
-  if(data.session){
-   currentUser=data.user;
-   const profile={
-    name:nickname,
-    avatar:"🎮",
-    color:"#24245a"
-   };
-   saveData("gh_profile",profile);
-   await saveOnlineProfile(profile);
-   renderProfile();
-   updateAccountUI();
-   setAuthMessage("Your account was created successfully!");
-  }else{
-   setAuthMessage("Account created! Check your email for a confirmation link, then log in.");
-  }
-
- }catch(error){
-  setAuthMessage("Sign-up error: "+error.message);
- }finally{
-  authBusy=false;
- }
+  if(data.session){currentUser=data.user;const p={name:nickname,avatar:"🎮",color:"#24245a"};saveData("gh_profile",p);await saveOnlineProfile(p);renderProfile();updateAccountUI();setAuthMessage("Account created successfully!")}
+  else setAuthMessage("Account created! Check your email for a confirmation link, then log in.");
+ }catch(e){setAuthMessage("Sign-up error: "+e.message)}finally{authBusy=false}
 }
-
 async function logIn(){
  if(authBusy)return;
-
- const email=document.getElementById("loginEmail").value.trim();
- const password=document.getElementById("loginPassword").value;
-
- if(!email||!password){
-  setAuthMessage("Please enter your email and password.");
-  return;
- }
-
- authBusy=true;
- setAuthMessage("Logging in...");
-
- try{
-  const {data,error}=await supabaseClient.auth.signInWithPassword({
-   email:email,
-   password:password
-  });
-
-  if(error)throw error;
-
-  currentUser=data.user;
-  await loadOnlineProfile();
-  updateAccountUI();
-  setAuthMessage("You are logged in!");
-  toast("Welcome back to Gaming Hub!");
-
- }catch(error){
-  setAuthMessage("Login error: "+error.message);
- }finally{
-  authBusy=false;
- }
+ const email=document.getElementById("loginEmail").value.trim(),password=document.getElementById("loginPassword").value;
+ if(!email||!password)return setAuthMessage("Enter your email and password.");
+ authBusy=true;setAuthMessage("Logging in...");
+ try{const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;currentUser=data.user;await loadOnlineProfile();updateAccountUI();setAuthMessage("You are logged in!");toast("Welcome back!")}
+ catch(e){setAuthMessage("Login error: "+e.message)}finally{authBusy=false}
 }
-
-async function logOut(){
- const {error}=await supabaseClient.auth.signOut();
-
- if(error){
-  toast("Logout error: "+error.message);
-  return;
- }
-
- currentUser=null;
- updateAccountUI();
- toast("You have logged out.");
+async function logOut(){const {error}=await supabaseClient.auth.signOut();if(error)return toast(error.message);currentUser=null;updateAccountUI();toast("Logged out.")}
+async function saveOnlineProfile(p){
+ if(!currentUser)return false;
+ const {error}=await supabaseClient.from("profiles").upsert({id:currentUser.id,nickname:p.name,avatar:p.avatar,color:p.color,updated_at:new Date().toISOString()},{onConflict:"id"});
+ if(error){document.getElementById("profileSaveStatus").textContent="Online save failed: "+error.message;return false}
+ document.getElementById("profileSaveStatus").textContent="✅ Profile saved online!";return true
 }
-
-async function saveOnlineProfile(profile){
- if(!currentUser)return;
-
- const row={
-  id:currentUser.id,
-  nickname:profile.name,
-  avatar:profile.avatar,
-  color:profile.color,
-  updated_at:new Date().toISOString()
- };
-
- const {error}=await supabaseClient
-  .from("profiles")
-  .upsert(row,{onConflict:"id"});
-
- if(error){
-  console.error("Profile save error:",error);
-  document.getElementById("profileSaveStatus").textContent=
-   "Online save failed: "+error.message;
-  return false;
- }
-
- document.getElementById("profileSaveStatus").textContent=
-  "✅ Your profile is saved online!";
- return true;
-}
-
 async function loadOnlineProfile(){
  if(!currentUser)return;
-
- document.getElementById("profileSaveStatus").textContent=
-  "Loading your online profile...";
-
- const {data,error}=await supabaseClient
-  .from("profiles")
-  .select("nickname,avatar,color")
-  .eq("id",currentUser.id)
-  .maybeSingle();
-
- if(error){
-  console.error("Profile load error:",error);
-  document.getElementById("profileSaveStatus").textContent=
-   "Could not load online profile: "+error.message;
-  return;
- }
-
- if(data){
-  const profile={
-   name:data.nickname||"Player",
-   avatar:data.avatar||"🎮",
-   color:data.color||"#24245a"
-  };
-  saveData("gh_profile",profile);
-  renderProfile();
- }else{
-  const profile=getData("gh_profile",{
-   name:"Player",avatar:"🎮",color:"#24245a"
-  });
-  await saveOnlineProfile(profile);
-  renderProfile();
- }
-
- updateAccountUI();
+ const {data,error}=await supabaseClient.from("profiles").select("nickname,avatar,color").eq("id",currentUser.id).maybeSingle();
+ if(error){document.getElementById("profileSaveStatus").textContent="Could not load profile: "+error.message;return}
+ if(data){saveData("gh_profile",{name:data.nickname||"Player",avatar:data.avatar||"🎮",color:data.color||"#24245a"});renderProfile()}
+ else await saveOnlineProfile(getData("gh_profile",{name:"Player",avatar:"🎮",color:"#24245a"}));
+ updateAccountUI()
 }
-
 async function initializeAuth(){
  const {data,error}=await supabaseClient.auth.getSession();
-
- if(error){
-  console.error("Session error:",error);
-  setAuthMessage("Could not check login session.");
-  return;
- }
-
+ if(error){setAuthMessage("Could not check login session.");return}
  currentUser=data.session?.user||null;
-
- if(currentUser){
-  await loadOnlineProfile();
- }
-
+ if(currentUser)await loadOnlineProfile();
  updateAccountUI();
-
- supabaseClient.auth.onAuthStateChange((event,session)=>{
-  currentUser=session?.user||null;
-  updateAccountUI();
-
-  if(event==="SIGNED_IN"){
-   setTimeout(()=>loadOnlineProfile(),0);
-  }
-
-  if(event==="SIGNED_OUT"){
-   setAuthMessage("You are logged out. You can still use Gaming Hub as a guest.");
-  }
- });
+ supabaseClient.auth.onAuthStateChange((event,session)=>{currentUser=session?.user||null;updateAccountUI();if(event==="SIGNED_IN")setTimeout(loadOnlineProfile,0);if(event==="SIGNED_OUT")setAuthMessage("You are logged out.")})
 }
 
 // ==========================================
-// GAMES
+// 10,000 GAME LIBRARY
 // ==========================================
-
-const games=[
+const starterGames=[
 {name:"Free Fire",category:"Battle Royale",platform:"Mobile",icon:"🔥",description:"A fast-paced battle royale game."},
 {name:"Minecraft",category:"Sandbox",platform:"PC",icon:"⛏️",description:"Build, explore and create your own world."},
 {name:"GTA V",category:"Action",platform:"PC",icon:"🚗",description:"Explore a huge open-world city."},
-{name:"Fortnite",category:"Battle Royale",platform:"Console",icon:"🎯",description:"Battle royale with building and creative modes."},
+{name:"Fortnite",category:"Battle Royale",platform:"Console",icon:"🎯",description:"Battle royale with creative modes."},
 {name:"PUBG Mobile",category:"Battle Royale",platform:"Mobile",icon:"🪖",description:"A competitive mobile battle royale."},
 {name:"Rocket League",category:"Sports",platform:"PC",icon:"🚀",description:"Football with rocket-powered cars."},
-{name:"Roblox",category:"Adventure",platform:"Mobile",icon:"🧱",description:"Explore games and experiences made by creators."},
+{name:"Roblox",category:"Adventure",platform:"Mobile",icon:"🧱",description:"Explore experiences made by creators."},
 {name:"Among Us",category:"Adventure",platform:"Mobile",icon:"👨‍🚀",description:"A social deduction multiplayer game."},
 {name:"EA Sports FC",category:"Sports",platform:"Console",icon:"⚽",description:"Play football and build your team."},
 {name:"The Sims 4",category:"Adventure",platform:"PC",icon:"🏡",description:"Create characters and build homes."},
 {name:"Fall Guys",category:"Adventure",platform:"Console",icon:"🏃",description:"Compete in colorful obstacle courses."},
 {name:"Terraria",category:"Sandbox",platform:"PC",icon:"🌳",description:"Explore, build and discover."}
 ];
+const demoCategories=["Adventure","Action","Sports","Sandbox","Racing","Strategy","Battle Royale"];
+const demoPlatforms=["Mobile","PC","Console"];
+const demoIcons=["🎮","🕹️","🚀","🐉","🏎️","⚔️","🌌","🏰","🧩","🌋","🤖","🏝️"];
+const games=[...starterGames];
+for(let i=1;games.length<10000;i++){
+ const number=String(i).padStart(5,"0");
+ games.push({
+  name:"Community Game "+number,
+  category:demoCategories[i%demoCategories.length],
+  platform:demoPlatforms[i%demoPlatforms.length],
+  icon:demoIcons[i%demoIcons.length],
+  description:"Generated demo entry "+number+". This is a sample game listing, not a verified real game."
+ });
+}
+const PAGE_SIZE=100;
+let currentPage=1,activeGameList=games;
 
-function renderGames(list=games){
- const search=document.getElementById("gameSearch").value.toLowerCase();
+function getFilteredGames(){
+ const search=document.getElementById("gameSearch").value.trim().toLowerCase();
  const category=document.getElementById("categoryFilter").value;
  const platform=document.getElementById("platformFilter").value;
- const favorites=getData("gh_favorites",[]);
-
- const filtered=list.filter(g=>
-  g.name.toLowerCase().includes(search)&&
+ return activeGameList.filter(g=>
+  (g.name.toLowerCase().includes(search)||g.description.toLowerCase().includes(search))&&
   (category==="all"||g.category===category)&&
   (platform==="all"||g.platform===platform)
  );
-
- document.getElementById("gamesGrid").innerHTML=filtered.map(g=>`
+}
+function renderGames(){
+ const filtered=getFilteredGames();
+ const totalPages=Math.max(1,Math.ceil(filtered.length/PAGE_SIZE));
+ if(currentPage>totalPages)currentPage=totalPages;
+ const start=(currentPage-1)*PAGE_SIZE;
+ const pageGames=filtered.slice(start,start+PAGE_SIZE);
+ const favorites=getData("gh_favorites",[]);
+ document.getElementById("gameCount").textContent=`Showing ${filtered.length?start+1:0}-${Math.min(start+PAGE_SIZE,filtered.length)} of ${filtered.length.toLocaleString()} matching games. Total library: ${games.length.toLocaleString()}.`;
+ document.getElementById("gamesGrid").innerHTML=pageGames.map(g=>`
  <div class="card">
-  <div class="game-image">${g.icon}</div>
-  <h3>${g.name}</h3>
-  <span class="tag">${g.category}</span>
-  <span class="tag">${g.platform}</span>
-  <p class="muted">${g.description}</p>
-  <button class="btn" onclick="openGame('${g.name}')">Details</button>
-  <button class="btn secondary" onclick="toggleFavorite('${g.name}')">${favorites.includes(g.name)?"❤️ Saved":"🤍 Favorite"}</button>
- </div>`).join("")||"<p>No games found.</p>";
-
+ <div class="game-image">${g.icon}</div>
+ <h3>${escapeHTML(g.name)}</h3>
+ <span class="tag">${escapeHTML(g.category)}</span><span class="tag">${escapeHTML(g.platform)}</span>
+ <p class="muted">${escapeHTML(g.description)}</p>
+ <button class="btn" onclick="openGameByName('${escapeHTML(g.name)}')">Details</button>
+ <button class="btn secondary" onclick="toggleFavorite('${escapeHTML(g.name)}')">${favorites.includes(g.name)?"❤️ Saved":"🤍 Favorite"}</button>
+ </div>`).join("")||"<p>No games found. Try another search.</p>";
+ renderPagination(totalPages);
  updateDashboard();
 }
-
-function openGame(name){
- const game=games.find(g=>g.name===name);
- if(!game)return;
-
- let recent=getData("gh_recent",[]);
- recent=[name,...recent.filter(n=>n!==name)].slice(0,5);
- saveData("gh_recent",recent);
-
- activity("Opened "+name);
- renderRecent();
-
- document.getElementById("modalContent").innerHTML=`
- <div class="game-image">${game.icon}</div>
- <h2>${game.name}</h2>
- <p>${game.description}</p>
- <span class="tag">${game.category}</span>
- <span class="tag">${game.platform}</span>
- <button class="btn" onclick="toggleFavorite('${game.name}');closeModal()">Favorite</button>
- <button class="btn secondary" onclick="closeModal()">Close</button>`;
-
+function renderPagination(totalPages){
+ const el=document.getElementById("pagination");
+ let html=`<button onclick="changePage(${currentPage-1})" ${currentPage===1?"disabled":""}>← Previous</button>`;
+ const pages=new Set([1,totalPages,currentPage-1,currentPage,currentPage+1]);
+ [...pages].filter(n=>n>=1&&n<=totalPages).sort((a,b)=>a-b).forEach(n=>{
+  html+=`<button class="${n===currentPage?"active":""}" onclick="changePage(${n})">${n}</button>`;
+ });
+ html+=`<button onclick="changePage(${currentPage+1})" ${currentPage===totalPages?"disabled":""}>Next →</button>`;
+ el.innerHTML=html;
+}
+function changePage(page){currentPage=Math.max(1,page);renderGames();document.getElementById("games").scrollIntoView({behavior:"smooth"})}
+function showFavorites(){activeGameList=games.filter(g=>getData("gh_favorites",[]).includes(g.name));currentPage=1;renderGames()}
+function showAllGames(){activeGameList=games;document.getElementById("gameSearch").value="";document.getElementById("categoryFilter").value="all";document.getElementById("platformFilter").value="all";currentPage=1;renderGames()}
+function openGameByName(name){
+ const game=games.find(g=>g.name===name);if(!game)return;
+ let r=getData("gh_recent",[]);r=[name,...r.filter(n=>n!==name)].slice(0,5);saveData("gh_recent",r);
+ activity("Opened "+name);renderRecent();
+ document.getElementById("modalContent").innerHTML=`<div class="game-image">${game.icon}</div><h2>${escapeHTML(game.name)}</h2><p>${escapeHTML(game.description)}</p><span class="tag">${escapeHTML(game.category)}</span><span class="tag">${escapeHTML(game.platform)}</span><button class="btn" onclick="toggleFavorite('${escapeHTML(game.name)}')">Favorite</button><button class="btn secondary" onclick="closeModal()">Close</button>`;
  document.getElementById("modal").style.display="flex";
 }
-
-function closeModal(event){
- if(!event||event.target.id==="modal"){
-  document.getElementById("modal").style.display="none";
- }
-}
-
-function toggleFavorite(name){
- let f=getData("gh_favorites",[]);
- f=f.includes(name)?f.filter(n=>n!==name):[...f,name];
- saveData("gh_favorites",f);
- renderGames();
- toast("Favorites updated!");
-}
-
-function showFavorites(){
- renderGames(games.filter(g=>getData("gh_favorites",[]).includes(g.name)));
-}
-
-function showSuggestions(){
- const v=document.getElementById("gameSearch").value.toLowerCase();
- const m=games.filter(g=>g.name.toLowerCase().includes(v)).slice(0,5);
- document.getElementById("suggestions").textContent=
-  v?"Suggestions: "+m.map(g=>g.name).join(", "):"";
- renderGames();
-}
-
-function renderRecent(){
- const r=getData("gh_recent",[]);
- document.getElementById("recentGames").innerHTML=r.length?
-  r.map(n=>`<div class="card"><h3>${n}</h3><button class="btn" onclick="openGame('${n}')">Open Again</button></div>`).join("") :
-  '<p class="muted">No games visited yet.</p>';
-}
+function closeModal(e){if(!e||e.target.id==="modal")document.getElementById("modal").style.display="none"}
+function toggleFavorite(name){let f=getData("gh_favorites",[]);f=f.includes(name)?f.filter(n=>n!==name):[...f,name];saveData("gh_favorites",f);renderGames();toast("Favorites updated!")}
+function renderRecent(){const r=getData("gh_recent",[]);document.getElementById("recentGames").innerHTML=r.length?r.map(n=>`<div class="card"><h3>${escapeHTML(n)}</h3><button class="btn" onclick="openGameByName('${escapeHTML(n)}')">Open Again</button></div>`).join(""):'<p class="muted">No games visited yet.</p>'}
 
 // ==========================================
-// DASHBOARD AND NOTIFICATIONS
+// DASHBOARD
 // ==========================================
-
 function updateDashboard(){
- const xp=getData("gh_xp",0);
- const level=Math.floor(xp/100)+1;
- const progress=xp%100;
-
+ const xp=getData("gh_xp",0),level=Math.floor(xp/100)+1,progress=xp%100;
  document.getElementById("xpStat").textContent=xp;
  document.getElementById("levelStat").textContent=level;
  document.getElementById("favStat").textContent=getData("gh_favorites",[]).length;
@@ -830,476 +366,92 @@ function updateDashboard(){
  document.getElementById("levelProgressText").textContent=progress+" / 100 XP";
  document.getElementById("profileLevel").textContent="Level "+level+" • "+xp+" XP";
 }
-
-function renderActivity(){
- const a=getData("gh_activity",[]);
- document.getElementById("recentActivity").innerHTML=a.length?
-  a.map(x=>`<div class="list-item">${escapeHTML(x)}</div>`).join("") :
-  "No activity yet.";
-}
-
-function addNotification(m){
- let n=getData("gh_notifications",[]);
- n.unshift(m);
- saveData("gh_notifications",n.slice(0,10));
- renderNotifications();
-}
-
-function renderNotifications(){
- document.getElementById("notificationList").innerHTML=
-  getData("gh_notifications",["Welcome to Gaming Hub!"])
-  .map(x=>`<div class="list-item">🔔 ${escapeHTML(x)}</div>`).join("");
-}
-
-function clearNotifications(){
- saveData("gh_notifications",[]);
- renderNotifications();
- toast("Notifications cleared.");
-}
+function renderActivity(){document.getElementById("recentActivity").innerHTML=getData("gh_activity",[]).map(x=>`<div class="list-item">${escapeHTML(x)}</div>`).join("")||"No activity yet."}
 
 // ==========================================
-// GAME COMPARISON
+// COMPARISON
 // ==========================================
-
 function setupComparison(){
- const o=games.map(g=>`<option>${g.name}</option>`).join("");
- document.getElementById("compareA").innerHTML=o;
- document.getElementById("compareB").innerHTML=o;
+ const options=starterGames.map(g=>`<option>${g.name}</option>`).join("");
+ document.getElementById("compareA").innerHTML=options;document.getElementById("compareB").innerHTML=options;
 }
-
 function compareGames(){
- const a=games.find(g=>g.name===document.getElementById("compareA").value);
- const b=games.find(g=>g.name===document.getElementById("compareB").value);
-
- document.getElementById("comparisonResult").innerHTML=`
- <div class="grid">
-  <div class="card"><h3>${a.icon} ${a.name}</h3><p>${a.category}</p><p>${a.platform}</p></div>
-  <div class="card"><h3>${b.icon} ${b.name}</h3><p>${b.category}</p><p>${b.platform}</p></div>
- </div>`;
+ const a=starterGames.find(g=>g.name===document.getElementById("compareA").value),b=starterGames.find(g=>g.name===document.getElementById("compareB").value);
+ document.getElementById("comparisonResult").innerHTML=`<div class="grid"><div class="card"><h3>${a.icon} ${a.name}</h3><p>${a.category}</p><p>${a.platform}</p></div><div class="card"><h3>${b.icon} ${b.name}</h3><p>${b.category}</p><p>${b.platform}</p></div></div>`;
 }
 
 // ==========================================
-// ORIGINAL BROWSER-GENERATED MUSIC
+// ORIGINAL MUSIC
 // ==========================================
-
 const tracks=[
 {name:"Neon Battle",type:"Gaming Beat",icon:"⚡",bpm:110,notes:[110,164.81,220,164.81,130.81,196,261.63,196]},
 {name:"Phantom Drive",type:"Dark Electronic",icon:"🌑",bpm:125,notes:[98,146.83,196,146.83,116.54,174.61,233.08,174.61]},
 {name:"Victory Rush",type:"Epic Gaming",icon:"🏆",bpm:135,notes:[130.81,196,261.63,196,146.83,220,293.66,220]},
 {name:"Dream World",type:"Relaxing Synth",icon:"🌙",bpm:85,notes:[174.61,220,261.63,220,164.81,207.65,246.94,207.65]}
 ];
-
 let currentTrack=0,audioContext=null,musicTimer=null,musicPlaying=false,musicStep=0,masterGain=null,musicStartTime=0,musicElapsed=0;
-const trackLength=30;
-
-function setupAudio(){
- if(audioContext)return;
- const AC=window.AudioContext||window.webkitAudioContext;
- if(!AC){toast("Your browser does not support audio.");return}
- audioContext=new AC();
- masterGain=audioContext.createGain();
- masterGain.gain.value=Number(document.getElementById("volumeControl").value)/100;
- masterGain.connect(audioContext.destination);
-}
-
-function playNote(frequency,start,duration,volume,waveform){
- const o=audioContext.createOscillator(),g=audioContext.createGain();
- o.type=waveform;
- o.frequency.setValueAtTime(frequency,start);
- g.gain.setValueAtTime(.001,start);
- g.gain.exponentialRampToValueAtTime(volume,start+.02);
- g.gain.exponentialRampToValueAtTime(.001,start+duration);
- o.connect(g);g.connect(masterGain);
- o.start(start);o.stop(start+duration+.03);
-}
-
-function playMusicStep(){
- if(!musicPlaying||!audioContext)return;
- const t=tracks[currentTrack],now=audioContext.currentTime,note=t.notes[musicStep%t.notes.length];
- playNote(note,now,.25,.18,"sawtooth");
- if(musicStep%2===0)playNote(note/2,now,.35,.23,"triangle");
- if(musicStep%4===0)playNote(700,now,.045,.035,"square");
- musicStep++;
-}
-
-function startMusic(){
- setupAudio();
- if(!audioContext)return;
- if(audioContext.state==="suspended")audioContext.resume();
- if(musicPlaying)return;
- musicPlaying=true;
- musicStartTime=Date.now()-musicElapsed*1000;
- document.getElementById("playButton").textContent="⏸";
- playMusicStep();
- musicTimer=setInterval(playMusicStep,60000/tracks[currentTrack].bpm);
- updateMusicProgress();
- renderPlaylist();
-}
-
-function pauseMusic(){
- if(!musicPlaying)return;
- musicPlaying=false;
- musicElapsed=Math.min(trackLength,(Date.now()-musicStartTime)/1000);
- clearInterval(musicTimer);
- musicTimer=null;
- document.getElementById("playButton").textContent="▶";
- renderPlaylist();
-}
-
-function stopMusic(){
- pauseMusic();
- musicElapsed=0;
- musicStep=0;
- updateMusicProgress();
-}
-
+function setupAudio(){if(audioContext)return;const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return toast("Audio not supported.");audioContext=new AC();masterGain=audioContext.createGain();masterGain.gain.value=.6;masterGain.connect(audioContext.destination)}
+function playNote(f,t,d,v,w){const o=audioContext.createOscillator(),g=audioContext.createGain();o.type=w;o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(v,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(masterGain);o.start(t);o.stop(t+d+.03)}
+function playMusicStep(){if(!musicPlaying||!audioContext)return;const n=tracks[currentTrack].notes[musicStep%tracks[currentTrack].notes.length],t=audioContext.currentTime;playNote(n,t,.25,.18,"sawtooth");if(musicStep%2===0)playNote(n/2,t,.35,.23,"triangle");if(musicStep%4===0)playNote(700,t,.045,.035,"square");musicStep++}
+function startMusic(){setupAudio();if(!audioContext)return;if(audioContext.state==="suspended")audioContext.resume();if(musicPlaying)return;musicPlaying=true;musicStartTime=Date.now()-musicElapsed*1000;document.getElementById("playButton").textContent="⏸";playMusicStep();musicTimer=setInterval(playMusicStep,60000/tracks[currentTrack].bpm);updateMusicProgress()}
+function pauseMusic(){if(!musicPlaying)return;musicPlaying=false;musicElapsed=(Date.now()-musicStartTime)/1000;clearInterval(musicTimer);document.getElementById("playButton").textContent="▶"}
+function stopMusic(){pauseMusic();musicElapsed=0;musicStep=0}
 function toggleMusic(){musicPlaying?pauseMusic():startMusic()}
-
-function chooseTrack(i){
- stopMusic();
- currentTrack=(i+tracks.length)%tracks.length;
- updateMusicDisplay();
- startMusic();
-}
-
+function chooseTrack(i){stopMusic();currentTrack=(i+tracks.length)%tracks.length;updateMusicDisplay();startMusic()}
 function nextTrack(){chooseTrack(currentTrack+1)}
 function previousTrack(){chooseTrack(currentTrack-1)}
-
-function updateMusicDisplay(){
- const t=tracks[currentTrack];
- document.getElementById("musicTitle").textContent=t.name;
- document.getElementById("musicCategory").textContent=t.type+" • Original";
- document.getElementById("musicArt").textContent=t.icon;
- renderPlaylist();
-}
-
-function renderPlaylist(){
- document.getElementById("playlist").innerHTML=tracks.map((t,i)=>`
- <div class="track ${i===currentTrack?"active":""}" onclick="chooseTrack(${i})">
-  <div><div class="track-name">${t.icon} ${t.name}</div><div class="track-type">${t.type}</div></div>
-  <span>${i===currentTrack&&musicPlaying?"🔊 Playing":"▶ Play"}</span>
- </div>`).join("");
-}
-
-function updateMusicProgress(){
- const p=document.getElementById("musicProgress");
- let e=musicElapsed;
- if(musicPlaying)e=Math.min(trackLength,(Date.now()-musicStartTime)/1000);
- p.value=e;
- document.getElementById("musicCurrentTime").textContent=formatTime(e);
- document.getElementById("musicDuration").textContent=formatTime(trackLength);
- if(e>=trackLength&&musicPlaying){nextTrack();return}
- if(musicPlaying)requestAnimationFrame(updateMusicProgress);
-}
-
-function formatTime(s){
- return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");
-}
-
-document.getElementById("volumeControl").addEventListener("input",function(){
- const v=Number(this.value);
- document.getElementById("volumeValue").textContent=v+"%";
- if(masterGain)masterGain.gain.setTargetAtTime(v/100,audioContext.currentTime,.03);
-});
-
-document.getElementById("musicProgress").addEventListener("change",function(){
- const v=Number(this.value);
- musicElapsed=v;
- if(musicPlaying)musicStartTime=Date.now()-v*1000;
- musicStep=Math.floor(v/(60/tracks[currentTrack].bpm));
- updateMusicProgress();
-});
+function updateMusicDisplay(){document.getElementById("musicTitle").textContent=tracks[currentTrack].name;document.getElementById("musicCategory").textContent=tracks[currentTrack].type+" • Original";document.getElementById("musicArt").textContent=tracks[currentTrack].icon;renderPlaylist()}
+function renderPlaylist(){document.getElementById("playlist").innerHTML=tracks.map((t,i)=>`<div class="track ${i===currentTrack?"active":""}" onclick="chooseTrack(${i})"><span>${t.icon} ${t.name}<br><small>${t.type}</small></span><span>${i===currentTrack&&musicPlaying?"🔊":"▶"}</span></div>`).join("")}
+function updateMusicProgress(){if(!musicPlaying)return;const e=(Date.now()-musicStartTime)/1000;if(e>=30){nextTrack();return}document.getElementById("musicProgress").value=e;document.getElementById("musicCurrentTime").textContent=formatTime(e);requestAnimationFrame(updateMusicProgress)}
+function formatTime(s){return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0")}
+document.getElementById("volumeControl").addEventListener("input",function(){document.getElementById("volumeValue").textContent=this.value+"%";if(masterGain)masterGain.gain.setTargetAtTime(this.value/100,audioContext.currentTime,.03)});
 
 // ==========================================
-// NEWS
+// NEWS, POLLS AND CALENDAR
 // ==========================================
-
-function addNews(){
- const title=document.getElementById("newsTitle").value.trim();
- const description=document.getElementById("newsDescription").value.trim();
- if(!title||!description)return toast("Fill in both news fields.");
- let n=getData("gh_news",[]);
- n.unshift({title,description});
- saveData("gh_news",n);
- renderNews();
- document.getElementById("newsTitle").value="";
- document.getElementById("newsDescription").value="";
- toast("News added!");
-}
-
-function renderNews(){
- const n=getData("gh_news",[]);
- const d=`
- <div class="card"><h3>🎮 Gaming Hub Update</h3><p>Explore the new features and discover your favorite games.</p></div>
- <div class="card"><h3>🏆 New Challenges</h3><p>Try the daily missions and collect XP.</p></div>
- <div class="card"><h3>🌟 Player Spotlight</h3><p>Build your profile and show your gaming interests.</p></div>`;
- document.getElementById("newsGrid").innerHTML=d+n.map(x=>`
- <div class="card"><h3>${escapeHTML(x.title)}</h3><p>${escapeHTML(x.description)}</p><span class="tag">Community News</span></div>
- `).join("");
-}
+function renderNews(){const n=getData("gh_news",[]);document.getElementById("newsGrid").innerHTML='<div class="card"><h3>🎮 Gaming Hub Update</h3><p>Discover your favorite games.</p></div><div class="card"><h3>🏆 New Challenges</h3><p>Try daily missions.</p></div>'+n.map(x=>`<div class="card"><h3>${escapeHTML(x.title)}</h3><p>${escapeHTML(x.description)}</p></div>`).join("")}
+function addNews(){const title=document.getElementById("newsTitle").value.trim(),description=document.getElementById("newsDescription").value.trim();if(!title||!description)return toast("Fill in both fields.");let n=getData("gh_news",[]);n.unshift({title,description});saveData("gh_news",n);renderNews();toast("News added!")}
+function vote(option){let v=getData("gh_votes",{});v[option]=(v[option]||0)+1;saveData("gh_votes",v);renderPoll()}
+function renderPoll(){const v=getData("gh_votes",{}),total=Object.values(v).reduce((a,b)=>a+b,0);document.getElementById("pollResults").innerHTML=["Mobile","PC","Console"].map(n=>`<p>${n}: ${v[n]||0} votes (${total?Math.round((v[n]||0)/total*100):0}%)</p>`).join("")}
+function addRelease(){const name=document.getElementById("releaseName").value.trim(),date=document.getElementById("releaseDate").value;if(!name||!date)return toast("Enter a game and date.");let l=getData("gh_releases",[]);l.push({name,date});l.sort((a,b)=>a.date.localeCompare(b.date));saveData("gh_releases",l);renderReleases()}
+function renderReleases(){document.getElementById("releaseList").innerHTML=getData("gh_releases",[]).map(r=>`<div class="list-item">📅 ${escapeHTML(r.name)} — ${r.date}</div>`).join("")||"No release dates yet."}
 
 // ==========================================
-// POLLS
+// MISSIONS, LEADERBOARD AND QUIZ
 // ==========================================
-
-function vote(option){
- let v=getData("gh_votes",{});
- v[option]=(v[option]||0)+1;
- saveData("gh_votes",v);
- renderPoll();
- toast("Your vote was saved!");
-}
-
-function renderPoll(){
- const v=getData("gh_votes",{});
- const total=Object.values(v).reduce((a,b)=>a+b,0);
-
- document.getElementById("pollResults").innerHTML=
- ["Mobile","PC","Console"].map(n=>{
-  const c=v[n]||0,p=total?Math.round(c/total*100):0;
-  return `<p>${n}: ${c} votes (${p}%)</p><div class="progress"><div style="width:${p}%"></div></div>`;
- }).join("");
-}
+function completeMission(id,points){let d=getData("gh_missions",[]);if(d.includes(id))return toast("Already completed!");d.push(id);saveData("gh_missions",d);addXP(points);activity("Completed a mission");renderMissions()}
+function renderMissions(){const d=getData("gh_missions",[]);["mission1","mission2","mission3"].forEach(id=>document.getElementById(id+"Status").textContent=d.includes(id)?"✅ Completed":"Not completed")}
+function renderLeaderboard(){const l=getData("gh_leaderboard",[]);document.getElementById("leaderboardList").innerHTML=[...l].sort((a,b)=>b.score-a.score).map((p,i)=>`<div class="list-item">#${i+1} 🏆 ${escapeHTML(p.name)} — ${p.score} XP</div>`).join("")||"No scores yet."}
+function addLeaderboardScore(){const name=document.getElementById("leaderboardName").value.trim();if(!name)return toast("Enter a name.");let l=getData("gh_leaderboard",[]);l.push({name,score:getData("gh_xp",0)});saveData("gh_leaderboard",l);renderLeaderboard()}
+function answerQuiz(correct){const r=document.getElementById("quizResult");if(correct){r.textContent="✅ Correct!";if(!getData("gh_quiz_done",false)){saveData("gh_quiz_done",true);addXP(15)}}else r.textContent="❌ Try again!"}
 
 // ==========================================
-// RELEASE CALENDAR
+// CHAT AND REVIEWS
 // ==========================================
-
-function addRelease(){
- const name=document.getElementById("releaseName").value.trim();
- const date=document.getElementById("releaseDate").value;
- if(!name||!date)return toast("Enter a game and date.");
- let l=getData("gh_releases",[]);
- l.push({name,date});
- l.sort((a,b)=>a.date.localeCompare(b.date));
- saveData("gh_releases",l);
- renderReleases();
- toast("Release date added!");
-}
-
-function renderReleases(){
- const l=getData("gh_releases",[]);
- document.getElementById("releaseList").innerHTML=l.length?
-  l.map(r=>`<div class="list-item">📅 ${escapeHTML(r.name)} — ${r.date}</div>`).join("") :
-  '<p class="muted">No release dates added yet.</p>';
-}
+function sendMessage(){const name=document.getElementById("chatName").value.trim(),message=document.getElementById("chatMessage").value.trim();if(!name||!message)return toast("Enter a nickname and message.");let l=getData("gh_chat",[]);l.push({name,message});saveData("gh_chat",l.slice(-30));document.getElementById("chatMessage").value="";renderChat()}
+function renderChat(){document.getElementById("chatMessages").innerHTML=getData("gh_chat",[]).map(m=>`<div class="list-item"><b>${escapeHTML(m.name)}:</b> ${escapeHTML(m.message)}</div>`).join("")}
+function addReview(){const game=document.getElementById("reviewGame").value.trim(),rating=document.getElementById("reviewRating").value,text=document.getElementById("reviewText").value.trim();if(!game||!text)return toast("Enter a game and review.");let l=getData("gh_reviews",[]);l.unshift({game,rating,text});saveData("gh_reviews",l);renderReviews();document.getElementById("reviewText").value=""}
+function renderReviews(){document.getElementById("reviewList").innerHTML=getData("gh_reviews",[]).map(r=>`<div class="list-item"><b>${escapeHTML(r.game)}</b> — ${"⭐".repeat(Number(r.rating))}<p>${escapeHTML(r.text)}</p></div>`).join("")}
 
 // ==========================================
-// MISSIONS
+// PROFILE AND OTHER FUNCTIONS
 // ==========================================
-
-function completeMission(id,points){
- let d=getData("gh_missions",[]);
- if(d.includes(id))return toast("Mission already completed!");
- d.push(id);
- saveData("gh_missions",d);
- addXP(points);
- activity("Completed a daily mission");
- addNotification("You completed a mission!");
- renderMissions();
-}
-
-function renderMissions(){
- const d=getData("gh_missions",[]);
- ["mission1","mission2","mission3"].forEach(id=>{
-  document.getElementById(id+"Status").textContent=
-   d.includes(id)?"✅ Completed":"Not completed";
- });
-}
+async function saveProfile(){const p={name:document.getElementById("profileName").value.trim()||"Player",avatar:document.getElementById("profileAvatar").value,color:document.getElementById("profileColor").value};saveData("gh_profile",p);renderProfile();if(currentUser){if(await saveOnlineProfile(p))toast("Profile saved online!")}else{document.getElementById("profileSaveStatus").textContent="Saved in this browser. Log in to save online.";toast("Profile saved!")};updateAccountUI()}
+function renderProfile(){const p=getData("gh_profile",{name:"Player",avatar:"🎮",color:"#24245a"});document.getElementById("profileDisplayName").textContent=p.avatar+" "+p.name;document.getElementById("profileName").value=p.name;document.getElementById("profileAvatar").value=p.avatar;document.getElementById("profileColor").value=p.color;document.getElementById("profileBackground").style.background=p.color;document.getElementById("profileBackground").textContent=p.avatar}
+function joinTournament(name){let j=getData("gh_tournaments",[]);if(j.includes(name))return toast("Already joined.");j.push(name);saveData("gh_tournaments",j);activity("Joined "+name);toast("Joined demo event!")}
+function sendSupport(){const message=document.getElementById("supportMessage").value.trim();if(!message)return toast("Write a message.");let l=getData("gh_support",[]);l.unshift(message);saveData("gh_support",l);document.getElementById("supportMessage").value="";toast("Feedback saved locally.")}
+function toggleTheme(){document.body.classList.toggle("light");saveData("gh_theme",document.body.classList.contains("light")?"light":"dark")}
+function loadTheme(){if(getData("gh_theme","dark")==="light")document.body.classList.add("light")}
+function resetData(){if(!confirm("Reset all Gaming Hub data saved in this browser?"))return;Object.keys(localStorage).filter(k=>k.startsWith("gh_")).forEach(k=>localStorage.removeItem(k));location.reload()}
 
 // ==========================================
-// LEADERBOARD
+// START WEBSITE
 // ==========================================
-
-function renderLeaderboard(){
- const l=getData("gh_leaderboard",[]);
- document.getElementById("leaderboardList").innerHTML=l.length?
-  [...l].sort((a,b)=>b.score-a.score).map((p,i)=>
-   `<div class="list-item">#${i+1} 🏆 ${escapeHTML(p.name)} — ${p.score} XP</div>`
-  ).join(""):"No scores yet.";
-}
-
-function addLeaderboardScore(){
- const name=document.getElementById("leaderboardName").value.trim();
- if(!name)return toast("Enter a player name.");
- let l=getData("gh_leaderboard",[]);
- l.push({name,score:getData("gh_xp",0)});
- saveData("gh_leaderboard",l);
- renderLeaderboard();
- toast("Your demo score was added!");
-}
-
-// ==========================================
-// QUIZ
-// ==========================================
-
-function answerQuiz(correct){
- const r=document.getElementById("quizResult");
- if(correct){
-  r.textContent="✅ Correct! Minecraft is famous for building with blocks.";
-  if(!getData("gh_quiz_done",false)){
-   saveData("gh_quiz_done",true);
-   addXP(15);
-  }
- }else{
-  r.textContent="❌ Try again!";
- }
-}
-
-// ==========================================
-// CHAT
-// ==========================================
-
-function sendMessage(){
- const name=document.getElementById("chatName").value.trim();
- const message=document.getElementById("chatMessage").value.trim();
-
- if(!name||!message)return toast("Enter a nickname and message.");
-
- let l=getData("gh_chat",[]);
- l.push({name,message});
- saveData("gh_chat",l.slice(-30));
- document.getElementById("chatMessage").value="";
- renderChat();
-}
-
-function renderChat(){
- document.getElementById("chatMessages").innerHTML=
-  getData("gh_chat",[]).map(m=>
-   `<div class="list-item"><b>${escapeHTML(m.name)}:</b> ${escapeHTML(m.message)}</div>`
-  ).join("");
-}
-
-// ==========================================
-// REVIEWS
-// ==========================================
-
-function addReview(){
- const game=document.getElementById("reviewGame").value.trim();
- const rating=document.getElementById("reviewRating").value;
- const text=document.getElementById("reviewText").value.trim();
-
- if(!game||!text)return toast("Enter a game and review.");
-
- let l=getData("gh_reviews",[]);
- l.unshift({game,rating,text});
- saveData("gh_reviews",l);
- renderReviews();
- document.getElementById("reviewText").value="";
- toast("Review added!");
-}
-
-function renderReviews(){
- document.getElementById("reviewList").innerHTML=
-  getData("gh_reviews",[]).map(r=>
-   `<div class="list-item"><b>${escapeHTML(r.game)}</b> — ${"⭐".repeat(Number(r.rating))}<p>${escapeHTML(r.text)}</p></div>`
-  ).join("");
-}
-
-// ==========================================
-// PLAYER PROFILE
-// ==========================================
-
-async function saveProfile(){
- const p={
-  name:document.getElementById("profileName").value.trim()||"Player",
-  avatar:document.getElementById("profileAvatar").value,
-  color:document.getElementById("profileColor").value
- };
-
- saveData("gh_profile",p);
- renderProfile();
-
- if(currentUser){
-  const saved=await saveOnlineProfile(p);
-  if(saved)toast("Profile saved online!");
- }else{
-  document.getElementById("profileSaveStatus").textContent=
-   "Saved in this browser. Log in to save your profile online.";
-  toast("Guest profile saved!");
- }
-
- updateAccountUI();
-}
-
-function renderProfile(){
- const p=getData("gh_profile",{
-  name:"Player",avatar:"🎮",color:"#24245a"
- });
-
- document.getElementById("profileDisplayName").textContent=p.avatar+" "+p.name;
- document.getElementById("profileName").value=p.name;
- document.getElementById("profileAvatar").value=p.avatar;
- document.getElementById("profileColor").value=p.color;
- document.getElementById("profileBackground").style.background=p.color;
- document.getElementById("profileBackground").textContent=p.avatar;
-}
-
-// ==========================================
-// TOURNAMENTS, SUPPORT AND SETTINGS
-// ==========================================
-
-function joinTournament(name){
- let j=getData("gh_tournaments",[]);
- if(j.includes(name))return toast("You already joined this demo event.");
- j.push(name);
- saveData("gh_tournaments",j);
- activity("Joined "+name);
- toast("You joined the demo event!");
-}
-
-function sendSupport(){
- const message=document.getElementById("supportMessage").value.trim();
- const email=document.getElementById("supportEmail").value.trim();
-
- if(!message)return toast("Write a message first.");
-
- let l=getData("gh_support",[]);
- l.unshift({email,message});
- saveData("gh_support",l);
- document.getElementById("supportMessage").value="";
- toast("Feedback saved in this browser!");
-}
-
-function toggleTheme(){
- document.body.classList.toggle("light");
- saveData("gh_theme",document.body.classList.contains("light")?"light":"dark");
-}
-
-function loadTheme(){
- if(getData("gh_theme","dark")==="light"){
-  document.body.classList.add("light");
- }
-}
-
-function resetData(){
- if(!confirm("Reset all Gaming Hub data saved in this browser?"))return;
- Object.keys(localStorage)
-  .filter(k=>k.startsWith("gh_"))
-  .forEach(k=>localStorage.removeItem(k));
- location.reload();
-}
-
-function escapeHTML(v){
- return String(v).replace(/[&<>"']/g,c=>({
-  "&":"&amp;",
-  "<":"&lt;",
-  ">":"&gt;",
-  '"':"&quot;",
-  "'":"&#39;"
- }[c]));
-}
-
-// ==========================================
-// START GAMING HUB
-// ==========================================
-
 function startHub(){
  loadTheme();
  renderGames();
  renderRecent();
  renderActivity();
- renderNotifications();
  renderNews();
  renderPoll();
  renderReleases();
@@ -1314,7 +466,6 @@ function startHub(){
  updateMusicDisplay();
  initializeAuth();
 }
-
 startHub();
 </script>
 </body>
